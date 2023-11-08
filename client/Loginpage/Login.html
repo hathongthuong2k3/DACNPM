@@ -179,9 +179,27 @@
         Email: sepenglish@gmail.com.
     </div>
     <script>
-      document.getElementById("login-button").addEventListener("click", function () {
-          window.location.href = "../Adminpage/Adminpage.html";
-      });
-  </script>
+        document.getElementById("login-button").addEventListener("click", function () {
+            // Trích xuất tham số actor từ URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const actor = urlParams.get("actor");
+        
+            var loginPage = "";
+        
+            // Định nghĩa đường dẫn tới trang đăng nhập dựa trên vai trò (actor) đã trích xuất
+            if (actor === "student") {
+                    loginPage = "../Studentpage/Studentpage.html";
+            } else if (actor === "teacher") {
+                    loginPage = "../Teacherpage/Teacherpage.html";
+            } else if (actor === "admin") {
+                    loginPage = "../Adminpage/Adminpage.html";
+            } else if (actor === "staff") {
+                    loginPage = "../Staffpage/Staffpage.html";
+            }
+        
+            // Chuyển hướng đến trang đăng nhập tương ứng
+            window.location.href = loginPage;
+        });
+    </script>
 </body>
 </html>
