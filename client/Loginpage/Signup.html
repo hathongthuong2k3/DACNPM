@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Đăng Ký</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        table {
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 400px;
+            padding: 20px;
+            margin-top: 50px;
+            flex-grow: 1;
+        }
+
+        table th {
+            text-align: center;
+            font-size: 24px;
+            padding: 10px;
+        }
+
+        table td {
+            text-align: left;
+            padding: 10px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-group label {
+            margin-right: 10px;
+        }
+
+        #footer {
+            text-align: center;
+            background-color: #0e3b68;
+            color: #fff;
+            padding: 10px;
+        }
+
+        #register-button {
+            width: 100%;
+            background-color: #1e90ff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        #terms-text {
+            text-align: justify;
+            margin-top: 10px;
+            font-size: 15px;
+        }
+
+        #terms-text a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th colspan="2">Đăng Ký</th>
+        </tr>
+        <tr>
+            <td>Tên đăng nhập:</td>
+            <td><input type="text" name="username"></td>
+        </tr>
+        <tr>
+            <td>Mật khẩu:</td>
+            <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <td>Họ và tên:</td>
+            <td><input type="text" name="fullname"></td>
+        </tr>
+        <tr>
+            <td>Năm sinh:</td>
+            <td><input type="date" name="birthdate"></td>
+        </tr>
+        <tr>
+            <td>Giới tính:</td>
+            <td>
+                <div class="radio-group">
+                    <label for="gender-male">Nam</label>
+                    <input type="radio" id="gender-male" name="gender" value="Nam">
+                    <label for="gender-female">Nữ</label>
+                    <input type="radio" id="gender-female" name="gender" value="Nữ">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Địa chỉ:</td>
+            <td><input type="text" name="address"></td>
+        </tr>
+        <tr>
+            <td>Số điện thoại:</td>
+            <td><input type="tel" name="phone"></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input type="email" name="email"></td>
+        </tr>
+        <tr>
+            <td>Vai trò:</td>
+            <td><input type="text" name="role"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <p id="terms-text">
+                    Bằng cách nhấp vào Đăng ký, bạn đồng ý với 
+                    <a href="dieu-khoan.html" target="_blank">Điều khoản</a>,
+                    <a href="chinh-sach-rieng-tu.html" target="_blank">Chính sách quyền riêng tư</a>
+                    và <a href="chinh-sach-cookie.html" target="_blank">Chính sách cookie</a> của chúng tôi.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button id="register-button">Đăng ký</button>
+            </td>
+        </tr>
+    </table>
+    <p></p>
+    <div id="footer">
+        Copyright 2023 Trường Đại Học Bách Khoa - ĐHQG TP.HCM. All Rights Reserved.<br>
+        Địa chỉ: Đông Hòa, TP Dĩ An, Bình Dương.<br>
+        Email: sepenglish@gmail.com.
+    </div>
+    <script>
+        document.getElementById("register-button").addEventListener("click", function () {
+            window.location.href = "ChooseActor.html";
+        });
+    </script>
+</body>
+</html>

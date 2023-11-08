@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quên Mật Khẩu</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        table {
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 500px;
+            padding: 20px;
+            margin-top: 200px;
+            margin-bottom: 200px;
+            flex-grow: 1;
+        }
+
+        table th {
+            text-align: center;
+            font-size: 24px;
+            padding: 10px;
+        }
+
+        table td {
+            text-align: left;
+            padding: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group label {
+            width: 30%;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        .form-group input {
+            width: 70%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        #reset-button {
+            width: 100%;
+            background-color: #1e90ff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        #footer {
+            text-align: center;
+            background-color: #0e3b68;
+            color: #fff;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th colspan="2">Quên Mật Khẩu</th>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="form-group">
+                    <label for="email">Địa chỉ Email:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button id="reset-button">Khôi phục mật khẩu</button>
+            </td>
+        </tr>
+    </table>
+    <p></p>
+    <div id="footer">
+        Copyright 2023 Trường Đại Học Bách Khoa - ĐHQG TP.HCM. All Rights Reserved.<br>
+        Địa chỉ: Đông Hòa, TP Dĩ An, Bình Dương.<br>
+        Email: sepenglish@gmail.com.
+    </div>
+</body>
+</html>
