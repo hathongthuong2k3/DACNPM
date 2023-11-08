@@ -9,6 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+    <script src="./Infostupage.js"></script>
 </head>
 
 <body>
@@ -172,8 +174,6 @@
             </ul>
         </div>
     </aside>
-
-
     <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <div class="px-3 py-3 lg:px-5 lg:pl-3">
             <div class="flex items-center justify-between">
@@ -256,7 +256,6 @@
             </div>
         </div>
     </nav>
-
     <aside id="logo-sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
         aria-label="Sidebar">
@@ -406,7 +405,7 @@
     </aside>
 
     <div class="p-8 sm:ml-64 mb-10" style="margin-top: 9vh;">
-        <div class="grid grid-cols-3 gap-4">
+        <!-- <div class="grid grid-cols-3 gap-4">
             <div class="col-span-2 hidden container">
                 <form>
                     <div>
@@ -470,8 +469,6 @@
                                 placeholder="nguyenvana@company.com" required>
                         </div>
                     </div>
-
-
                     <div class="mb-6">
                         <label for="Lớp"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
@@ -489,7 +486,6 @@
                     </div>
                     <input id="dropzone-file" type="file" class="hidden" />
                 </label>
-
                 <div class="w-full ">
                     <button id="submitAddBtn"
                         class="w-full mt-10 inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
@@ -500,9 +496,9 @@
                     </button>
                 </div>
             </div>
-        </div>
-        <div class="grid grid-cols-3 gap-4">
-            <div class="col-span-2 hidden container1">
+        </div> -->
+        <div class="grid grid-cols-3 gap-4" id="modal">
+            <!-- <div class="col-span-2 hidden container1">
                 <form>
                     <div>
                         <div class="gap-6 mb-6">
@@ -594,13 +590,13 @@
                         </span>
                     </button>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="relative overflow-x-auto">
-            <div class="flex justify-end">
+            <!-- <div class="flex justify-end">
                 <button id="button1" type="button"
                     class="text-white rounded-full bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium text-sm px-5 py-2.5 text-center mr-2 mb-2 ">Thêm</button>
-            </div>
+            </div> -->
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 text-center">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -623,7 +619,7 @@
                             Email
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Lớp
+                            Khóa học
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <svg class="w-6 h-6 text-gray-900 dark:text-white" aria-hidden="true"
@@ -634,8 +630,8 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tbody id="student">
+                    <!-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             Thái Ngọc Rạng
                         </th>
@@ -671,7 +667,7 @@
                                 </svg>
                             </button>
                         </td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>
@@ -732,49 +728,6 @@
             </div>
         </div>
     </footer>
-    <script>
-        $(document).ready(function () {
-            addData();
-            editData();
-        });
-        function addData() {
-
-            $('#button1').click(function (e) {
-                e.preventDefault();
-                var elements = document.getElementsByClassName("container");
-                for (var i = 0; i < elements.length; i++) {
-                    elements[i].classList.remove("hidden");
-                }
-                $('#button1').addClass("hidden");
-            });
-            $('#submitAddBtn').click(function (e) {
-                e.preventDefault();
-                var elements = document.getElementsByClassName("container");
-                for (var i = 0; i < elements.length; i++) {
-                    elements[i].classList.add("hidden");
-                }
-                $('#button1').removeClass("hidden");
-            })
-        }
-        function editData() {
-            $('#button2').click(function (e) {
-                e.preventDefault();
-                var elements = document.getElementsByClassName("container1");
-                for (var i = 0; i < elements.length; i++) {
-                    elements[i].classList.remove("hidden");
-                }
-                $('#button1').addClass("hidden");
-            });
-            $('#submitEditBtn').click(function (e) {
-                e.preventDefault();
-                var elements = document.getElementsByClassName("container1");
-                for (var i = 0; i < elements.length; i++) {
-                    elements[i].classList.add("hidden");
-                }
-                $('#button1').removeClass("hidden");
-            })
-        }
-    </script>
 </body>
 
 </html>
