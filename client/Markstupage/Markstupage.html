@@ -11,6 +11,8 @@
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+    <script src="./Markstupage.js"></script>
 </head>
 
 <body>
@@ -408,8 +410,8 @@
     </aside>
 
     <div class="p-8 sm:ml-64 mb-10" style="margin-top: 9vh;">
-        <div class="grid grid-cols-3 gap-4">
-            <div class="col-span-2 hidden container">
+        <div class="grid grid-cols-3 gap-4" id="studentModal">
+            <!-- <div class="col-span-2 hidden container">
                 <form>
                     <div>
                         <div class="gap-6 mb-6">
@@ -501,10 +503,10 @@
                         </span>
                     </button>
                 </div>
-            </div>
+            </div> -->
         </div>
-        <div class="grid grid-cols-3 gap-4">
-            <div class="col-span-2 hidden container1">
+        <div class="grid grid-cols-3 gap-4" id="scoreModal">
+            <!-- <div class="col-span-2 hidden container1">
                 <form>
                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                         <div>
@@ -562,7 +564,7 @@
                         </span>
                     </button>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="relative overflow-x-auto">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -598,8 +600,8 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                <tbody id="student">
+                    <!-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <span id="button1">
                                 Thái Ngọc Rạng
@@ -636,7 +638,7 @@
                                 </svg>
                             </button>
                         </td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>
@@ -697,51 +699,6 @@
             </div>
         </div>
     </footer>
-    <script>
-        $(document).ready(function () {
-            loadData();
-        });
-
-        var count1 = 0;
-        var count2 = 0;
-
-        function loadData() {
-            $('#button1').click(function (e) {
-                e.preventDefault();
-                var elements1 = $(".container");
-                var elements2 = $(".container1");
-                if (count2 === 1) {
-                    elements2.addClass("hidden");
-                    count2--;
-                }
-                if (count1 === 0) {
-                    elements1.removeClass("hidden");
-                    count1 = 1;
-                } else {
-                    elements1.addClass("hidden");
-                    count1 = 0;
-                }
-            });
-
-            $('#button2').click(function (e) {
-                e.preventDefault();
-                var elements1 = $(".container");
-                var elements2 = $(".container1");
-                if (count1 === 1) {
-                    elements1.addClass("hidden");
-                    count1--;
-                }
-                if (count2 === 0) {
-                    elements2.removeClass("hidden");
-                    count2 = 1;
-                } else {
-                    elements2.addClass("hidden");
-                    count2 = 0;
-                }
-            });
-        }
-
-    </script>
 </body>
 
 </html>
