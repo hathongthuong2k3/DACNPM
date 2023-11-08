@@ -25,6 +25,7 @@ body {
     flex-shrink: 0;
     margin-left: 130px;
     margin-right: 435px;
+    margin-top: 10px;
 }
 
 .course__text-1 .h2 {
