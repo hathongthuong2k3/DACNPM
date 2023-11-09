@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
     <style>
-        body {
-            background-color: #ffffff;
+        * {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+        }
+
+        body {
+            width: 1440px;
+            margin: auto;
+            margin-top: 100px;
         }
 
         table {
@@ -81,11 +82,11 @@
             font-size: 15px;
         }
 
-        #footer {
+        .footer {
             display: flex;
             justify-content: center;
             align-items: center;
-            /* width: 1440px; */
+            width: 1440px;
             height: 177px;
             background-color: #125380;
             text-align: center;
@@ -173,11 +174,13 @@
         </tr>
     </table>
     <p></p>
-    <div id="footer">
-        Copyright 2023 Trường Đại Học Bách Khoa - ĐHQG TP.HCM. All Rights Reserved.<br>
-        Địa chỉ: Đông Hòa, TP Dĩ An, Bình Dương.<br>
-        Email: sepenglish@gmail.com.
-    </div>
+
+    <footer class="footer">
+        <p>Copyright 2023 Trường Đại Học Bách Khoa - ĐHQG TP.HCM. All Rights Reserved. <br>
+            Địa chỉ: Đông Hòa, TP Dĩ An, Bình Dương. <br>
+            Email: sepenglish@gmail.com.</p>
+    </footer>
+
     <script>
         document.getElementById("login-button").addEventListener("click", function () {
             // Trích xuất tham số actor từ URL
