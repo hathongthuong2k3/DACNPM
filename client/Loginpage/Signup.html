@@ -100,6 +100,10 @@
             color: #1e90ff;
             text-decoration: none;
         }
+
+        #authentication-code {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -183,7 +187,18 @@
         </tr>
         <tr>
             <td>Vai trò:</td>
-            <td><input type="text" name="role"></td>
+            <td>
+                <select id="role" name="role" onchange="checkRole()">
+                    <option value="HocVien">Học viên</option>
+                    <option value="GiaoVien">Giáo viên</option>
+                    <option value="NhanVien">Nhân viên</option>
+                    <option value="QuanTriVien">Quản trị viên</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="authentication-code">
+            <td>Mã xác thực:</td>
+            <td><input type="text" name="authenticationCode"></td>
         </tr>
         <tr>
             <td colspan="2">
@@ -208,6 +223,17 @@
         Email: sepenglish@gmail.com.
     </div>
     <script>
+        function checkRole() {
+            var role = document.getElementById("role").value;
+            var authenticationCodeRow = document.getElementById("authentication-code");
+
+            if (role == "NhanVien" || role == "QuanTriVien") {
+                authenticationCodeRow.style.display = "table-row";
+            } else {
+                authenticationCodeRow.style.display = "none";
+            }
+        }
+
         document.getElementById("register-button").addEventListener("click", function () {
             window.location.href = "ChooseActor.html";
         });
