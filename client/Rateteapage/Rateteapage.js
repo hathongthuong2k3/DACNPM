@@ -212,7 +212,8 @@ function loadTeacherModal() {
         var str = ''
         var id = $(this).attr('data-id');
         str += `
-        <div class="col-span-2" id="modal1">
+        <div class="grid grid-cols-3 gap-4 mb-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="col-span-2 " id="modal1">
         <form>
             <div>
                 <div class="gap-6 mb-6">
@@ -320,11 +321,14 @@ function loadTeacherModal() {
                     </span>
                 </button>
     </div>
-            </div>`;
+            </div></div>`;
         $('#teacherModal').html(str);
+        $('#rateModal').html('');
+        $('.addRate').addClass('hidden')
         $('.closeBtn').click(function (e) {
             e.preventDefault();
             $('#teacherModal').html('');
+            $('.addRate').removeClass('hidden')
         });
     });
 }
@@ -333,9 +337,9 @@ function loadRateModal() {
         e.preventDefault();
         var id = $(this).attr('data-id');
         var str = '';
-        str += `<div class="col-span-2">
+        str += `<div class="col-span-2 mb-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <form id="editForm">
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-6 mb-6 md:grid-cols-3">
                 <div>
                     <label for="full_name"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
@@ -359,18 +363,17 @@ function loadRateModal() {
                 </div>
             </div>
         </form>
-    </div>
     <div style="margin-top: 4vh;">
-        <div class="w-full ">
+        <div class="w-full flex justify-between">
         <button type="submit" 
-                    class="w-full closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                    class=" closeBtn inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
                     <span
                         class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Hủy
                     </span>
                 </button>
             <button form="editForm"
-                class="submitEditBtn w-full mt-10 inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                class="submitEditBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
                 <span
                     class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                     Thêm
@@ -429,12 +432,11 @@ function editData(id) {
 function addRateModal() {
     $('.addRate').click(function (e) {
         e.preventDefault();
-
         var str = '';
         str += `
-            <div class="col-span-2">
+            <div class="col-span-2 mb-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <form id="addForm">
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-6 mb-6 md:grid-cols-3">
                 <div>
                     <label for="full_name"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
@@ -458,24 +460,23 @@ function addRateModal() {
                 </div>
             </div>
         </form>
-    </div>
-    <div style="margin-top: 4vh;">
-        <div class="w-full ">
-        <button type="submit" 
-                    class="w-full closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
-                    <span
-                        class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                        Hủy
-                    </span>
-                </button>
-            <button form="addForm"
-                class="submitAddBtn w-full mt-10 inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+        <div style="margin-top: 4vh;">        
+        <div class="w-full flex justify-between">
+            <button type="submit"
+                class="closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
                 <span
                     class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                    Thay đổi
+                    Hủy
                 </span>
             </button>
-        </div>
+            <button form="form" type="submit"
+                class="submitAddBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
+                <span
+                    class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                    Thêm
+                </span>
+            </button>
+            </div>
     </div>
         `
         $('.addRate').addClass('hidden');

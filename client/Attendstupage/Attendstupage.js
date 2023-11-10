@@ -150,7 +150,7 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
         </button>
         <button data-tooltip-target="update" type="button"
-                class="edit p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="`+ index + `">
+                class="editBtn p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="`+ index + `">
                 <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     viewBox="0 0 20 18">
@@ -172,6 +172,7 @@ function loadData() {
     addCheck();
     addWarn();
     loadModal();
+    editModal();
 }
 function formatDate(date) {
     const day = String(date.getDate()).padStart(2, '0');
@@ -235,7 +236,7 @@ function loadModal() {
         e.preventDefault();
         var str = ''
         var id = $(this).attr('data-id');
-        str += `
+        str += `<div class="grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="col-span-2" id="modal1">
         <form>
             <div>
@@ -344,7 +345,7 @@ function loadModal() {
                     </span>
                 </button>
     </div>
-            </div>`;
+            </div></div>`;
         $('#modal').html(str);
         $('.closeBtn').click(function (e) {
             e.preventDefault();
@@ -352,4 +353,100 @@ function loadModal() {
         });
     });
 
+}
+function editModal() {
+    $('.editBtn').click(function (e) {
+        e.preventDefault();
+        $('.addBtn').addClass('hidden');
+        var id = $(this).attr('data-id');
+        var str = '';
+        str += `
+            <div class="gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <form id="form">
+                <div class="grid gap-6 mb-6 md:grid-cols-3">
+                    <div>
+                        <label for="namePay"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
+                        <input type="text" id="namePay" disabled
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Nguyễn Văn A" value="`+ tableData[id]['name'] + `"
+                            required>
+                    </div>
+                    <div>
+                        <label for="classPay"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
+                        <input type="text" id="classPay"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
+                    </div>
+                    <div>
+                        <label for="pay"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số buổi</label>
+                        <input type="text" id="pay"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="`+ tableData[id]['dates'] + `" required>
+                    </div>
+                </div>    
+                </form>
+        <div style="margin-top: 4vh;">        
+            <div class="w-full flex justify-between">
+                <button type="submit"
+                    class="closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                    <span
+                        class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        Hủy
+                    </span>
+                </button>
+                <button form="form" type="submit"
+                    class="submitEditBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
+                    <span
+                        class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md  group-hover:bg-opacity-0">
+                        Thay đổi
+                    </span>
+                </button>
+                </div>
+            </div>
+        </div>
+        </div>
+        `
+        $('#editModal').html(str);
+        $('#modal').html('');
+        editDate(id);
+    })
+}
+function editDate(id) {
+    $('.submitEditBtn').click(function (e) {
+        e.preventDefault();
+        var dates = $('#pay').val();
+        if (dates < 0) {
+            Toast.fire({
+                icon: "error",
+                title: "Ngày không hợp lệ"
+            })
+        }
+        else {
+            Swal.fire({
+                title: "Bạn chắc chứ?",
+                text: "Bạn đang chỉnh sửa thông tin của " + tableData[id]['name'],
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Xác nhận"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Toast.fire({
+                        icon: "success",
+                        title: "Chỉnh sửa thành công"
+                    }).then(() => {
+                        tableData[id]['dates'] = dates;
+                        $('#editModal').html('');
+                        loadData();
+                    })
+                }
+            });
+        }
+    })
+    $('.closeBtn').click(function (e) {
+        $('#editModal').html('');
+    })
 }
