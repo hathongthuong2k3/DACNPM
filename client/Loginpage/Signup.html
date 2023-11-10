@@ -143,9 +143,9 @@
                         </div>
                         <div class="text-base font-medium text-gray-900 dark:text-white">
                             Bằng cách nhấp vào Đăng ký, bạn đồng ý với 
-                            <a href="dieu-khoan.html" target="_blank">Điều khoản</a>,
-                            <a href="chinh-sach-rieng-tu.html" target="_blank">Chính sách quyền riêng tư</a>
-                            và <a href="chinh-sach-cookie.html" target="_blank">Chính sách cookie</a> của chúng tôi.
+                            <a href="#" target="_blank">Điều khoản</a>,
+                            <a href="#" target="_blank">Chính sách quyền riêng tư</a>
+                            và <a href="#" target="_blank">Chính sách cookie</a> của chúng tôi.
                             <p></p>
                         </div>
                         <div class="flex justify-center">
@@ -163,43 +163,7 @@
             Email: sepenglish@gmail.com.</p>
     </footer>
 
-    <script>
-        function toggleAuthenticationCode() {
-            var role = document.getElementById("role").value;
-            var authCodeDiv = document.querySelector(".authentication-code");
-
-            if (role === "NhanVien" || role === "QuanTriVien") {
-                authCodeDiv.style.display = "block";
-            } else {
-                authCodeDiv.style.display = "none";
-            }
-        }
-
-        // document.getElementById("register-button").addEventListener("click", function () {
-        //     window.location.href = "ChooseActorTest.html";
-        // });
-        document.getElementById("register-button").addEventListener("click", function (event) {
-            var username = document.getElementById("floating_loginname").value;
-            var password = document.getElementById("floating_password").value;
-            var repeatPassword = document.getElementById("floating_repeat_password").value;
-            var name = document.getElementById("floating_name").value;
-            var birthday = document.getElementById("floating_birthday").value;
-            var gender = document.getElementById("gender").value;
-            var address = document.getElementById("floating_address").value;
-            var phone = document.getElementById("floating_phone").value;
-            var email = document.getElementById("floating_email").value;
-
-            if (username && password && repeatPassword && name && birthday && gender && address && phone && email) {
-                window.location.href = "ChooseActor.html";
-            } else {
-                // Hiển thị thông báo hoặc thực hiện xử lý khác nếu có lỗi
-                alert("Vui lòng điền đầy đủ thông tin.");
-            }
-
-            // Ngăn chặn hành động mặc định của nút submit trong form
-            event.preventDefault();
-        });
-    </script>
+    <script src="Signup.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
 </body>

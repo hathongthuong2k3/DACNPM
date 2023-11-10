@@ -4,7 +4,7 @@
 }
 
 body {
-    width: 1440px;
+    /* width: 1440px; */
     margin: auto;
     margin-top: 100px;
 }
@@ -14,7 +14,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1440px;
+    /* width: 1440px; */
     height: 177px;
     background-color: #125380;
     text-align: center;
@@ -24,25 +24,30 @@ body {
     font-weight: 300;
 }
 
+.sep-english-1 {
+    margin: 0 10% 0 10%;
+    width: 80%;
+}
 
 .text-intro {
-    margin: 20px 130px 0 130px;
+    margin: 20px 10% 0 10%;
     width: 875px;
+    width: 59%;
 }
 
 .text-intro h2 {
-    font-size: 45px;
+    font-size: 24pt;
     font-weight: 600;
     margin-bottom: 20px;
 }
 
 .text-intro p {
-    font-size: 24px;
+    font-size: 16pt;
 }
 
 .course-list {
     list-style: none;
-    margin: 20px 130px 0 130px;
+    margin: 20px 10% 0 10%;
 }
 
 .course-list .course {
@@ -50,23 +55,23 @@ body {
 }
 
 .course h3 {
-    font-size: 35px;
+    font-size: 18pt;
     font-weight: 600;
 }
 
 .course p {
-    font-size: 25px;
+    font-size: 14pt;
     margin-bottom: 20px;
 }
 
 .course__card {
     display: flex;
-    width: 1180px;
+    width: 75%;
     height: 250px;
     border-radius: 20px;
     border: 3px solid rgba(68, 68, 68, 0.20);
     align-items: center;
-
+    margin: auto;
 }
 
 .card__left {
@@ -78,7 +83,7 @@ body {
 }
 
 .card__right h2 {
-    font-size: 50px;
+    font-size: 24pt;
     margin-bottom: 20px;
 }
 
@@ -86,13 +91,13 @@ body {
     text-decoration: none;
     color: #fff;
     display: block;
-    width: 250px;
-    height: 61px;
+    width: 200px;
+    height: 50px;
     border-radius: 40px;
     background-color: #249DE3;
     font-size: 20px;
     text-align: center;
-    line-height: 61px;
+    line-height: 50px;
 }
 
 .card__right .more:hover {
