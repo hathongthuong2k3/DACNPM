@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Đăng Nhập</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.css" rel="stylesheet" />
+    <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.css"  rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -16,77 +15,16 @@
         }
 
         body {
-            width: 1440px;
+            /* width: 1440px; */
             margin: auto;
             margin-top: 100px;
-        }
-
-        table {
-            margin: 0 auto;
-            background-color: #ffffff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 500px;
-            padding: 20px;
-            margin-top: 170px;
-            margin-bottom: 170px;
-            flex-grow: 1;
-        }
-
-        table th {
-            text-align: center;
-            font-size: 24px;
-            padding: 10px;
-        }
-
-        table td {
-            text-align: left;
-            padding: 10px;
-        }
-
-        .form-group {
-            display: flex;
-            align-items: center;
-        }
-
-        .form-group label {
-            width: 30%;
-            text-align: right;
-            padding-right: 10px;
-        }
-
-        .form-group input {
-            width: 70%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-
-        #forgot-password {
-            text-align: right;
-            margin-right: 0%;
-            margin-top: 10px;
-        }
-
-        #login-button {
-            width: 100%;
-            background-color: #1e90ff;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 15px;
         }
 
         .footer {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 1440px;
+            /* width: 1440px; */
             height: 177px;
             background-color: #125380;
             text-align: center;
@@ -105,7 +43,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="../HomePage/homePage.html">Trang chủ</a>
@@ -120,7 +58,7 @@
                     <a class="nav-link" href="../ContactPage/contact.html">Liên hệ</a>
                 </li>
             </ul>
-        <!-- </div> -->
+        </div>
 
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -133,47 +71,50 @@
             <a class="btn btn-outline-secondary" href="Signup.html" role="button">Đăng ký</a>
         </div>
     </nav>
-    <table>
-        <tr>
-            <th colspan="2">Đăng nhập</th>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <div class="form-group">
-                    <label for="username">Tên đăng nhập:</label>
-                    <input type="text" id="username" name="username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Mật khẩu:</label>
-                    <input type="password" id="password" name="password">
-                </div>
-                <div class="flex items-center justify-between">
-                    <div class="flex items-start">
-                        <div class="flex items-center h-5">
-                          <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="">
+
+    <section class="bg-gray-50 dark:bg-gray-900">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16">
+            <div class="flex flex-col justify-center">
+                <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Đăng ký ngay</h1>
+                <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Nhận liền khóa học hay.</p>
+                <a href="../CoursesPage/coursesPage.html" class="text-blue-600 dark:text-blue-500 hover:underline font-medium text-lg inline-flex items-center">Xem thêm các khóa học của chúng tôi 
+                    <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                    </svg>
+                </a>
+            </div>
+            <div>
+                <div class="w-full lg:max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow-xl dark:bg-gray-800">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white" style="font-size: 24pt">
+                        Đăng nhập
+                    </h2>
+                    <form class="mt-8 space-y-6" action="#">
+                        <div>
+                            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tên đăng nhập</label>
+                            <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tên đăng nhập" required>
                         </div>
-                        <div class="ml-3 text-sm">
-                          <label for="remember" class="text-gray-500 dark:text-gray-300">Ghi nhớ tài khoản</label>
+                        <div>
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mật khẩu</label>
+                            <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         </div>
-                    </div>
-                    <a href="ForgotPass.html" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Quên mật khẩu?</a>
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                                <input id="remember" aria-describedby="remember" name="remember" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600" required>
+                            </div>
+                            <div class="ml-3 text-sm">
+                            <label for="remember" class="font-medium text-gray-500 dark:text-gray-400">Ghi nhớ tài khoản</label>
+                            </div>
+                            <a href="Forgotpass.html" class="ml-auto text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Quên mật khẩu?</a>
+                        </div>
+                        <button id="login-button" type="submit" class="w-full px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Đăng nhập</button>
+                        <div class="text-sm font-medium text-gray-900 dark:text-white">
+                            Chưa có tài khoản? <a href="Signup.html" class="text-blue-600 hover:underline dark:text-blue-500">Đăng ký ngay</a>
+                        </div>
+                    </form>
                 </div>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <button id="login-button">Đăng nhập</button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                    Chưa có tài khoản? <a href="Signup.html" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Đăng ký</a>
-                </p>
-            </td>
-        </tr>
-    </table>
-    <p></p>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer">
         <p>Copyright 2023 Trường Đại Học Bách Khoa - ĐHQG TP.HCM. All Rights Reserved. <br>
@@ -182,27 +123,41 @@
     </footer>
 
     <script>
-        document.getElementById("login-button").addEventListener("click", function () {
-            // Trích xuất tham số actor từ URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const actor = urlParams.get("actor");
-        
-            var loginPage = "";
-        
-            // Định nghĩa đường dẫn tới trang đăng nhập dựa trên vai trò (actor) đã trích xuất
-            if (actor === "student") {
-                    loginPage = "../HomePage/homePageStudent.html";
-            } else if (actor === "teacher") {
-                    loginPage = "../HomePage/homePageTeacher.html";
-            } else if (actor === "admin") {
-                    loginPage = "../Adminpage/Adminpage.html";
-            } else if (actor === "staff") {
-                    loginPage = "../Staffpage/Staffpage.html";
+        document.getElementById("login-button").addEventListener("click", function (event) {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            const rememberCheckbox = document.getElementById("remember");
+
+            rememberCheckbox.checked = false;
+            
+            if (username && password) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const actor = urlParams.get("actor");
+            
+                var loginPage = "";
+            
+                // Định nghĩa đường dẫn tới trang đăng nhập dựa trên vai trò (actor) đã trích xuất
+                if (actor === "student") {
+                        loginPage = "../HomePage/homePageStudent.html";
+                } else if (actor === "teacher") {
+                        loginPage = "../HomePage/homePageTeacher.html";
+                } else if (actor === "admin") {
+                        loginPage = "../Adminpage/Adminpage.html";
+                } else if (actor === "staff") {
+                        loginPage = "../Staffpage/Staffpage.html";
+                }
+            
+                // Chuyển hướng đến trang đăng nhập tương ứng
+                window.location.href = loginPage;
+            } else {
+                // Hiển thị thông báo hoặc thực hiện xử lý khác nếu có lỗi
+                alert("Vui lòng điền đầy đủ thông tin.");
             }
-        
-            // Chuyển hướng đến trang đăng nhập tương ứng
-            window.location.href = loginPage;
+            // Ngăn chặn hành động mặc định của nút submit trong form
+            event.preventDefault();
         });
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
 </body>
 </html>
