@@ -67,7 +67,9 @@ function loadScoreModal() {
         e.preventDefault();
         var id = $(this).attr('data-id');
         var str = '';
-        str += `<div class="col-span-2">
+        str += `
+        <div class="mb-5 grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="col-span-2">
         <form>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
@@ -132,13 +134,23 @@ function loadScoreModal() {
                 </span>
             </button>
         </div>
-    </div>`
+    </div></div>`
         $('#scoreModal').html(str);
-        $('#studentModal').html('');
-        editData(id);
+        $('#scoreModal').removeClass('invisible opacity-0');
+        $('#scoreModal').addClass('opacity-100');
+        $('#studentModal').removeClass('opacity-100');
+        $('#studentModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#studentModal').html('');
+        }, 200);
         $('.closeBtn').click(function (e) {
-            $('#scoreModal').html('');
+            $('#scoreModal').removeClass('opacity-100');
+            $('#scoreModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('#scoreModal').html('');
+            }, 200);
         })
+        editData(id);
     });
 }
 function loadData() {
@@ -204,6 +216,7 @@ function loadStudentModal() {
         var str = ''
         var id = $(this).attr('data-id');
         str += `
+        <div class="mb-5 grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="col-span-2" id="modal1">
         <form>
             <div>
@@ -310,14 +323,24 @@ function loadStudentModal() {
                         Hủy
                     </span>
                 </button>
-            </div>`;
+            </div></div>`;
         $('#studentModal').html(str);
-        $('#scoreModal').html('');
+        $('#studentModal').removeClass('invisible opacity-0');
+        $('#studentModal').addClass('opacity-100');
+        $('#scoreModal').removeClass('opacity-100');
+        $('#scoreModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#scoreModal').html('');
+        }, 200);
         $('.closeBtn').click(function (e) {
-            e.preventDefault();
-            $('#studentModal').html('');
+            $('#studentModal').removeClass('opacity-100');
+            $('#studentModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('#studentModal').html('');
+            }, 200);
         })
     });
+
 }
 function editData(id) {
     $('.submitEditBtn').click(function (e) {

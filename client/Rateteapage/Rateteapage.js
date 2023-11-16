@@ -323,13 +323,21 @@ function loadTeacherModal() {
     </div>
             </div></div>`;
         $('#teacherModal').html(str);
-        $('#rateModal').html('');
-        $('.addRate').addClass('hidden')
+        $('#teacherModal').removeClass('invisible opacity-0');
+        $('#teacherModal').addClass('opacity-100');
+        $('#rateModal').removeClass('opacity-100');
+        $('#rateModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#rateModal').html('');
+        }, 200);
         $('.closeBtn').click(function (e) {
-            e.preventDefault();
-            $('#teacherModal').html('');
-            $('.addRate').removeClass('hidden')
-        });
+            $('#teacherModal').removeClass('opacity-100');
+            $('#teacherModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('.addRate').removeClass('hidden');
+                $('#teacherModal').html('');
+            }, 200);
+        })
     });
 }
 function loadRateModal() {
@@ -382,12 +390,21 @@ function loadRateModal() {
         </div>
     </div>`
         $('#rateModal').html(str);
-        $('#teacherModal').html('');
         $('.addRate').addClass('hidden');
-        editData(id);
+        $('#rateModal').removeClass('invisible opacity-0');
+        $('#rateModal').addClass('opacity-100');
+        $('#teacherModal').removeClass('opacity-100');
+        $('#teacherModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#teacherModal').html('');
+        }, 200);
         $('.closeBtn').click(function (e) {
-            $('#rateModal').html('');
-            $('.addRate').removeClass('hidden');
+            $('#rateModal').removeClass('opacity-100');
+            $('#rateModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('.addRate').removeClass('hidden');
+                $('#rateModal').html('');
+            }, 200);
         })
     });
 }
@@ -419,8 +436,12 @@ function editData(id) {
                     }).then(() => {
                         tableData[id]['course'] = course;
                         tableData[id]['rate'] = rate;
-                        $('#rateModal').html('');
-                        $('.addRate').removeClass('hidden');
+                        $('#rateModal').removeClass('opacity-100');
+                        $('#rateModal').addClass('invisible opacity-0');
+                        setTimeout(function () {
+                            $('.addRate').removeClass('hidden');
+                            $('#rateModal').html('');
+                        }, 200);
                         loadData();
                     })
                 }
@@ -479,14 +500,24 @@ function addRateModal() {
             </div>
     </div>
         `
-        $('.addRate').addClass('hidden');
         $('#rateModal').html(str);
-        $('#teacherModal').html('');
-        addRate();
+        $('.addRate').addClass('hidden');
+        $('#rateModal').removeClass('invisible opacity-0');
+        $('#rateModal').addClass('opacity-100');
+        $('#teacherModal').removeClass('opacity-100');
+        $('#teacherModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#teacherModal').html('');
+        }, 200);
         $('.closeBtn').click(function (e) {
-            $('#rateModal').html('');
-            $('.addRate').removeClass('hidden');
+            $('#rateModal').removeClass('opacity-100');
+            $('#rateModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('.addRate').removeClass('hidden');
+                $('#rateModal').html('');
+            }, 200);
         })
+        addRate();
     });
 }
 function addRate() {
@@ -551,8 +582,12 @@ function addRate() {
                             'prizeStatus': el['prizeStatus'],
                             'rate': parseInt(rate)
                         })
-                        $('#rateModal').html('');
-                        $('.addRate').removeClass('hidden');
+                        $('#rateModal').removeClass('opacity-100');
+                        $('#rateModal').addClass('invisible opacity-0');
+                        setTimeout(function () {
+                            $('.addRate').removeClass('hidden');
+                            $('#rateModal').html('');
+                        }, 200);
                         loadData();
                     })
                 }

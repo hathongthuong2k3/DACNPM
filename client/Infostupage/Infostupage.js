@@ -101,11 +101,11 @@ function editData() {
                         tableData[id].phoneNumber = phone;
                         tableData[id].email = email;
                         tableData[id].course = course;
-
-                        var elements = document.getElementsByClassName("container1");
-                        for (var i = 0; i < elements.length; i++) {
-                            elements[i].classList.add("hidden");
-                        }
+                        $('#modal').removeClass('opacity-100');
+                        $('#modal').addClass('invisible opacity-0');
+                        setTimeout(function () {
+                            $('#modal').html('');
+                        }, 200);
                         loadData();
                     })
                 }
@@ -116,7 +116,8 @@ function editData() {
 function loadModal(id) {
     var str = '';
     str += `
-    <div class="col-span-2 hidden container1">
+    <div class="grid grid-cols-3 gap-4 p-6 mb-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="col-span-2">
     <form>
         <div>
             <div class="gap-6 mb-6">
@@ -219,7 +220,7 @@ function loadModal(id) {
     <button type="submit"
                     class="w-full closeBtn mt-10 inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
                     <span
-                        class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        class="w-full px-5 py-2.5 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Hủy
                     </span>
                 </button>
@@ -228,21 +229,24 @@ function loadModal(id) {
     <button id="submitEditBtn"
             class="w-full inline-flex items-center mt-10 justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
             <span
-                class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                class="w-full px-5 py-2.5 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                 Thay đổi
             </span>
         </button>
     </div>
-        
+    </div>
     </div>
 </div>`
     $('#modal').html(str);
+    $('#modal').removeClass('invisible opacity-0');
+    $('#modal').addClass('opacity-100');
     editData();
     $('.closeBtn').click(function (e) {
-        var elements = document.getElementsByClassName("container1");
-        for (var i = 0; i < elements.length; i++) {
-            elements[i].classList.add("hidden");
-        }
+        $('#modal').removeClass('opacity-100');
+        $('#modal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#modal').html('');
+        }, 200);
     })
 }
 function loadData() {

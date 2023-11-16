@@ -43,6 +43,24 @@ const Toast = Swal.mixin({
         toast.onmouseleave = Swal.resumeTimer;
     }
 });
+//function addData() {
+//    $('#button1').click(function (e) {
+//        e.preventDefault();
+//        var elements = document.getElementsByClassName("container");
+//        for (var i = 0; i < elements.length; i++) {
+//            elements[i].classList.remove("hidden");
+//        }
+//        $('#button1').addClass("hidden");
+//    });
+//    $('#submitAddBtn').click(function (e) {
+//        e.preventDefault();
+//        var elements = document.getElementsByClassName("container");
+//        for (var i = 0; i < elements.length; i++) {
+//            elements[i].classList.add("hidden");
+//        }
+//       $('#button1').removeClass("hidden");
+//    })
+//}
 function editData() {
     $('.edit').click(function (e) {
         var id = $(this).data("id");
@@ -61,7 +79,6 @@ function editData() {
             var address = $('#address').val();
             var phone = $('#phone').val();
             var email = $('#email').val();
-            var course = $('#Lớp').val();
             Swal.fire({
                 title: "Bạn chắc chứ?",
                 text: "Bạn đang chỉnh sửa thông tin của " + tableData[id]['name'],
@@ -82,7 +99,6 @@ function editData() {
                         tableData[id].address = address;
                         tableData[id].phoneNumber = phone;
                         tableData[id].email = email;
-                        tableData[id].course = course;
                         $('#modal').removeClass('opacity-100');
                         $('#modal').addClass('invisible opacity-0');
                         setTimeout(function () {
@@ -99,7 +115,7 @@ function loadModal(id) {
     var str = '';
     str += `
     <div class="grid grid-cols-3 gap-4 p-6 mb-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <div class="col-span-2 container1">
+    <div class="col-span-2">
     <form>
         <div>
             <div class="gap-6 mb-6">
@@ -179,13 +195,6 @@ function loadModal(id) {
                     placeholder="nguyenvana@company.com" value="`+ tableData[id]['email'] + `" required>
             </div>
         </div>
-        <div class="mb-6">
-            <label for="Lớp"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
-            <input type="Lớp" id="Lớp"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
-        </div>
     </form>
 </div>
 <div class="hidden container1" style="margin-top: 9vh;">
@@ -253,9 +262,6 @@ function loadData() {
         </td>
         <td class="px-6 py-4">
         `+ el['email'] + `
-        </td>
-        <td class="px-6 py-4">
-        `+ el['course'] + `
         </td>
         <td class="px-6 py-4">
             <button type="button" data-tooltip-target="update"

@@ -10,6 +10,8 @@ var tableData = [
         dates: 11,
         teacherName: "Nguyễn Đức Tùng",
         status: 0,
+        month: 10,
+        year: 2023,
     },
     {
         name: "Nguyễn Thị Hằng",
@@ -22,6 +24,8 @@ var tableData = [
         dates: 10,
         teacherName: "Nguyễn Đức Hải",
         status: 1,
+        month: 11,
+        year: 2023,
     },
     {
         name: "Lê Văn Hoàng",
@@ -34,6 +38,8 @@ var tableData = [
         dates: 0,
         teacherName: "Nguyễn Phan Anh",
         status: -1,
+        month: 11,
+        year: 2023,
     },
 ];
 $(document).ready(function () {
@@ -62,71 +68,16 @@ function loadData() {
                             </span>
                         </th>
                         <td class="px-6 py-4">
-                        `+ el['course'] + `
+                        `+ el['month'] + `
                         </td>
                         <td class="px-6 py-4">
-                        `
-        if (el['status'] == 1) {
-            str += "Đã học xong"
-        }
-        else if (el['status'] == 0) {
-            str += "Đang học"
-        }
-        else if (el['status'] == -1) {
-            str += "Chưa học"
-        }
-        str += `
-                        </td>
-                        <td class="px-6 py-4">
-                        `+ el['teacherName'] + `
+                        `+ el['year'] + `
                         </td>
                         <td class="px-6 py-4">
                         `+ el['dates'] + `
                         </td>
-                        <td class="px-6 py-4 ">
-                        `
-        if (el['status'] == 1) {
-            str += `<button data-tooltip-target="attend" disabled data-id=` + index + `
-            class="addCheck mx-auto p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            <svg class="text-center w-6 h-6 text-gray-100 dark:text-white flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 16 12">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
-            </svg>
-            <div id="attend" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-    Điểm danh
-    <div class="tooltip-arrow" data-popper-arrow></div>
-        </button>
-        <button data-tooltip-target="warning" disabled
-            class="mx-auto p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            <span
-                class="material-symbols-outlined text-center w-6 h-6 text-gray-100 dark:text-white flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
-                priority_high
-            </span>
-            <div id="warning" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-    Cảnh cáo
-    <div class="tooltip-arrow" data-popper-arrow></div>
-        </button>
-        <button data-tooltip-target="update" type="button"
-                class="editBtn p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id=`+ index + `>
-                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                    viewBox="0 0 20 18">
-                    <path
-                        d="M12.687 14.408a3.01 3.01 0 0 1-1.533.821l-3.566.713a3 3 0 0 1-3.53-3.53l.713-3.566a3.01 3.01 0 0 1 .821-1.533L10.905 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V11.1l-3.313 3.308Zm5.53-9.065.546-.546a2.518 2.518 0 0 0 0-3.56 2.576 2.576 0 0 0-3.559 0l-.547.547 3.56 3.56Z" />
-                    <path
-                        d="M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z" />
-                </svg>
-                <div id="update" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-    Chỉnh sửa
-    <div class="tooltip-arrow" data-popper-arrow></div>
-            </button>
-    </td>
-</tr>`
-        }
-        else {
-            str += `<button data-tooltip-target="attend" data-id=` + index + `
+                        <td class="px-6 py-4">
+                        <button data-tooltip-target="attend" data-id=` + index + `
             class="addCheck mx-auto p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <svg class="text-center w-6 h-6 text-gray-100 dark:text-white flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -165,9 +116,7 @@ function loadData() {
             </button>
     </td>
 </tr>`
-        }
-
-    })
+    });
     $('#student').html(str);
     addCheck();
     addWarn();
@@ -185,6 +134,7 @@ function addCheck() {
     $('.addCheck').click(function (e) {
         e.preventDefault();
         var id = $(this).attr('data-id');
+        var now = new Date()
         Swal.fire({
             title: "Bạn chắc chứ?",
             text: "Bạn đang điểm danh cho " + tableData[id]['name'],
@@ -195,16 +145,24 @@ function addCheck() {
             confirmButtonText: "Xác nhận"
         }).then((result) => {
             if (result.isConfirmed) {
-                Toast.fire({
-                    icon: "success",
-                    title: tableData[id]['name'] + " đã được điểm danh thành công",
-                }).then(() => {
-                    if (tableData[id]['dates'] == 0) {
-                        tableData[id]['status'] = 0;
-                    }
-                    tableData[id]['dates']++;
-                    loadData();
-                });
+                if ((now.getMonth() + 1 - tableData[id]['month'] == 0) && (now.getFullYear() - tableData[id]['year'] == 0)) {
+                    Toast.fire({
+                        icon: "success",
+                        title: tableData[id]['name'] + " đã được điểm danh thành công",
+                    }).then(() => {
+                        if (tableData[id]['dates'] == 0) {
+                            tableData[id]['status'] = 0;
+                        }
+                        tableData[id]['dates']++;
+                        loadData();
+                    });
+                }
+                else {
+                    Toast.fire({
+                        icon: "error",
+                        title: "Tháng được điểm danh đã quá lâu",
+                    })
+                }
             }
         });
     })
@@ -317,13 +275,6 @@ function loadModal() {
                         placeholder="nguyenvana@company.com" value="`+ tableData[id]['email'] + `" required>
                 </div>
             </div>
-            <div class="mb-6">
-                <label for="Lớp"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
-                <input disabled type="Lớp" id="Lớp"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
-            </div>
         </form>
     </div>
         <div>
@@ -372,7 +323,7 @@ function editModal() {
         str += `
             <div class="mb-5 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <form id="form">
-                <div class="grid gap-6 mb-6 md:grid-cols-3">
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
                         <label for="namePay"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
@@ -383,10 +334,17 @@ function editModal() {
                     </div>
                     <div>
                         <label for="classPay"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Năm</label>
                         <input type="text" id="classPay"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
+                            placeholder="IELTS 1" value="`+ tableData[id]['year'] + `" required>
+                    </div>
+                    <div>
+                        <label for="class"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tháng</label>
+                        <input type="text" id="class"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="IELTS 1" value="`+ tableData[id]['month'] + `" required>
                     </div>
                     <div>
                         <label for="pay"

@@ -20,6 +20,8 @@ var tableData = [
         prizeClass: "",
         prizeCash: 0,
         prizeStatus: 0,
+        month: 10,
+        year: 2023,
     },
     {
         name: "Nguyễn Thị Hằng",
@@ -42,6 +44,8 @@ var tableData = [
         prizeClass: "TOEIC",
         prizeCash: 2000000,
         prizeStatus: 0,
+        month: 11,
+        year: 2023,
     },
     {
         name: "Lê Văn Hoàng",
@@ -64,6 +68,8 @@ var tableData = [
         prizeClass: "",
         prizeCash: 0,
         prizeStatus: 0,
+        month: 11,
+        year: 2023,
     },
 ];
 const Toast = Swal.mixin({
@@ -92,10 +98,13 @@ function loadData() {
                 </span>
             </th>
             <td class="px-6 py-4">
-            `+ el['payClass'] + `
+            `+ el['month'] + `
             </td>
             <td class="px-6 py-4">
-            `+ el['payCash'] + `
+            `+ el['year'] + `
+            </td>
+            <td class="px-6 py-4">
+            `+ el['payCash'].toLocaleString('en-US') + `
             </td>
             <td class="px-6 py-4">
             `
@@ -158,10 +167,13 @@ function loadData() {
                 </span>
             </th>
             <td class="px-6 py-4">
-            `+ el['prizeClass'] + `
+            `+ el['month'] + `
             </td>
             <td class="px-6 py-4">
-            `+ el['prizeCash'] + `
+            `+ el['year'] + `
+            </td>
+            <td class="px-6 py-4">
+            `+ el['prizeCash'].toLocaleString('en-US') + `
             </td>
             <td class="px-6 py-4">
             `
@@ -315,13 +327,6 @@ function loadStudentModal() {
                         placeholder="nguyenvana@company.com" value="`+ tableData[id]['email'] + `" required>
                 </div>
             </div>
-            <div class="mb-6">
-                <label for="Lớp"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
-                <input disabled type="Lớp" id="Lớp"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
-            </div>
         </form>
     </div>
         <div>
@@ -370,8 +375,7 @@ function addPayModal() {
         $('.payModal').addClass('hidden');
         var str = '';
         str += `
-            <div class="grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div class="col-span-2">
+            <div class="gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <form id="payForm">
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
@@ -383,11 +387,17 @@ function addPayModal() {
                             required>
                     </div>
                     <div>
-                        <label for="classPay"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
-                        <input type="text" id="classPay"
+                        <label for="year"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Năm</label>
+                        <input type="text" id="year"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="IELTS 1" required>
+                            placeholder="2023" required>
+                    </div>
+                    <div>
+                        <label for="month"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tháng</label>
+                        <input type="text" id="month"
+                            class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     </div>
                     <div>
                         <label for="pay"
@@ -403,26 +413,26 @@ function addPayModal() {
                       <option value="1">Đã nhận</option>
                     </select>
                     </div>
-                </div>    
-        </div>
+                </div>
         </form>
         <div style="margin-top: 4vh;">
-            <div class="w-full ">
+            <div class="w-full flex justify-between">
             <button type="submit" 
-                    class="w-full closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                    class="closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
                     <span
                         class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Hủy
                     </span>
                 </button>
                 <button form="payForm" type="submit"
-                    class="submitAddPayBtn w-full inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
+                    class="submitAddPayBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
                     <span
                         class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Thêm
                     </span>
                 </button>
             </div>
+        </div>
         </div>
         </div>
         `
@@ -451,8 +461,7 @@ function addPrizeModal() {
         $('.prizeModal').addClass('hidden');
         var str = '';
         str += `
-            <div class="grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div class="col-span-2">
+            <div class="gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <form id="prizeForm">
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
@@ -464,11 +473,17 @@ function addPrizeModal() {
                             required>
                     </div>
                     <div>
-                        <label for="classPrize"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
-                        <input type="text" id="classPrize"
+                        <label for="year"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Năm</label>
+                        <input type="text" id="year"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="IELTS 1" required>
+                            placeholder="2023" required>
+                    </div>
+                    <div>
+                        <label for="month"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tháng</label>
+                        <input type="text" id="month"
+                            class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     </div>
                     <div>
                         <label for="prize"
@@ -484,26 +499,25 @@ function addPrizeModal() {
                       <option value="1">Đã nhận</option>
                     </select>
                     </div>
-                </div>
-            
-        </div></form>
+                </div></form>
         <div style="margin-top: 4vh;">
-            <div class="w-full ">
+            <div class="w-full flex justify-between">
                 <button type="submit" 
-                    class="w-full closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                    class="closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
                     <span
                         class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Hủy
                     </span>
                 </button>
                 <button form="prizeForm" type="submit"
-                    class="submitAddPrizeBtn w-full inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
+                    class="submitAddPrizeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
                     <span
                         class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Thêm
                     </span>
                 </button>
             </div>
+        </div>
         </div>
         </div>
         `
@@ -530,7 +544,8 @@ function addPay() {
     $('.submitAddPayBtn').click(function (e) {
         e.preventDefault();
         var fullName = $('#namePay').val();
-        var course = $('#classPay').val();
+        var month = $('#month').val();
+        var year = $('#year').val();
         var payAmount = $('#pay').val();
         var status = $('#payStatus').val();
         if (fullName == '') {
@@ -539,16 +554,22 @@ function addPay() {
                 title: "Vui lòng nhập tên"
             })
         }
-        else if (course == '') {
+        else if (month == '') {
             Toast.fire({
                 icon: "error",
-                title: "Vui lòng nhập lớp"
+                title: "Vui lòng nhập tháng"
+            })
+        }
+        else if (year == '') {
+            Toast.fire({
+                icon: "error",
+                title: "Vui lòng nhập tháng"
             })
         }
         else if (payAmount == '') {
             Toast.fire({
                 icon: "error",
-                title: "Vui lòng nhập khoản thu"
+                title: "Vui lòng nhập lương"
             })
         }
         else if (status == '') {
@@ -560,10 +581,10 @@ function addPay() {
         else {
             var check = false;
             tableData.forEach((el) => {
-                if (el['name'] === fullName && el['payClass'] === course) {
+                if (el['name'] === fullName && el['month'] === month && el['year'] === year) {
                     Toast.fire({
                         icon: "error",
-                        title: "Đã tồn tại học phí"
+                        title: "Đã tồn tại lương"
                     })
                     check = true;
                 }
@@ -588,12 +609,14 @@ function addPay() {
                             'speaking': el['speaking'],
                             'reading': el['reading'],
                             'writing': el['writing'],
-                            'payClass': course,
+                            'payClass': el['payClass'],
                             'payCash': payAmount,
                             'payStatus': status,
                             'prizeClass': "",
                             'prizeCash': 0,
                             'prizeStatus': 0,
+                            'month': month,
+                            'year': year,
                         })
                         loadData();
                         $('#payModal').removeClass('opacity-100');
@@ -618,7 +641,8 @@ function addPrize() {
     $('.submitAddPrizeBtn').click(function (e) {
         e.preventDefault();
         var fullName = $('#namePrize').val();
-        var course = $('#classPrize').val();
+        var month = $('#month').val();
+        var year = $('#year').val();
         var prizeAmount = $('#prize').val();
         var status = $('#prizeStatus').val();
         if (fullName == '') {
@@ -627,16 +651,22 @@ function addPrize() {
                 title: "Vui lòng nhập tên"
             })
         }
-        else if (course == '') {
+        else if (month == '') {
             Toast.fire({
                 icon: "error",
-                title: "Vui lòng nhập lớp"
+                title: "Vui lòng nhập tháng"
+            })
+        }
+        else if (year == '') {
+            Toast.fire({
+                icon: "error",
+                title: "Vui lòng nhập năm"
             })
         }
         else if (prizeAmount == '') {
             Toast.fire({
                 icon: "error",
-                title: "Vui lòng nhập khoản thu"
+                title: "Vui lòng nhập khoản thưởng"
             })
         }
         else if (status == '') {
@@ -682,6 +712,8 @@ function addPrize() {
                             'prizeClass': course,
                             'prizeCash': prizeAmount,
                             'prizeStatus': status,
+                            'month': month,
+                            'year': year,
                         })
                         loadData();
                         $('#prizeModal').removeClass('opacity-100');
@@ -751,8 +783,7 @@ function editPayModal() {
         var id = $(this).attr('data-id');
         var str = '';
         str += `
-            <div class="grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div class="col-span-2">
+            <div class="gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <form id="payForm">
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
@@ -764,12 +795,18 @@ function editPayModal() {
                             required>
                     </div>
                     <div>
-                        <label for="classPay"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
-                        <input type="text" id="classPay"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="IELTS 1" value="`+ tableData[id]['payClass'] + `" required>
-                    </div>
+                    <label for="year"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Năm</label>
+                    <input type="text" id="year"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="2023" value="`+ tableData[id]['year'] + `" required>
+                </div>
+                <div>
+                    <label for="month"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tháng</label>
+                    <input type="text" id="month"
+                        class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="`+ tableData[id]['month'] + `" required>
+                </div>
                     <div>
                         <label for="pay"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số tiền nhận</label>
@@ -792,26 +829,25 @@ function editPayModal() {
         str += `>Đã nhận</option>
                     </select>
                     </div>
-                </div>    
-        </div>
+                </div>
         </form>
         <div style="margin-top: 4vh;">
-            <div class="w-full ">
+            <div class="w-full flex justify-between">
                 <button type="submit"
-                    class="closeBtn w-full inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                    class="closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
                     <span
                         class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Hủy
                     </span>
                 </button>
                 <button form="payForm" type="submit"
-                    class="submitEditPayBtn w-full inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
+                    class="submitEditPayBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
                     <span
                         class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Thay đổi
                     </span>
                 </button>
-            </div>
+            </div></div>
         </div>
         </div>
         `
@@ -907,8 +943,7 @@ function editPrizeModal() {
         var id = $(this).attr('data-id');
         var str = '';
         str += `
-            <div class="grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div class="col-span-2">
+            <div class="gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <form id="prizeForm">
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
@@ -920,11 +955,17 @@ function editPrizeModal() {
                             required>
                     </div>
                     <div>
-                        <label for="classPrize"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
-                        <input type="text" id="classPrize"
+                        <label for="year"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Năm</label>
+                        <input type="text" id="year"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="IELTS 1" value="`+ tableData[id]['prizeClass'] + `" required>
+                            placeholder="2023" value="`+ tableData[id]['year'] + `" required>
+                    </div>
+                    <div>
+                        <label for="month"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tháng</label>
+                        <input type="text" id="month"
+                            class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="`+ tableData[id]['month'] + `" required>
                     </div>
                     <div>
                         <label for="prize"
@@ -948,26 +989,25 @@ function editPrizeModal() {
         str += `>Đã nhận</option>
                     </select>
                     </div>
-                </div>    
-        </div>
+                </div>
         </form>
         <div style="margin-top: 4vh;">
-            <div class="w-full ">
+            <div class="w-full flex justify-between ">
                 <button type="submit"
-                    class="closeBtn w-full inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                    class="closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
                     <span
                         class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Hủy
                     </span>
                 </button>
                 <button form="prizeForm" type="submit"
-                    class="submitEditPrizeBtn w-full inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
+                    class="submitEditPrizeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
                     <span
                         class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Thay đổi
                     </span>
                 </button>
-            </div>
+            </div></div>
         </div>
         </div>
         `
