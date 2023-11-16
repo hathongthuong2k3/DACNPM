@@ -874,11 +874,12 @@ function editPay() {
     $('.submitEditPayBtn').click(function (e) {
         e.preventDefault();
         var fullName = $('#namePay').val();
-        var course = $('#classPay').val();
+        var month = $('#month').val();
+        var year = $('#year').val();
         var payAmount = $('#pay').val();
         var status = $('#payStatus').val();
         tableData.forEach((el) => {
-            if (el['name'] === fullName && el['payClass'] === course) {
+            if (el['name'] === fullName && el['month'] === Number(month) && el['year'] === Number(year)) {
                 Swal.fire({
                     title: "Bạn chắc chứ?",
                     text: "Bạn đang chỉnh sửa thông tin của " + el['name'] + " dạy lớp " + el['payClass'],
@@ -1000,7 +1001,7 @@ function editPrizeModal() {
                         Hủy
                     </span>
                 </button>
-                <button form="prizeForm" type="submit"
+                <button form="prizeForm" type="button"
                     class="submitEditPrizeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
                     <span
                         class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
@@ -1013,6 +1014,7 @@ function editPrizeModal() {
         `
         $('#prizeModal').html(str);
         $('#prizeModal').removeClass('invisible opacity-0');
+
         $('#prizeModal').addClass('opacity-100');
         $('#studentModal').removeClass('opacity-100');
         $('#studentModal').addClass('invisible opacity-0');
@@ -1034,11 +1036,12 @@ function editPrize() {
     $('.submitEditPrizeBtn').click(function (e) {
         e.preventDefault();
         var fullName = $('#namePrize').val();
-        var course = $('#classPrize').val();
+        var month = $('#month').val();
+        var year = $('#year').val();
         var prizeAmount = $('#prize').val();
         var status = $('#prizeStatus').val();
         tableData.forEach((el) => {
-            if (el['name'] === fullName && el['prizeClass'] === course) {
+            if (el['name'] === fullName && el['month'] === Number(month) && el['year'] === Number(year)) {
                 Swal.fire({
                     title: "Bạn chắc chứ?",
                     text: "Bạn đang chỉnh sửa thông tin của " + el['name'] + " dạy lớp " + el['prizeClass'],
