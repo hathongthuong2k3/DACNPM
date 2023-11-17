@@ -14,10 +14,10 @@ document.getElementById("login-button").addEventListener("click", function (even
                 // Định nghĩa đường dẫn tới trang đăng nhập dựa trên vai trò (actor) đã trích xuất
                 if (actor === "student") {
                         localStorage.setItem('idRole', 1)
-                        loginPage = "../HomePage/homePageStudent.html";
+                        loginPage = "../HomePage/homePage.html";
                 } else if (actor === "teacher") {
                         localStorage.setItem('idRole', 2)
-                        loginPage = "../HomePage/homePageTeacher.html";
+                        loginPage = "../HomePage/homePage.html";
                 } else if (actor === "admin") {
                         localStorage.setItem('idRole', 3)
                         loginPage = "../Adminpage/Adminpage.html";
