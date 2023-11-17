@@ -5,11 +5,18 @@ if (idRole === null) {
 else if (idRole === '1') {
     $(document).ready(function () {
         loadCourses(studentCourses);
+        $('#user-name').html(studentInfo.name);
+        $('#user-role').html('Học viên');
+        $('#user-avt').attr('src', studentInfo.avt);
+
     });
 }
 else if (idRole === '2') {
     $(document).ready(function () {
         loadCourses(teacherCourses);
+        $('#user-name').html(teacherInfo.name);
+        $('#user-role').html('Giảng viên');
+        $('#user-avt').attr('src', teacherInfo.avt);
     });
 }
 
@@ -48,6 +55,17 @@ var teacherCourses = [
         courseStatus: 'Chưa dạy'
     },
 ]
+
+var studentInfo = {
+    name: 'Thòng Thượng Hà',
+    avt: '../img/user-avatar.jpg',
+
+}
+
+var teacherInfo = {
+    name: 'Thòng Thượng Hà',
+    avt: '../img/user-avatar.jpg',
+}
 
 
 function loadCourses(courseList) {
