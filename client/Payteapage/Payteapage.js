@@ -66,17 +66,6 @@ var tableData = [
         prizeStatus: 0,
     },
 ];
-const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-    }
-});
 $(document).ready(function () {
     loadData();
 });
@@ -95,7 +84,7 @@ function loadData() {
             `+ el['payClass'] + `
             </td>
             <td class="px-6 py-4">
-            `+ el['payCash'] + `
+            `+ el['payCash'].toLocaleString('en-US') + ` đ
             </td>
             <td class="px-6 py-4">
             `
@@ -161,7 +150,7 @@ function loadData() {
             `+ el['prizeClass'] + `
             </td>
             <td class="px-6 py-4">
-            `+ el['prizeCash'] + `
+            `+ el['prizeCash'].toLocaleString('en-US') + ` đ
             </td>
             <td class="px-6 py-4">
             `

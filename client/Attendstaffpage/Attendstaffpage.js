@@ -45,17 +45,6 @@ var tableData = [
 $(document).ready(function () {
     loadData();
 });
-const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-    }
-});
 
 function loadData() {
     var str = '';
@@ -396,7 +385,7 @@ function editModal() {
 function editDate(id) {
     $('.submitEditBtn').click(function (e) {
         e.preventDefault();
-        var dates = $('.pay').val();
+        var dates = $('#pay').val();
         if (dates < 0) {
             Toast.fire({
                 icon: "error",
