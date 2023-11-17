@@ -181,7 +181,7 @@ var courses = [
     {
         title: "Course English for Kids",
         intro: `<h2>KHÓA HỌC ANH VĂN THIẾU NHI</h2>
-        <p>Khóa học Anh văn thiếu nhi tại SEP được thiết kế đặc biệt để kích thích sự tò mò, sáng tạo, và khám phá của trẻ qua việc học tiếng Anh. Chúng tôi áp dụng phương pháp học thông qua trò chơi, hình ảnh, và hoạt động thú vị, giúp trẻ học một cách tự nhiên và hiệu quả.</p>s`,
+        <p>Khóa học Anh văn thiếu nhi tại SEP được thiết kế đặc biệt để kích thích sự tò mò, sáng tạo, và khám phá của trẻ qua việc học tiếng Anh. Chúng tôi áp dụng phương pháp học thông qua trò chơi, hình ảnh, và hoạt động thú vị, giúp trẻ học một cách tự nhiên và hiệu quả.</p>`,
         img: "../img/course4-1.png",
         str: `<li class="course">
         <h3>1. Các hoạt động trong khóa học</h3>
@@ -227,6 +227,7 @@ function loadData() {
     $('.first-pic').attr('src', courses[id].img);
     $('.course-list').html(courses[id].str);
 }
+
 card = [1, 2, 3, 4];
 function load() {
     var str = '';

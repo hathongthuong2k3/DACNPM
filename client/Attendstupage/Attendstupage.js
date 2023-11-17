@@ -109,7 +109,7 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
         </button>
         <button data-tooltip-target="update" type="button"
-                class="edit p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="`+ index + `">
+                class="editBtn p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id=`+ index + `>
                 <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     viewBox="0 0 20 18">
@@ -236,7 +236,7 @@ function loadModal() {
         e.preventDefault();
         var str = ''
         var id = $(this).attr('data-id');
-        str += `<div class="grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        str += `<div class="mb-5 grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="col-span-2" id="modal1">
         <form>
             <div>
@@ -347,12 +347,21 @@ function loadModal() {
     </div>
             </div></div>`;
         $('#modal').html(str);
+        $('#modal').removeClass('invisible opacity-0');
+        $('#modal').addClass('opacity-100');
+        $('#editModal').removeClass('opacity-100');
+        $('#editModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#editModal').html('');
+        }, 200);
         $('.closeBtn').click(function (e) {
-            e.preventDefault();
-            $('#modal').html('');
-        });
+            $('#modal').removeClass('opacity-100');
+            $('#modal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('#modal').html('');
+            }, 200);
+        })
     });
-
 }
 function editModal() {
     $('.editBtn').click(function (e) {
@@ -361,7 +370,7 @@ function editModal() {
         var id = $(this).attr('data-id');
         var str = '';
         str += `
-            <div class="gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="mb-5 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <form id="form">
                 <div class="grid gap-6 mb-6 md:grid-cols-3">
                     <div>
@@ -409,14 +418,27 @@ function editModal() {
         </div>
         `
         $('#editModal').html(str);
-        $('#modal').html('');
+        $('#editModal').removeClass('invisible opacity-0');
+        $('#editModal').addClass('opacity-100');
+        $('#modal').removeClass('opacity-100');
+        $('#modal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#modal').html('');
+        }, 200);
+        $('.closeBtn').click(function (e) {
+            $('#editModal').removeClass('opacity-100');
+            $('#editModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('#editModal').html('');
+            }, 200);
+        })
         editDate(id);
     })
 }
 function editDate(id) {
     $('.submitEditBtn').click(function (e) {
         e.preventDefault();
-        var dates = $('#pay').val();
+        var dates = $('.pay').val();
         if (dates < 0) {
             Toast.fire({
                 icon: "error",
@@ -439,7 +461,11 @@ function editDate(id) {
                         title: "Chỉnh sửa thành công"
                     }).then(() => {
                         tableData[id]['dates'] = dates;
-                        $('#editModal').html('');
+                        $('#editModal').removeClass('opacity-100');
+                        $('#editModal').addClass('invisible opacity-0');
+                        setTimeout(function () {
+                            $('#editModal').html('');
+                        }, 200);
                         loadData();
                     })
                 }
@@ -447,6 +473,10 @@ function editDate(id) {
         }
     })
     $('.closeBtn').click(function (e) {
-        $('#editModal').html('');
+        $('#editModal').removeClass('opacity-100');
+        $('#editModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#editModal').html('');
+        }, 200);
     })
 }

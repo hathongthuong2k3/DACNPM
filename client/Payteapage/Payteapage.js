@@ -234,7 +234,7 @@ function loadStudentModal() {
         var str = ''
         var id = $(this).attr('data-id');
         str += `
-        <div class="grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="mb-5 grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="col-span-2" id="modal1">
         <form>
             <div>
@@ -343,14 +343,25 @@ function loadStudentModal() {
                 </button>
             </div></div>`;
         $('#studentModal').html(str);
-        $('#payModal').html('');
-        $('.payModal').removeClass('hidden');
-        $('#prizeModal').html('');
-        $('.prizeModal').removeClass('hidden');
+        $('#studentModal').removeClass('invisible opacity-0');
+        $('#studentModal').addClass('opacity-100');
+        $('#payModal').removeClass('opacity-100');
+        $('#payModal').addClass('invisible opacity-0');
+        $('#prizeModal').removeClass('opacity-100');
+        $('#prizeModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('.payModal').removeClass('hidden');
+            $('.prizeModal').removeClass('hidden');
+            $('#payModal').html('');
+            $('#prizeModal').html('');
+        }, 200);
         $('.closeBtn').click(function (e) {
-            e.preventDefault();
-            $('#studentModal').html('');
-        });
+            $('#studentModal').removeClass('opacity-100');
+            $('#studentModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('#studentModal').html('');
+            }, 200);
+        })
     });
 }
 function addPayModal() {
@@ -405,7 +416,7 @@ function addPayModal() {
                     </span>
                 </button>
                 <button form="payForm" type="submit"
-                    class="submitAddPayBtn w-full inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                    class="submitAddPayBtn w-full inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
                     <span
                         class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Thêm
@@ -416,7 +427,21 @@ function addPayModal() {
         </div>
         `
         $('#payModal').html(str);
-        $('#studentModal').html('');
+        $('#payModal').removeClass('invisible opacity-0');
+        $('#payModal').addClass('opacity-100');
+        $('#studentModal').removeClass('opacity-100');
+        $('#studentModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#studentModal').html('');
+        }, 200);
+        $('.closeBtn').click(function (e) {
+            $('#payModal').removeClass('opacity-100');
+            $('#payModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('.payModal').removeClass('hidden');
+                $('#payModal').html('');
+            }, 200);
+        })
         addPay();
     });
 }
@@ -472,7 +497,7 @@ function addPrizeModal() {
                     </span>
                 </button>
                 <button form="prizeForm" type="submit"
-                    class="submitAddPrizeBtn w-full inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                    class="submitAddPrizeBtn w-full inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
                     <span
                         class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Thêm
@@ -483,7 +508,21 @@ function addPrizeModal() {
         </div>
         `
         $('#prizeModal').html(str);
-        $('#studentModal').html('');
+        $('#prizeModal').removeClass('invisible opacity-0');
+        $('#prizeModal').addClass('opacity-100');
+        $('#studentModal').removeClass('opacity-100');
+        $('#studentModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#studentModal').html('');
+        }, 200);
+        $('.closeBtn').click(function (e) {
+            $('#prizeModal').removeClass('opacity-100');
+            $('#prizeModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('.prizeModal').removeClass('hidden');
+                $('#prizeModal').html('');
+            }, 200);
+        })
         addPrize();
     });
 }
@@ -557,8 +596,12 @@ function addPay() {
                             'prizeStatus': 0,
                         })
                         loadData();
-                        $('.payModal').removeClass('hidden')
-                        $('#payModal').html('');
+                        $('#payModal').removeClass('opacity-100');
+                        $('#payModal').addClass('invisible opacity-0');
+                        setTimeout(function () {
+                            $('.payModal').removeClass('hidden');
+                            $('#payModal').html('');
+                        }, 200);
                     })
                 }
             })
@@ -569,10 +612,6 @@ function addPay() {
                 })
             }
         }
-    })
-    $('.closeBtn').click(function (e) {
-        $('.payModal').removeClass('hidden')
-        $('#payModal').html('');
     })
 }
 function addPrize() {
@@ -645,9 +684,12 @@ function addPrize() {
                             'prizeStatus': status,
                         })
                         loadData();
-                        $('.prizeModal').text('Thêm');
-                        $('.prizeModal').addClass("text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br");
-                        $('#prizeModal').html('');
+                        $('#prizeModal').removeClass('opacity-100');
+                        $('#prizeModal').addClass('invisible opacity-0');
+                        setTimeout(function () {
+                            $('.prizeModal').removeClass('hidden');
+                            $('#prizeModal').html('');
+                        }, 200);
                     })
                 }
             })
@@ -659,10 +701,6 @@ function addPrize() {
             }
         }
     });
-    $('.closeBtn').click(function (e) {
-        $('.prizeModal').removeClass('hidden')
-        $('#prizeModal').html('');
-    })
 }
 function addWarn() {
     $('.payWarning').click(function (e) {
@@ -778,7 +816,21 @@ function editPayModal() {
         </div>
         `
         $('#payModal').html(str);
-        $('#studentModal').html('');
+        $('#payModal').removeClass('invisible opacity-0');
+        $('#payModal').addClass('opacity-100');
+        $('#studentModal').removeClass('opacity-100');
+        $('#studentModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#studentModal').html('');
+        }, 200);
+        $('.closeBtn').click(function (e) {
+            $('#payModal').removeClass('opacity-100');
+            $('#payModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('.payModal').removeClass('hidden');
+                $('#payModal').html('');
+            }, 200);
+        })
         editPay();
     })
 }
@@ -807,18 +859,18 @@ function editPay() {
                         }).then(() => {
                             el['payCash'] = payAmount
                             el['payStatus'] = status
-                            $('#payModal').html('');
-                            $('.payModal').removeClass('hidden');
+                            $('#payModal').removeClass('opacity-100');
+                            $('#payModal').addClass('invisible opacity-0');
+                            setTimeout(function () {
+                                $('.payModal').removeClass('hidden');
+                                $('#payModal').html('');
+                            }, 200);
                             loadData();
                         })
                     }
                 });
             }
         })
-    })
-    $('.closeBtn').click(function (e) {
-        $('#payModal').html('');
-        $('.payModal').removeClass('hidden');
     })
 }
 function deletePay() {
@@ -920,7 +972,21 @@ function editPrizeModal() {
         </div>
         `
         $('#prizeModal').html(str);
-        $('#studentModal').html('');
+        $('#prizeModal').removeClass('invisible opacity-0');
+        $('#prizeModal').addClass('opacity-100');
+        $('#studentModal').removeClass('opacity-100');
+        $('#studentModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#studentModal').html('');
+        }, 200);
+        $('.closeBtn').click(function (e) {
+            $('#prizeModal').removeClass('opacity-100');
+            $('#prizeModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('.prizeModal').removeClass('hidden');
+                $('#prizeModal').html('');
+            }, 200);
+        })
         editPrize();
     })
 }
@@ -949,18 +1015,18 @@ function editPrize() {
                         }).then(() => {
                             el['prizeCash'] = prizeAmount
                             el['prizeStatus'] = status
-                            $('#prizeModal').html('');
-                            $('.prizeModal').removeClass('hidden');
+                            $('#prizeModal').removeClass('opacity-100');
+                            $('#prizeModal').addClass('invisible opacity-0');
+                            setTimeout(function () {
+                                $('.prizeModal').removeClass('hidden');
+                                $('#prizeModal').html('');
+                            }, 200);
                             loadData();
                         })
                     }
                 });
             }
         })
-    })
-    $('.closeBtn').click(function (e) {
-        $('#prizeModal').html('');
-        $('.prizeModal').removeClass('hidden');
     })
 }
 function deletePrize() {

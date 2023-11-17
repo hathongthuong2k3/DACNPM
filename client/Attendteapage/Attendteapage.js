@@ -233,7 +233,7 @@ function loadModal() {
         e.preventDefault();
         var str = ''
         var id = $(this).attr('data-id');
-        str += `<div class="grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        str += `<div class="mb-5 grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="col-span-2" id="modal1">
         <form>
             <div>
@@ -344,11 +344,20 @@ function loadModal() {
     </div>
             </div></div>`;
         $('#modal').html(str);
-        $('#editModal').html('');
+        $('#modal').removeClass('invisible opacity-0');
+        $('#modal').addClass('opacity-100');
+        $('#editModal').removeClass('opacity-100');
+        $('#editModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#editModal').html('');
+        }, 200);
         $('.closeBtn').click(function (e) {
-            e.preventDefault();
-            $('#modal').html('');
-        });
+            $('#modal').removeClass('opacity-100');
+            $('#modal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('#modal').html('');
+            }, 200);
+        })
     });
 
 }
@@ -407,7 +416,20 @@ function editModal() {
         </div>
         `
         $('#editModal').html(str);
-        $('#modal').html('');
+        $('#editModal').removeClass('invisible opacity-0');
+        $('#editModal').addClass('opacity-100');
+        $('#modal').removeClass('opacity-100');
+        $('#modal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#modal').html('');
+        }, 200);
+        $('.closeBtn').click(function (e) {
+            $('#editModal').removeClass('opacity-100');
+            $('#editModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('#editModal').html('');
+            }, 200);
+        })
         editDate(id);
     })
 }
@@ -437,7 +459,11 @@ function editDate(id) {
                         title: "Chỉnh sửa thành công"
                     }).then(() => {
                         tableData[id]['dates'] = dates;
-                        $('#editModal').html('');
+                        $('#editModal').removeClass('opacity-100');
+                        $('#editModal').addClass('invisible opacity-0');
+                        setTimeout(function () {
+                            $('#editModal').html('');
+                        }, 200);
                         loadData();
                     })
                 }
@@ -445,6 +471,10 @@ function editDate(id) {
         }
     })
     $('.closeBtn').click(function (e) {
-        $('#editModal').html('');
+        $('#editModal').removeClass('opacity-100');
+        $('#editModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#editModal').html('');
+        }, 200);
     })
 }

@@ -31,6 +31,7 @@ $(document).ready(function () {
     //addData();
     //editData();
     loadData();
+    loadAddData();
 });
 const Toast = Swal.mixin({
     toast: true,
@@ -61,18 +62,181 @@ const Toast = Swal.mixin({
 //       $('#button1').removeClass("hidden");
 //    })
 //}
+function loadAddData() {
+    $('.add').click(function (e) {
+        e.preventDefault();
+        var str = '';
+        str += `
+    <div class="grid grid-cols-3 gap-4 p-6 mb-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="col-span-2">
+    <form>
+        <div>
+            <div class="gap-6 mb-6">
+                <label for="full_name"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
+                <input type="text" id="full_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Nguyễn Văn A" required>
+            </div>
+        </div>
+        <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div>
+                <label for="dob" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Năm
+                    sinh</label>
+                <input type="date" id="dob"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+            </div>
+            <div>
+                <label for="gender"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giới tính</label>
+                <div class="flex">
+                <div class="flex items-center mt-3 mr-4">
+                    <input id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
+                         class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="inline-radio"
+                        class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nam</label>
+                </div>
+                <div class="flex items-center mt-3 mr-4">
+                    <input id="inline-2-radio" type="radio" value="Nữ" name="inline-radio-group"
+                    class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="inline-2-radio"
+                        class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
+                </div> 
+                </div>
+            </div>
+        </div>
+        <div class="gap-6 mb-6">
+            <div>
+                <label for="address"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa chỉ</label>
+                <input type="text" id="address"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="" required>
+            </div>
+        </div>
+        <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div>
+                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số
+                    điện thoại</label>
+                <input type="tel" id="phone"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="0912345678" pattern="[0-9]{10}" required>
+            </div>
+            <div>
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa
+                    chỉ email</label>
+                <input type="email" id="email"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="nguyenvana@company.com" required>
+            </div>
+        </div>
+        <div class="mb-6">
+            <label for="Lớp"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
+            <input type="Lớp" id="Lớp"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="IELTS 1" required>
+        </div>
+    </form>
+</div>
+<div class="" style="margin-top: 9vh;">
+    <label for="dropzone-file"
+        class="flex flex-col items-center justify-center w-full h-64 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 mb-10">
+        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <img src="https://th.bing.com/th/id/OIP.CVdkzge14K0HJZWZg5DiMQHaHn?pid=ImgDet&rs=1" alt="">
+        </div>
+        <input id="dropzone-file" type="file" class="hidden" />
+    </label>
+
+    <div class="w-full grid grid-cols-2 gap-4">
+    <div>
+    <button type="submit"
+                    class="w-full closeBtn mt-10 inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                    <span
+                        class="w-full px-5 py-2.5 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        Hủy
+                    </span>
+                </button>
+    </div>
+    <div>
+    <button id="submitAddBtn"
+            class="w-full inline-flex items-center mt-10 justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
+            <span
+                class="w-full px-5 py-2.5 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                Thêm
+            </span>
+        </button>
+    </div>
+    </div>
+    </div>
+</div>`
+        $('#modal').html(str);
+        $('#modal').removeClass('invisible opacity-0');
+        $('#modal').addClass('opacity-100');
+        $('.add').addClass('hidden');
+        addData();
+        $('.closeBtn').click(function (e) {
+            $('#modal').removeClass('opacity-100');
+            $('#modal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('#modal').html('');
+                $('.add').removeClass('hidden');
+            }, 200);
+        })
+    });
+
+}
+function addData() {
+    $('#submitAddBtn').click(function (e) {
+        $('.add').addClass('hidden');
+        e.preventDefault();
+        var fullName = $("#full_name").val();
+        var dob = $("#dob").val();
+        var gender = $("input[name='inline-radio-group']:checked").val();
+        var address = $("#address").val();
+        var phone = $("#phone").val();
+        var email = $("#email").val();
+        var lop = $("#Lớp").val();
+        if (fullName === '' || dob === '' || gender === undefined || address === '' || phone === '' || email === '' || lop === '') {
+            Toast.fire({
+                icon: "error",
+                title: "Vui lòng điền đầy đủ thông tin",
+            });
+            $('.add').removeClass('hidden');
+        } else {
+            Toast.fire({
+                icon: "success",
+                title: "Thêm thành công"
+            }).then(() => {
+                var newData = {
+                    name: fullName,
+                    gender: gender,
+                    birthYear: new Date(dob),
+                    address: address,
+                    phoneNumber: phone,
+                    email: email,
+                    course: lop,
+                };
+                tableData.push(newData);
+                $('#modal').removeClass('opacity-100');
+                $('#modal').addClass('invisible opacity-0');
+                setTimeout(function () {
+                    $('#modal').html('');
+                    $('.add').removeClass('hidden');
+                }, 200);
+                loadData();
+            })
+        }
+    });
+}
 function editData() {
     $('.edit').click(function (e) {
-        var id = $(this).data("id");
         e.preventDefault();
         var id = $(this).data("id");
         loadModal(id);
-        var elements = document.getElementsByClassName("container1");
-        for (var i = 0; i < elements.length; i++) {
-            elements[i].classList.remove("hidden");
-        }
         $('#submitEditBtn').click(function (e) {
             e.preventDefault();
+            $('.add').addClass('hidden');
             var fullName = $('#full_name').val();
             var dob = $('#dob').val();
             var gender = $("input[name='inline-radio-group']:checked").val();
@@ -101,11 +265,12 @@ function editData() {
                         tableData[id].phoneNumber = phone;
                         tableData[id].email = email;
                         tableData[id].course = course;
-
-                        var elements = document.getElementsByClassName("container1");
-                        for (var i = 0; i < elements.length; i++) {
-                            elements[i].classList.add("hidden");
-                        }
+                        $('#modal').removeClass('opacity-100');
+                        $('#modal').addClass('invisible opacity-0');
+                        setTimeout(function () {
+                            $('#modal').html('');
+                            $('.add').removeClass('hidden');
+                        }, 200);
                         loadData();
                     })
                 }
@@ -116,7 +281,8 @@ function editData() {
 function loadModal(id) {
     var str = '';
     str += `
-    <div class="col-span-2 hidden container1">
+    <div class="grid grid-cols-3 gap-4 p-6 mb-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="col-span-2">
     <form>
         <div>
             <div class="gap-6 mb-6">
@@ -205,7 +371,7 @@ function loadModal(id) {
         </div>
     </form>
 </div>
-<div class="hidden container1" style="margin-top: 9vh;">
+<div class="" style="margin-top: 9vh;">
     <label for="dropzone-file"
         class="flex flex-col items-center justify-center w-full h-64 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 mb-10">
         <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -219,7 +385,7 @@ function loadModal(id) {
     <button type="submit"
                     class="w-full closeBtn mt-10 inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
                     <span
-                        class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        class="w-full px-5 py-2.5 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                         Hủy
                     </span>
                 </button>
@@ -228,21 +394,26 @@ function loadModal(id) {
     <button id="submitEditBtn"
             class="w-full inline-flex items-center mt-10 justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
             <span
-                class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                class="w-full px-5 py-2.5 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                 Thay đổi
             </span>
         </button>
     </div>
-        
+    </div>
     </div>
 </div>`
     $('#modal').html(str);
+    $('#modal').removeClass('invisible opacity-0');
+    $('#modal').addClass('opacity-100');
+    $('.add').addClass('hidden');
     editData();
     $('.closeBtn').click(function (e) {
-        var elements = document.getElementsByClassName("container1");
-        for (var i = 0; i < elements.length; i++) {
-            elements[i].classList.add("hidden");
-        }
+        $('#modal').removeClass('opacity-100');
+        $('#modal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#modal').html('');
+            $('.add').removeClass('hidden');
+        }, 200);
     })
 }
 function loadData() {

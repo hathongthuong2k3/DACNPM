@@ -104,7 +104,7 @@ function loadData() {
     tableData.forEach((el, index) => {
         str += `<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            <span class="modal" data-id=`+ index + `>
+            <span class="studentModal" data-id=`+ index + `>
                 `+ el['name'] + `
             </span>
         </th>
@@ -180,7 +180,139 @@ Chỉnh sửa
         addModal();
         editModal();
         deleteModal();
+        loadStudentModal();
     })
+}
+function loadStudentModal() {
+    $('.studentModal').click(function (e) {
+        e.preventDefault();
+        var str = ''
+        var id = $(this).attr('data-id');
+        str += `
+        <div class="grid grid-cols-3 gap-4 p-6 mb-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="col-span-2" id="modal1">
+        <form>
+            <div>
+                <div class="gap-6 mb-6">
+                    <label for="full_name"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
+                    <input disabled type="text" id="full_name"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Nguyễn Văn A" value="`+ tableData[id]['name'] + `" required>
+                </div>
+            </div>
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <div>
+                    <label for="dob" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Năm
+                        sinh</label>
+                    <input disabled type="date" id="dob"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        value=`+ (new Date(tableData[id].birthYear.getTime() - (tableData[id].birthYear.getTimezoneOffset() * 60000))).toISOString().split('T')[0] + `     required>
+                </div>
+                <div>
+                    <label for="gender"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giới tính</label>
+                    <div class="flex">`
+        if (tableData[id]['gender'] === "Nam") {
+            str += `<div class="flex items-center mt-3 mr-4">
+                        <input disabled id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
+                            checked class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="inline-radio"
+                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nam</label>
+                    </div>
+                    <div class="flex items-center mt-3 mr-4">
+                        <input disabled id="inline-2-radio" type="radio" value="Nữ" name="inline-radio-group"
+                            class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="inline-2-radio"
+                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
+                    </div>`
+        }
+        else {
+            str += `<div class="flex items-center mt-3 mr-4">
+                        <input disabled id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
+                             class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="inline-radio"
+                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nam</label>
+                    </div>
+                    <div class="flex items-center mt-3 mr-4">
+                        <input disabled id="inline-2-radio" type="radio" value="Nữ" name="inline-radio-group"
+                        checked class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="inline-2-radio"
+                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
+                    </div>`
+        }
+        str += ` 
+                    </div>
+                </div>
+            </div>
+            <div class="gap-6 mb-6">
+                <div>
+                    <label for="address"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa chỉ</label>
+                    <input disabled type="text" id="address"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="" value="`+ tableData[id]['address'] + `"required>
+                </div>
+            </div>
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <div>
+                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số
+                        điện thoại</label>
+                    <input disabled type="tel" id="phone"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="0912345678" value="`+ tableData[id]['phoneNumber'] + `"pattern="[0-9]{10}" required>
+                </div>
+                <div>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa
+                        chỉ email</label>
+                    <input disabled type="email" id="email"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="nguyenvana@company.com" value="`+ tableData[id]['email'] + `" required>
+                </div>
+            </div>
+            <div class="mb-6">
+                <label for="Lớp"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
+                <input disabled type="Lớp" id="Lớp"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
+            </div>
+        </form>
+    </div>
+        <div>
+        <div>
+                <label for="dropzone-file"
+                    class="flex flex-col items-center justify-center w-full h-64 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                    
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6"style="margin-top: 12vh;" >
+                        <img src="https://th.bing.com/th/id/OIP.CVdkzge14K0HJZWZg5DiMQHaHn?pid=ImgDet&rs=1" alt="">
+                    </div>
+                    <input disabled id="dropzone-file" type="file" class="hidden" />
+                </label>
+                <button type="submit"
+                    class="w-full closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800" style="margin-top:20vh">
+                    <span
+                        class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        Hủy
+                    </span>
+                </button>
+            </div></div>`;
+        $('#studentModal').html(str);
+        $('#studentModal').removeClass('invisible opacity-0');
+        $('#studentModal').addClass('opacity-100');
+        $('.editModal').removeClass('opacity-100');
+        $('.editModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('.editModal').html('');
+        }, 200);
+        $('.closeBtn').click(function (e) {
+            $('#studentModal').removeClass('opacity-100');
+            $('#studentModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('#studentModal').html('');
+            }, 200);
+        })
+    });
 }
 function addWarn() {
     $('.addWarn').click(function (e) {
@@ -278,7 +410,21 @@ function addModal() {
         </div>
         `
         $('.editModal').html(str);
-        $('#studentModal').html('');
+        $('.editModal').removeClass('invisible opacity-0');
+        $('.editModal').addClass('opacity-100');
+        $('#studentModal').removeClass('opacity-100');
+        $('#studentModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#studentModal').html('');
+        }, 200);
+        $('.closeBtn').click(function (e) {
+            $('.editModal').removeClass('opacity-100');
+            $('.editModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('.editModal').html('');
+                $('.addBtn').removeClass('hidden');
+            }, 200);
+        })
         addBook();
     })
 }
@@ -334,15 +480,24 @@ function addBook() {
                     'bookNums': bookNums,
                     'bookStatus': status
                 })
-                $('.editModal').html('');
-                $('.addBtn').removeClass('hidden');
+                $('.editModal').removeClass('opacity-100');
+                $('.editModal').addClass('invisible opacity-0');
+                setTimeout(function () {
+                    $('.editModal').html('');
+                    $('.addBtn').removeClass('hidden');
+                }, 200);
                 loadData();
             })
         }
     });
     $('.closeBtn').click(function (e) {
-        $('.editModal').html('');
-        $('.addBtn').removeClass('hidden');
+        $('.editModal').removeClass('opacity-100');
+        $('.editModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('.editModal').html('');
+            $('.addBtn').removeClass('hidden');
+        }, 200);
+
     })
 }
 function editModal() {
@@ -433,7 +588,21 @@ function editModal() {
         </div>
         `
         $('.editModal').html(str);
-        $('#studentModal').html('');
+        $('.editModal').removeClass('invisible opacity-0');
+        $('.editModal').addClass('opacity-100');
+        $('#studentModal').removeClass('opacity-100');
+        $('#studentModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('#studentModal').html('');
+        }, 200);
+        $('.closeBtn').click(function (e) {
+            $('.editModal').removeClass('opacity-100');
+            $('.editModal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('.editModal').html('');
+                $('.addBtn').removeClass('hidden');
+            }, 200);
+        })
         editBook(id);
     })
 }
@@ -464,16 +633,26 @@ function editBook(id) {
                     tableData[id]['bookType'] = bookType;
                     tableData[id]['bookNums'] = bookNums;
                     tableData[id]['bookStatus'] = status;
-                    $('.editModal').html('');
-                    $('.addBtn').removeClass('hidden');
+                    $('.editModal').removeClass('opacity-100');
+                    $('.editModal').addClass('invisible opacity-0');
+                    setTimeout(function () {
+                        $('.editModal').html('');
+                        $('.addBtn').removeClass('hidden');
+                    }, 200);
+
                     loadData();
                 })
             }
         });
     })
     $('.closeBtn').click(function (e) {
-        $('.editModal').html('');
-        $('.addBtn').removeClass('hidden');
+        $('.editModal').removeClass('opacity-100');
+        $('.editModal').addClass('invisible opacity-0');
+        setTimeout(function () {
+            $('.editModal').html('');
+            $('.addBtn').removeClass('hidden');
+        }, 200);
+
     })
 }
 function deleteModal() {
