@@ -7,19 +7,19 @@ function loadNav() {
     if (idRole === "1") {
         $('#nav__login').remove();
         $('#my-class-link').html('Khoá học của tôi');
-        $('#my-class-link').attr('href', '../MyCourses/myCoursesStudent.html');
+        $('#my-class-link').attr('href', '../MyCourses/myCourses.html');
         $('#my-page-link').html('Trang của tôi');
-        $('#my-page-link').attr('href', '../MyPage/myPageStudent.html');
+        $('#my-page-link').attr('href', '../MyPage/myPage.html');
     }
     else if (idRole === "2") {
         $('#nav__login').remove();
         $('#my-class-link').html('Lớp học của tôi');
-        $('#my-class-link').attr('href', '../MyCourses/myCoursesStudent.html');
+        $('#my-class-link').attr('href', '../MyCourses/myCourses.html');
         $('#my-page-link').html('Trang của tôi');
-        $('#my-page-link').attr('href', '../MyPage/myPageStudent.html');
+        $('#my-page-link').attr('href', '../MyPage/myPage.html');
     }
     else {
         $('#nav__user').remove();
     }
-    
+
 }
