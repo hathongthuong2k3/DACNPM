@@ -5,7 +5,7 @@ var card = [
     { number: 4, title: "AV Thiếu Nhi", str: "Khóa học Anh văn thiếu nhi tại SEP được thiết kế đặc biệt để kích thích sự tò mò, sáng tạo, và khám phá của trẻ qua việc học tiếng Anh. Chúng tôi áp dụng phương pháp học thông qua trò chơi, hình ảnh, và hoạt động thú vị, giúp trẻ học một cách tự nhiên và hiệu quả.", image: "../img/avtn-1.png", href: "../CoursesPageDetail/CoursesPageDetail.html?id=3" }
 ];
 $(document).ready(function () {
-    var courseList = $(".course-list");
+    $(".course-list").empty();
     card.forEach(function (el) {
         var listItem = `
             <li class="course">
@@ -21,6 +21,6 @@ $(document).ready(function () {
                     </div>
                 </div>
             </li>`;
-        courseList.append(listItem);
+        $(".course-list").append(listItem);
     });
 });
