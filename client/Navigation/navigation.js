@@ -160,7 +160,7 @@ function signout() {
                 }).then(() => {
                     localStorage.removeItem('idRole');
                     localStorage.removeItem('userInfo');
-                    window.location.replace("../Loginpage/Login.html");
+                    window.location.replace("../Loginpage/ChooseActor.html");
                 });
             }
         });

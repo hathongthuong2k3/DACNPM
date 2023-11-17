@@ -21,8 +21,14 @@
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <!-- nav -->
     <script src="../Navigation/nav.js"></script>
+
+    <script src="../Navigation/navigation.js"></script>
 
     <script src="myPage.js"></script>
 </head>
@@ -93,8 +99,8 @@
                             neil.sims@flowbite.com
                         </p>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Thông tin tài khoản</a>
-                        <a class="dropdown-item" href="../HomePage/homePage.html">Sign out</a>
+                        <a class="dropdown-item" href="#" id="userinfo">Thông tin tài khoản</a>
+                        <a class="dropdown-item" href="../HomePage/homePage.html" id="signout">Sign out</a>
                     </div>
                 </li>
             </ul>

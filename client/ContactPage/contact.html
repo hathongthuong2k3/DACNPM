@@ -9,13 +9,20 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="contact.css">
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <!-- nav -->
     <script src="../Navigation/nav.js"></script>
+
+    <script src="../Navigation/navigation.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #fff;">
@@ -81,8 +88,8 @@
                             neil.sims@flowbite.com
                         </p>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Thông tin tài khoản</a>
-                        <a class="dropdown-item" href="../HomePage/homePage.html">Sign out</a>
+                        <a class="dropdown-item" href="#" id="userinfo">Thông tin tài khoản</a>
+                        <a class="dropdown-item" href="../HomePage/homePage.html" id="signout">Sign out</a>
                     </div>
                 </li>
             </ul>
