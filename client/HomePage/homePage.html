@@ -61,11 +61,40 @@
             </form>
 
             <!-- for student and teacher -->
-            <div id="nav__user" style="margin-left: 30px; margin-right: 100px;">
-                <a href="#" style="margin-right: 10px;"><i class="fa fa-bell-o" aria-hidden="true" style="color:#000;"></i></a>
-                <a href="#" style="margin-right: 10px;"><i class="fa fa-comment-o" aria-hidden="true" style="color:#000;"></i></a>
-                <a href="#"><i class="fa fa-user-circle-o" aria-hidden="true" style="color:#000;"></i></a>
-            </div>
+            <!-- <div id="nav__user" style="margin-left: 30px; margin-right: 100px;">
+                <a href="#" style="margin-right: 10px;">
+                    <i class="fa fa-bell-o" aria-hidden="true" style="color:#000;"></i>
+                </a>
+                <a href="#" style="margin-right: 10px;">
+                    <i class="fa fa-comment-o" aria-hidden="true" style="color:#000;"></i>
+                </a>
+                <a href="#">
+                    <i class="fa fa-user-circle-o" aria-hidden="true" style="color:#000;"></i>
+                </a>
+            </div> -->
+            <ul class="nav nav-pills" id="nav__user" style="margin-left: 30px; margin-right: 100px;">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-bell-o" aria-hidden="true" style="color:#000;"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-comment-o" aria-hidden="true" style="color:#000;"></i></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user-circle-o" aria-hidden="true" style="color:#000;"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <p class="dropdown-item">
+                            Thông Thượng Hà
+                            <br>
+                            neil.sims@flowbite.com
+                        </p>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+                        <a class="dropdown-item" href="../HomePage/homePage.html">Sign out</a>
+                    </div>
+                </li>
+            </ul>
 
             <!-- for guest  -->
             <div id="nav__login" style="margin-left: 30px; margin-right: 100px;">
