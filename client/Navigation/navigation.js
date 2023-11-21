@@ -12,6 +12,7 @@ var user = {
 $(document).ready(function () {
     signout();
     loadModal();
+    loadModal1();
 });
 const Toast = Swal.mixin({
     toast: true,
@@ -141,6 +142,69 @@ function loadModal() {
         // });
     });
 }
+function loadModal1() {
+    $('#userinfo').click(function (e) {
+        e.preventDefault();
+        var str = '';
+        str += `
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-auto">
+                        <form>
+                            <div class="mb-4">
+                                <label for="full_name" class="form-label">Họ và tên</label>
+                                <input type="text" id="full_name" disabled class="form-control" placeholder="Nguyễn Văn A" value="${user.name}" required>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <label for="dob" class="form-label">Năm sinh</label>
+                                    <input type="date" id="dob" disabled class="form-control" value="${(new Date(user.dob.getTime() - (user.dob.getTimezoneOffset() * 60000))).toISOString().split('T')[0]}" required>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Giới tính</label>
+                                    <div class="form-check">
+                                        <input disabled ${user.gender === 1 ? 'checked' : ''} id="inline-radio" type="radio" value="Nam" name="inline-radio-group" class="form-check-input">
+                                        <label for="inline-radio" class="form-check-label">Nam</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input disabled ${user.gender === 0 ? 'checked' : ''} id="inline-2-radio" type="radio" value="Nữ" name="inline-radio-group" class="form-check-input">
+                                        <label for="inline-2-radio" class="form-check-label">Nữ</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="address" class="form-label">Địa chỉ</label>
+                                <input disabled type="text" id="address" class="form-control" placeholder="" value="${user.address}" required>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <label for="phone" class="form-label">Số điện thoại</label>
+                                    <input disabled type="tel" id="phone" class="form-control" placeholder="0912345678" pattern="[0-9]{10}" value="${user.phone}" required>
+                                </div>
+                                <div class="col">
+                                    <label for="email" class="form-label">Địa chỉ email</label>
+                                    <input type="email" id="email" disabled class="form-control" placeholder="nguyenvana@company.com" value="${user.email}" required>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-4 ml-auto mr-auto">
+                        <div class="d-flex flex-column align-items-center justify-content-center w-100 h-100">
+                            <label for="dropzone-file" class="border border-dashed rounded-lg cursor-pointer bg-light p-0">
+                                <div class="d-flex flex-column align-items-center justify-content-center">
+                                    <img src="https://th.bing.com/th/id/OIP.CVdkzge14K0HJZWZg5DiMQHaHn?pid=ImgDet&rs=1" alt="" class="img-fluid w-100">
+                                    <input disabled id="dropzone-file" type="file" class="hidden d-none">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        $('#userModal1').html(str);
+    });
+}
+
 function signout() {
     $('#signout').click(function (e) {
         e.preventDefault();
