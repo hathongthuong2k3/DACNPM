@@ -46,9 +46,9 @@ function loadData() {
         str += `
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            <span class="modal" data-id=` + index + `>
+                        <span data-id=`+ index + ` class='modal'>
                                 `+ el['name'] + `
-                            </span>
+                        </span>
                         </th>
                         <td class="px-6 py-4">
                         `+ el['course'] + `
@@ -155,72 +155,12 @@ function loadData() {
     </td>
 </tr>`
         }
-
     })
     $('#student').html(str);
     addCheck();
     addWarn();
     loadModal();
     editModal();
-}
-function formatDate(date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day} /${month}/${year} `;
-}
-
-function addCheck() {
-    $('.addCheck').click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr('data-id');
-        Swal.fire({
-            title: "Bạn chắc chứ?",
-            text: "Bạn đang điểm danh cho " + tableData[id]['name'],
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Xác nhận"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Toast.fire({
-                    icon: "success",
-                    title: tableData[id]['name'] + " đã được điểm danh thành công",
-                }).then(() => {
-                    if (tableData[id]['dates'] == 0) {
-                        tableData[id]['status'] = 0;
-                    }
-                    tableData[id]['dates']++;
-                    loadData();
-                });
-            }
-        });
-    })
-}
-function addWarn() {
-    $('.addWarn').click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr('data-id');
-        Swal.fire({
-            title: "Bạn chắc chứ?",
-            text: "Bạn đang gửi cảnh cáo cho " + tableData[id]['name'],
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Xác nhận"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Toast.fire({
-                    icon: "success",
-                    title: tableData[id]['name'] + " đã được gửi cảnh cáo"
-                })
-            }
-        });
-    })
-}
-function loadModal() {
     $('.modal').click(function (e) {
         e.preventDefault();
         var str = ''
@@ -352,6 +292,63 @@ function loadModal() {
         })
     });
 }
+function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day} /${month}/${year} `;
+}
+
+function addCheck() {
+    $('.addCheck').click(function (e) {
+        e.preventDefault();
+        var id = $(this).attr('data-id');
+        Swal.fire({
+            title: "Bạn chắc chứ?",
+            text: "Bạn đang điểm danh cho " + tableData[id]['name'],
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Xác nhận"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Toast.fire({
+                    icon: "success",
+                    title: tableData[id]['name'] + " đã được điểm danh thành công",
+                }).then(() => {
+                    if (tableData[id]['dates'] == 0) {
+                        tableData[id]['status'] = 0;
+                    }
+                    tableData[id]['dates']++;
+                    loadData();
+                });
+            }
+        });
+    })
+}
+function addWarn() {
+    $('.addWarn').click(function (e) {
+        e.preventDefault();
+        var id = $(this).attr('data-id');
+        Swal.fire({
+            title: "Bạn chắc chứ?",
+            text: "Bạn đang gửi cảnh cáo cho " + tableData[id]['name'],
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Xác nhận"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Toast.fire({
+                    icon: "success",
+                    title: tableData[id]['name'] + " đã được gửi cảnh cáo"
+                })
+            }
+        });
+    })
+}
 function editModal() {
     $('.editBtn').click(function (e) {
         e.preventDefault();
@@ -427,7 +424,7 @@ function editModal() {
 function editDate(id) {
     $('.submitEditBtn').click(function (e) {
         e.preventDefault();
-        var dates = $('.pay').val();
+        var dates = Number($('#pay').val());
         if (dates < 0) {
             Toast.fire({
                 icon: "error",

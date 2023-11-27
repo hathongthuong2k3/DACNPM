@@ -520,7 +520,7 @@ function addPay() {
         e.preventDefault();
         var fullName = $('#namePay').val();
         var course = $('#classPay').val();
-        var payAmount = $('#pay').val();
+        var payAmount = Number($('#pay').val());
         var status = $('#payStatus').val();
         if (fullName == '') {
             Toast.fire({
@@ -608,7 +608,7 @@ function addPrize() {
         e.preventDefault();
         var fullName = $('#namePrize').val();
         var course = $('#classPrize').val();
-        var prizeAmount = $('#prize').val();
+        var prizeAmount = Number($('#prize').val());
         var status = $('#prizeStatus').val();
         if (fullName == '') {
             Toast.fire({
@@ -828,7 +828,7 @@ function editPay() {
         e.preventDefault();
         var fullName = $('#namePay').val();
         var course = $('#classPay').val();
-        var payAmount = $('#pay').val();
+        var payAmount = Number($('#pay').val());
         var status = $('#payStatus').val();
         tableData.forEach((el) => {
             if (el['name'] === fullName && el['payClass'] === course) {
@@ -984,7 +984,7 @@ function editPrize() {
         e.preventDefault();
         var fullName = $('#namePrize').val();
         var course = $('#classPrize').val();
-        var prizeAmount = $('#prize').val();
+        var prizeAmount = Number($('#prize').val());
         var status = $('#prizeStatus').val();
         tableData.forEach((el) => {
             if (el['name'] === fullName && el['prizeClass'] === course) {

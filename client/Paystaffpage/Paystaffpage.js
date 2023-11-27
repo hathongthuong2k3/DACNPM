@@ -535,7 +535,7 @@ function addPay() {
         var fullName = $('#namePay').val();
         var month = $('#month').val();
         var year = $('#year').val();
-        var payAmount = $('#pay').val();
+        var payAmount = Number($('#pay').val());
         var status = $('#payStatus').val();
         if (fullName == '') {
             Toast.fire({
@@ -632,7 +632,7 @@ function addPrize() {
         var fullName = $('#namePrize').val();
         var month = $('#month').val();
         var year = $('#year').val();
-        var prizeAmount = $('#prize').val();
+        var prizeAmount = Number($('#prize').val());
         var status = $('#prizeStatus').val();
         if (fullName == '') {
             Toast.fire({
@@ -865,7 +865,7 @@ function editPay() {
         var fullName = $('#namePay').val();
         var month = $('#month').val();
         var year = $('#year').val();
-        var payAmount = $('#pay').val();
+        var payAmount = Number($('#pay').val());
         var status = $('#payStatus').val();
         tableData.forEach((el) => {
             if (el['name'] === fullName && el['month'] === Number(month) && el['year'] === Number(year)) {
@@ -1027,7 +1027,7 @@ function editPrize() {
         var fullName = $('#namePrize').val();
         var month = $('#month').val();
         var year = $('#year').val();
-        var prizeAmount = $('#prize').val();
+        var prizeAmount = Number($('#prize').val());
         var status = $('#prizeStatus').val();
         tableData.forEach((el) => {
             if (el['name'] === fullName && el['month'] === Number(month) && el['year'] === Number(year)) {

@@ -520,7 +520,7 @@ function addPay() {
         e.preventDefault();
         var fullName = $('#namePay').val();
         var course = $('#classPay').val();
-        var payAmount = $('#pay').val();
+        var payAmount = Number($('#pay').val());
         var status = $('#payStatus').val();
         if (fullName == '') {
             Toast.fire({
@@ -608,7 +608,7 @@ function addPrize() {
         e.preventDefault();
         var fullName = $('#namePrize').val();
         var course = $('#classPrize').val();
-        var prizeAmount = $('#prize').val();
+        var prizeAmount = Number($('#prize').val());
         var status = $('#prizeStatus').val();
         if (fullName == '') {
             Toast.fire({
@@ -846,7 +846,7 @@ function editPay() {
                             icon: "success",
                             title: "Chỉnh sửa thành công"
                         }).then(() => {
-                            el['payCash'] = payAmount
+                            el['payCash'] = Number(payAmount);
                             el['payStatus'] = status
                             $('#payModal').removeClass('opacity-100');
                             $('#payModal').addClass('invisible opacity-0');
@@ -1002,7 +1002,7 @@ function editPrize() {
                             icon: "success",
                             title: "Chỉnh sửa thành công"
                         }).then(() => {
-                            el['prizeCash'] = prizeAmount
+                            el['prizeCash'] = Number(prizeAmount);
                             el['prizeStatus'] = status
                             $('#prizeModal').removeClass('opacity-100');
                             $('#prizeModal').addClass('invisible opacity-0');

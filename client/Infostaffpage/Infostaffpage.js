@@ -55,55 +55,8 @@ function editData() {
     $('.edit').click(function (e) {
         var id = $(this).data("id");
         e.preventDefault();
-        var id = $(this).data("id");
-        loadModal(id);
-        var elements = document.getElementsByClassName("container1");
-        for (var i = 0; i < elements.length; i++) {
-            elements[i].classList.remove("hidden");
-        }
-        $('#submitEditBtn').click(function (e) {
-            e.preventDefault();
-            var fullName = $('#full_name').val();
-            var dob = $('#dob').val();
-            var gender = $("input[name='inline-radio-group']:checked").val();
-            var address = $('#address').val();
-            var phone = $('#phone').val();
-            var email = $('#email').val();
-            Swal.fire({
-                title: "Bạn chắc chứ?",
-                text: "Bạn đang chỉnh sửa thông tin của " + tableData[id]['name'],
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Xác nhận"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Toast.fire({
-                        icon: "success",
-                        title: "Chỉnh sửa thành công"
-                    }).then(() => {
-                        tableData[id].name = fullName;
-                        tableData[id].birthYear = new Date(dob);
-                        tableData[id].gender = gender;
-                        tableData[id].address = address;
-                        tableData[id].phoneNumber = phone;
-                        tableData[id].email = email;
-                        $('#modal').removeClass('opacity-100');
-                        $('#modal').addClass('invisible opacity-0');
-                        setTimeout(function () {
-                            $('#modal').html('');
-                        }, 200);
-                        loadData();
-                    })
-                }
-            })
-        })
-    });
-}
-function loadModal(id) {
-    var str = '';
-    str += `
+        var str = '';
+        str += `
     <div class="grid grid-cols-3 gap-4 p-6 mb-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="col-span-2">
     <form>
@@ -128,8 +81,8 @@ function loadModal(id) {
                 <label for="gender"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giới tính</label>
                 <div class="flex">`
-    if (tableData[id]['gender'] === "Nam") {
-        str += `<div class="flex items-center mt-3 mr-4">
+        if (tableData[id]['gender'] === "Nam") {
+            str += `<div class="flex items-center mt-3 mr-4">
                     <input id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
                         checked class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="inline-radio"
@@ -141,9 +94,9 @@ function loadModal(id) {
                     <label for="inline-2-radio"
                         class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
                 </div>`
-    }
-    else {
-        str += `<div class="flex items-center mt-3 mr-4">
+        }
+        else {
+            str += `<div class="flex items-center mt-3 mr-4">
                     <input id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
                          class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="inline-radio"
@@ -155,8 +108,8 @@ function loadModal(id) {
                     <label for="inline-2-radio"
                         class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
                 </div>`
-    }
-    str += ` 
+        }
+        str += ` 
                 </div>
             </div>
         </div>
@@ -218,17 +171,63 @@ function loadModal(id) {
     </div>
     </div>
 </div>`
-    $('#modal').html(str);
-    $('#modal').removeClass('invisible opacity-0');
-    $('#modal').addClass('opacity-100');
-    editData();
-    $('.closeBtn').click(function (e) {
-        $('#modal').removeClass('opacity-100');
-        $('#modal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('#modal').html('');
-        }, 200);
-    })
+        $('#modal').html(str);
+        $('#modal').removeClass('invisible opacity-0');
+        $('#modal').addClass('opacity-100');
+        editData();
+        $('.closeBtn').click(function (e) {
+            $('#modal').removeClass('opacity-100');
+            $('#modal').addClass('invisible opacity-0');
+            setTimeout(function () {
+                $('#modal').html('');
+            }, 200);
+        })
+        var elements = document.getElementsByClassName("container1");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].classList.remove("hidden");
+        }
+        $('#submitEditBtn').click(function (e) {
+            e.preventDefault();
+            var fullName = $('#full_name').val();
+            var dob = $('#dob').val();
+            var gender = $("input[name='inline-radio-group']:checked").val();
+            var address = $('#address').val();
+            var phone = $('#phone').val();
+            var email = $('#email').val();
+            Swal.fire({
+                title: "Bạn chắc chứ?",
+                text: "Bạn đang chỉnh sửa thông tin của " + tableData[id]['name'],
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Xác nhận"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Toast.fire({
+                        icon: "success",
+                        title: "Chỉnh sửa thành công"
+                    }).then(() => {
+                        tableData[id].name = fullName;
+                        tableData[id].birthYear = new Date(dob);
+                        tableData[id].gender = gender;
+                        tableData[id].address = address;
+                        tableData[id].phoneNumber = phone;
+                        tableData[id].email = email;
+                        $('#modal').removeClass('opacity-100');
+                        $('#modal').addClass('invisible opacity-0');
+                        setTimeout(function () {
+                            $('#modal').html('');
+                        }, 200);
+                        loadData();
+                    })
+                }
+            })
+        })
+    });
+}
+function loadModal(id) {
+
 }
 function loadData() {
     var str = '';

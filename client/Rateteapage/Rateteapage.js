@@ -382,6 +382,7 @@ function loadRateModal() {
         $('.addRate').addClass('hidden');
         $('#rateModal').removeClass('invisible opacity-0');
         $('#rateModal').addClass('opacity-100');
+        editData(id);
         $('#teacherModal').removeClass('opacity-100');
         $('#teacherModal').addClass('invisible opacity-0');
         setTimeout(function () {
