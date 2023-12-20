@@ -17,18 +17,19 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="myPage.css">
-    
+
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
     <!-- nav -->
+    <script src="../Navigation/navigation.js"></script>
     <script src="../Navigation/nav.js"></script>
 
-    <script src="../Navigation/navigation.js"></script>
+
 
     <script src="myPage.js"></script>
 </head>
@@ -86,35 +87,39 @@
                     <a class="nav-link" href="#"><i class="fa fa-bell-o" aria-hidden="true" style="color:#000;"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-comment-o" aria-hidden="true" style="color:#000;"></i></a>
+                    <a class="nav-link" href="#"><i class="fa fa-comment-o" aria-hidden="true"
+                            style="color:#000;"></i></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user-circle-o" aria-hidden="true" style="color:#000;"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <p class="dropdown-item">
-                            Thông Thượng Hà
+                            <span id="title-name">Thông Thượng Hà</span>
                             <br>
-                            neil.sims@flowbite.com
+                            <span id="title-email">neil.sims@flowbite.com</span>
                         </p>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item btn btn-primary" href="#" id="userinfo" data-toggle="modal" data-target="#exampleModal">Thông tin tài khoản</a>
-                        <a class="dropdown-item" href="../HomePage/homePage.html" id="signout">Sign out</a>
+                        <a class="dropdown-item btn btn-primary" href="#" id="userinfo" data-toggle="modal"
+                            data-target="#exampleModal">Thông tin tài khoản</a>
+                        <a class="dropdown-item" href="../HomePage/homePage.html" id="signout">Đăng xuất</a>
                     </div>
                 </li>
             </ul>
 
             <!-- for guest  -->
             <div id="nav__login" style="margin-left: 30px; margin-right: 100px;">
-                <a class="btn btn-outline-secondary" href="../Loginpage/ChooseActor.html" role="button">Đăng nhập</a>
+                <a class="btn btn-outline-secondary" href="../Loginpage/Login.html" role="button">Đăng nhập</a>
                 <a class="btn btn-outline-secondary" href="../Loginpage/Signup.html" role="button">Đăng ký</a>
             </div>
         </div>
     </nav>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -132,7 +137,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="my-page">
         <h2>Lịch của tôi</h2>
         <div class="my-calendar h-screen overflow-hidden flex items-center justify-center" style="background: #fff;">
@@ -438,8 +443,8 @@
             </div>
         </div>
         <h2 id="bill-intro"></h2>
-        <div class="my-bill">
-            <table class="table table-hover table-md">
+        <div class="my-bill m-3 text-center">
+            <table class="table table-hover table-bordered table-md">
                 <thead id="bill-col">
                 </thead>
                 <tbody id="bill-row">
@@ -458,9 +463,9 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
