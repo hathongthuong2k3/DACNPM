@@ -1,13 +1,5 @@
 const UserRouter = require("./user");
-<<<<<<< HEAD
-const TaskRouter = require("./task");
 const StaffRouter = require("./staff")
-
-function route(app) {
-  app.use("/user", UserRouter);
-  app.use("/task", TaskRouter);
-  app.use("/staff", StaffRouter);
-=======
 const AdminRouter = require("./admin");
 const ClassRouter = require("./class");
 const CourseRouter = require("./course");
@@ -18,6 +10,8 @@ const FileRouter = require("./file");
 const { requireApiKey,sendMail } = require("../src/middleware/useApiKey");
 
 function route(app) {
+  app.use("/user", UserRouter);
+  app.use("/staff",requireApiKey, StaffRouter);
   app.use("/users", UserRouter);
   app.use("/admins", requireApiKey, AdminRouter);
   app.use("/classes", requireApiKey, ClassRouter);
@@ -27,6 +21,5 @@ function route(app) {
   app.use("/sponsors", requireApiKey, SponsorRouter);
   app.use("/files", requireApiKey, FileRouter);
   app.use("/sendMail",sendMail);
->>>>>>> 9a03af11662503505a883e36ab86f1d6fea5de36
 }
 module.exports = route;
