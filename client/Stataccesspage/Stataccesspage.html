@@ -13,6 +13,7 @@
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
     <script src="../Navigation/navigation.js"></script>
+    <script src="./Stataccesspage.js"></script>
 </head>
 
 <body>
@@ -603,7 +604,7 @@
                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
-                                            Họ và tên
+                                            Tên tài khoản
                                         </th>
                                         <th scope="col" class="px-6 py-3">
                                             Chức vụ
@@ -615,40 +616,12 @@
                                             Ngày
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            Action
+                                            Trạng thái
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr
-                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            Thái Ngọc Rạng
-                                        </th>
-                                        <td class="px-6 py-4">
-                                            Học viên
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            Mua khóa học
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            10/10/2023
-                                        </td>
-                                        <td class="px-6 py-4 flex justify-center">
-                                            <button data-id=`+ index + ` data-tooltip-target="detail"
-                                                class="scoreModal flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                                <span
-                                                    class="material-symbols-outlined flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
-                                                    quick_reference
-                                                </span>
-                                                <div id="detail" role="tooltip"
-                                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                                    Chi tiết
-                                                    <div class="tooltip-arrow" data-popper-arrow></div>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                <tbody id="access-list">
+
                                 </tbody>
                             </table>
                         </div>
@@ -663,7 +636,7 @@
                                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
-                                            Họ và tên
+                                            Tên tài khoản
                                         </th>
                                         <th scope="col" class="px-6 py-3">
                                             Chức vụ
@@ -674,13 +647,10 @@
                                         <th scope="col" class="px-6 py-3">
                                             Ngày đăng ký
                                         </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Action
-                                        </th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr
+                                <tbody id="register-list">
+                                    <!-- <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -708,7 +678,7 @@
                                                     <div class="tooltip-arrow" data-popper-arrow></div>
                                             </button>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>
