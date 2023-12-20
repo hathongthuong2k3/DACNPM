@@ -3,8 +3,8 @@ const pool = mysql
   .createPool({
     host: "localhost",
     user: "root",
-    password: "",
-    database: "mindx_cijs",
+    password: "Alwaysbehappy@23",
+    database: "englishbk",
   })
   .promise();
 if (pool) {
