@@ -1,5 +1,5 @@
-const pool = require("../config/database");
-const Log = require("./Log");
+const pool = require('../config/database');
+const Log = require('./Log');
 class Course {
   async getCourses() {
     const query = `SELECT * FROM courses`;
@@ -52,7 +52,7 @@ class Course {
   async deleteCourse(name) {
     const query1 = `SELECT COUNT(*) FROM classes INNER JOIN courses ON idCourse=courses.id WHERE courses.name=?`;
     const [result1] = await pool.query(query1, [name]);
-    if (result1[0]["COUNT(*)"] == 0) {
+    if (result1[0]['COUNT(*)'] == 0) {
       const query = `DELETE FROM courses WHERE name=?;`;
       const [result] = await pool.query(query, [name]);
       if (result.affectedRows == 0) return false;

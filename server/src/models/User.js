@@ -1,19 +1,19 @@
-const pool = require("../config/database");
+const pool = require('../config/database');
 class User {
   async getUser(username, password) {
-    const query = "SELECT * FROM users WHERE username = ? AND password = ?";
+    const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
     const [rows] = await pool.query(query, [username, password]);
     return rows[0];
   }
   async checkEmail(email, role) {
-    const query = "SELECT * FROM emails WHERE email=? AND role=?";
+    const query = 'SELECT * FROM emails WHERE email=? AND role=?';
     const [rows] = await pool.query(query, [email, role]);
     if (rows.length > 0) return true;
     return false;
   }
   async getInfo(id, role) {
-    if (role == "student" || role == "teacher") {
-      role += "s";
+    if (role == 'student' || role == 'teacher') {
+      role += 's';
     }
     const query =
       `SELECT name,sex,dateofbirth,phone,address,email,image FROM ` +
@@ -22,11 +22,10 @@ class User {
       role +
       `.id WHERE users.id =?`;
     const [rows] = await pool.query(query, [id]);
-    console.log(id);
     return rows[0];
   }
   async authUser(id, role) {
-    const query = "SELECT * FROM users WHERE id = ? AND role = ?";
+    const query = 'SELECT * FROM users WHERE id = ? AND role = ?';
     const [rows] = await pool.query(query, [id, role]);
     return rows[0];
   }
@@ -39,26 +38,26 @@ class User {
     sex,
     phone,
     address,
-    role
+    role,
   ) {
-    const query = "SELECT * FROM users WHERE username = ?";
+    const query = 'SELECT * FROM users WHERE username = ?';
     const [rows] = await pool.query(query, [username]);
     let query1, res1;
     if (rows.length == 0) {
       const query2 =
-        "INSERT INTO users (username,password, email, role) VALUES (?, ?, ?, ?)";
+        'INSERT INTO users (username,password, email, role) VALUES (?, ?, ?, ?)';
       const [res2] = await pool.query(query2, [
         username,
         userpassword,
         email,
         role,
       ]);
-      const check = "SELECT * FROM users WHERE username = ?";
+      const check = 'SELECT * FROM users WHERE username = ?';
       const [checkrow] = await pool.query(check, [username]);
       switch (role) {
-        case "student":
+        case 'student':
           query1 =
-            "INSERT INTO students (id,name, sex, dateofbirth, phone,address) VALUES (?, ?, ?, ?, ?,?)";
+            'INSERT INTO students (id,name, sex, dateofbirth, phone,address) VALUES (?, ?, ?, ?, ?,?)';
           [res1] = await pool.query(query1, [
             checkrow[0].id,
             name,
@@ -68,9 +67,9 @@ class User {
             address,
           ]);
           break;
-        case "teacher":
+        case 'teacher':
           query1 =
-            "INSERT INTO teachers (id,name, sex, dateofbirth, phone,address) VALUES (?, ?, ?, ?, ?,?)";
+            'INSERT INTO teachers (id,name, sex, dateofbirth, phone,address) VALUES (?, ?, ?, ?, ?,?)';
           [res1] = await pool.query(query1, [
             checkrow[0].id,
             name,
@@ -80,9 +79,9 @@ class User {
             address,
           ]);
           break;
-        case "staff":
+        case 'staff':
           query1 =
-            "INSERT INTO staff (id,name, sex, dateofbirth, phone,address) VALUES (?, ?, ?, ?, ?,?)";
+            'INSERT INTO staff (id,name, sex, dateofbirth, phone,address) VALUES (?, ?, ?, ?, ?,?)';
           [res1] = await pool.query(query1, [
             checkrow[0].id,
             name,
@@ -92,9 +91,9 @@ class User {
             address,
           ]);
           break;
-        case "admin":
+        case 'admin':
           query1 =
-            "INSERT INTO admin (id,name, sex, dateofbirth, phone,address) VALUES (?, ?, ?, ?, ?,?)";
+            'INSERT INTO admin (id,name, sex, dateofbirth, phone,address) VALUES (?, ?, ?, ?, ?,?)';
           [res1] = await pool.query(query1, [
             checkrow[0].id,
             name,
@@ -111,8 +110,8 @@ class User {
     }
   }
   async updateUser(id, name, email, dob, sex, phone, address, role) {
-    if (role == "student" || role == "teacher") {
-      role += "s";
+    if (role == 'student' || role == 'teacher') {
+      role += 's';
     }
     const query =
       `UPDATE ` +

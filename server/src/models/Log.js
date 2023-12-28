@@ -1,7 +1,7 @@
-const pool = require("../config/database");
+const pool = require('../config/database');
 class Log {
   async getLogs() {
-    const query = `SELECT role,action,status,date,username FROM log INNER JOIN users ON users.id=idUser`;
+    const query = `SELECT role,action,status,date,username FROM log INNER JOIN users ON users.id=idUser ORDER BY log.id DESC LIMIT 100`;
     const [result] = await pool.query(query);
     return result;
   }

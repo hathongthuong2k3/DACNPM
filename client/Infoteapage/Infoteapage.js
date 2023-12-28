@@ -1,44 +1,49 @@
-var tableData = [
-    {
-        name: "Thái Ngọc Rạng",
-        gender: "Nam",
-        birthYear: new Date(2003, 0, 1),
-        address: "KTX Khu A, Dĩ An, Bình Dương",
-        phoneNumber: "0912345678",
-        email: "rangthai@gmail.com",
-        course: "IELTS 1",
-    },
-    {
-        name: "Nguyễn Thị Hằng",
-        gender: "Nữ",
-        birthYear: new Date(1995, 0, 1),
-        address: "123 Main Street, Hanoi",
-        phoneNumber: "0987654321",
-        email: "hangnguyen@gmail.com",
-        course: "TOEFL Prep",
-    },
-    {
-        name: "Lê Văn Hoàng",
-        gender: "Nam",
-        birthYear: new Date(2000, 0, 1),
-        address: "456 Elm Street, Ho Chi Minh City",
-        phoneNumber: "0123456789",
-        email: "hoangle@gmail.com",
-        course: "GRE Math",
-    },
-];
+// var tableData = [
+//   {
+//     name: "Thái Ngọc Rạng",
+//     gender: "Nam",
+//     birthYear: new Date(2003, 0, 1),
+//     address: "KTX Khu A, Dĩ An, Bình Dương",
+//     phoneNumber: "0912345678",
+//     email: "rangthai@gmail.com",
+//     course: "IELTS 1",
+//   },
+//   {
+//     name: "Nguyễn Thị Hằng",
+//     gender: "Nữ",
+//     birthYear: new Date(1995, 0, 1),
+//     address: "123 Main Street, Hanoi",
+//     phoneNumber: "0987654321",
+//     email: "hangnguyen@gmail.com",
+//     course: "TOEFL Prep",
+//   },
+//   {
+//     name: "Lê Văn Hoàng",
+//     gender: "Nam",
+//     birthYear: new Date(2000, 0, 1),
+//     address: "456 Elm Street, Ho Chi Minh City",
+//     phoneNumber: "0123456789",
+//     email: "hoangle@gmail.com",
+//     course: "GRE Math",
+//   },
+// ];
+var tableData = [];
 $(document).ready(function () {
-    //addData();
-    //editData();
-    loadData();
-    loadAddData();
+  //addData();
+  //editData();
+  loadData();
+  //   loadAddData();
 });
 function editData() {
-    $('.edit').click(function (e) {
-        e.preventDefault();
-        var id = $(this).data("id");
-        var str = '';
-        str += `
+  $(".edit").click(function (e) {
+    e.preventDefault();
+    var id = $(this).data("id");
+    var idCourse = $(this).attr("data-value");
+    let dob = new Date(tableData[id].dateofbirth);
+    dob.setMinutes(dob.getMinutes() - dob.getTimezoneOffset());
+    var str = "";
+    str +=
+      `
     <div class="grid grid-cols-3 gap-4 p-6 mb-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="col-span-2 container1">
     <form>
@@ -48,7 +53,9 @@ function editData() {
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
                 <input type="text" id="full_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Nguyễn Văn A" value="`+ tableData[id]['name'] + `" required>
+                    placeholder="Nguyễn Văn A" value="` +
+      tableData[id]["name"] +
+      `" required>
             </div>
         </div>
         <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -57,41 +64,43 @@ function editData() {
                     sinh</label>
                 <input type="date" id="dob"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    value=`+ (new Date(tableData[id].birthYear.getTime() - (tableData[id].birthYear.getTimezoneOffset() * 60000))).toISOString().split('T')[0] + `     required>
+                    value=` +
+      dob.toISOString().split("T")[0] +
+      `     required>
             </div>
             <div>
                 <label for="gender"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giới tính</label>
-                <div class="flex">`
-        if (tableData[id]['gender'] === "Nam") {
-            str += `<div class="flex items-center mt-3 mr-4">
-                    <input id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
+                <div class="flex">`;
+    if (tableData[id]["sex"] === "M") {
+      str += `<div class="flex items-center mt-3 mr-4">
+                    <input id="inline-radio" type="radio" value="M" name="inline-radio-group"
                         checked class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="inline-radio"
                         class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nam</label>
                 </div>
                 <div class="flex items-center mt-3 mr-4">
-                    <input id="inline-2-radio" type="radio" value="Nữ" name="inline-radio-group"
+                    <input id="inline-2-radio" type="radio" value="F" name="inline-radio-group"
                         class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="inline-2-radio"
                         class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
-                </div>`
-        }
-        else {
-            str += `<div class="flex items-center mt-3 mr-4">
-                    <input id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
+                </div>`;
+    } else {
+      str += `<div class="flex items-center mt-3 mr-4">
+                    <input id="inline-radio" type="radio" value="M" name="inline-radio-group"
                          class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="inline-radio"
                         class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nam</label>
                 </div>
                 <div class="flex items-center mt-3 mr-4">
-                    <input id="inline-2-radio" type="radio" value="Nữ" name="inline-radio-group"
+                    <input id="inline-2-radio" type="radio" value="F" name="inline-radio-group"
                     checked class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="inline-2-radio"
                         class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
-                </div>`
-        }
-        str += ` 
+                </div>`;
+    }
+    str +=
+      ` 
                 </div>
             </div>
         </div>
@@ -101,7 +110,9 @@ function editData() {
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa chỉ</label>
                 <input type="text" id="address"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="" value="`+ tableData[id]['address'] + `"required>
+                    placeholder="" value="` +
+      tableData[id]["address"] +
+      `"required>
             </div>
         </div>
         <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -110,22 +121,19 @@ function editData() {
                     điện thoại</label>
                 <input type="tel" id="phone"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="0912345678" value="`+ tableData[id]['phoneNumber'] + `"pattern="[0-9]{10}" required>
+                    placeholder="0912345678" value="` +
+      tableData[id]["phone"] +
+      `"pattern="[0-9]{10}" required>
             </div>
             <div>
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa
                     chỉ email</label>
                 <input type="email" id="email"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="nguyenvana@company.com" value="`+ tableData[id]['email'] + `" required>
+                    placeholder="nguyenvana@company.com" value="` +
+      tableData[id]["email"] +
+      `" required>
             </div>
-        </div>
-        <div class="mb-6">
-            <label for="Lớp"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
-            <input type="Lớp" id="Lớp"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
         </div>
     </form>
 </div>
@@ -159,69 +167,87 @@ function editData() {
     </div>
     </div>
     </div>
-</div>`
-        $('#modal').html(str);
-        $('#modal').removeClass('invisible opacity-0');
-        $('#modal').addClass('opacity-100');
-        editData();
-        $('.closeBtn').click(function (e) {
-            $('#modal').removeClass('opacity-100');
-            $('#modal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('#modal').html('');
-            }, 200);
-        })
-        var elements = document.getElementsByClassName("container1");
-        for (var i = 0; i < elements.length; i++) {
-            elements[i].classList.remove("hidden");
-        }
-        $('#submitEditBtn').click(function (e) {
-            e.preventDefault();
-            var fullName = $('#full_name').val();
-            var dob = $('#dob').val();
-            var gender = $("input[name='inline-radio-group']:checked").val();
-            var address = $('#address').val();
-            var phone = $('#phone').val();
-            var email = $('#email').val();
-            var course = $('#Lớp').val();
-            Swal.fire({
-                title: "Bạn chắc chứ?",
-                text: "Bạn đang chỉnh sửa thông tin của " + tableData[id]['name'],
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Xác nhận"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Toast.fire({
-                        icon: "success",
-                        title: "Chỉnh sửa thành công"
-                    }).then(() => {
-                        tableData[id].name = fullName;
-                        tableData[id].birthYear = new Date(dob);
-                        tableData[id].gender = gender;
-                        tableData[id].address = address;
-                        tableData[id].phoneNumber = phone;
-                        tableData[id].email = email;
-                        tableData[id].course = course;
-                        $('#modal').removeClass('opacity-100');
-                        $('#modal').addClass('invisible opacity-0');
-                        setTimeout(function () {
-                            $('#modal').html('');
-                        }, 200);
-                        loadData();
-                    })
-                }
-            })
-        })
+</div>`;
+    $("#modal").html(str);
+    $("#modal").removeClass("invisible opacity-0");
+    $("#modal").addClass("opacity-100");
+
+    $(".closeBtn").click(function (e) {
+      $("#modal").removeClass("opacity-100");
+      $("#modal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $("#modal").html("");
+      }, 200);
     });
+    var elements = document.getElementsByClassName("container1");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].classList.remove("hidden");
+    }
+    $("#submitEditBtn").click(function (e) {
+      e.preventDefault();
+      var fullName = $("#full_name").val();
+      var dob = $("#dob").val();
+      var sex = $("input[name='inline-radio-group']:checked").val();
+      var address = $("#address").val();
+      var phone = $("#phone").val();
+      var email = $("#email").val();
+      Swal.fire({
+        title: "Bạn chắc chứ?",
+        text: "Bạn đang chỉnh sửa thông tin của " + tableData[id]["name"],
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Xác nhận",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            type: "patch",
+            url: "http://localhost:3000/teachers/teacher",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("apitoken"),
+            },
+            data: {
+              id: idCourse,
+              name: fullName,
+              sex: sex,
+              dateofbirth: new Date(dob),
+              address: address,
+              email: email,
+              phone: phone,
+            },
+            dataType: "JSON",
+            success: function (res) {
+              Toast.fire({
+                icon: "success",
+                title: "Sửa lớp thành công",
+              }).then(() => {
+                $("#modal").removeClass("opacity-100");
+                $("#modal").addClass("invisible opacity-0");
+                setTimeout(function () {
+                  $(".add").removeClass("hidden");
+                  $("#modal").html("");
+                }, 200);
+                loadData();
+              });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              Toast.fire({
+                icon: "error",
+                title: jqXHR.responseJSON.msg,
+              });
+            },
+          });
+        }
+      });
+    });
+  });
 }
 function loadAddData() {
-    $('.add').click(function (e) {
-        e.preventDefault();
-        var str = '';
-        str += `
+  $(".add").click(function (e) {
+    e.preventDefault();
+    var str = "";
+    str += `
     <div class="grid grid-cols-3 gap-4 p-6 mb-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="col-span-2">
     <form>
@@ -246,13 +272,13 @@ function loadAddData() {
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giới tính</label>
                 <div class="flex">
                 <div class="flex items-center mt-3 mr-4">
-                    <input id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
+                    <input id="inline-radio" type="radio" value="M" name="inline-radio-group"
                          class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="inline-radio"
                         class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nam</label>
                 </div>
                 <div class="flex items-center mt-3 mr-4">
-                    <input id="inline-2-radio" type="radio" value="Nữ" name="inline-radio-group"
+                    <input id="inline-2-radio" type="radio" value="F" name="inline-radio-group"
                     class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="inline-2-radio"
                         class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
@@ -324,98 +350,126 @@ function loadAddData() {
     </div>
     </div>
     </div>
-</div>`
-        $('#modal').html(str);
-        $('#modal').removeClass('invisible opacity-0');
-        $('#modal').addClass('opacity-100');
-        $('.add').addClass('hidden');
-        addData();
-        $('.closeBtn').click(function (e) {
-            $('#modal').removeClass('opacity-100');
-            $('#modal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('#modal').html('');
-                $('.add').removeClass('hidden');
-            }, 200);
-        })
+</div>`;
+    $("#modal").html(str);
+    $("#modal").removeClass("invisible opacity-0");
+    $("#modal").addClass("opacity-100");
+    $(".add").addClass("hidden");
+    addData();
+    $(".closeBtn").click(function (e) {
+      $("#modal").removeClass("opacity-100");
+      $("#modal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $("#modal").html("");
+        $(".add").removeClass("hidden");
+      }, 200);
     });
-
+  });
 }
 function addData() {
-    $('#submitAddBtn').click(function (e) {
-        $('.add').addClass('hidden');
-        e.preventDefault();
-        var fullName = $("#full_name").val();
-        var dob = $("#dob").val();
-        var gender = $("input[name='inline-radio-group']:checked").val();
-        var address = $("#address").val();
-        var phone = $("#phone").val();
-        var email = $("#email").val();
-        var lop = $("#Lớp").val();
-        if (fullName === '' || dob === '' || gender === undefined || address === '' || phone === '' || email === '' || lop === '') {
-            Toast.fire({
-                icon: "error",
-                title: "Vui lòng điền đầy đủ thông tin",
-            });
-            $('.add').removeClass('hidden');
-        } else {
-            Toast.fire({
-                icon: "success",
-                title: "Thêm thành công"
-            }).then(() => {
-                var newData = {
-                    name: fullName,
-                    gender: gender,
-                    birthYear: new Date(dob),
-                    address: address,
-                    phoneNumber: phone,
-                    email: email,
-                    course: lop,
-                };
-                tableData.push(newData);
-                $('#modal').removeClass('opacity-100');
-                $('#modal').addClass('invisible opacity-0');
-                setTimeout(function () {
-                    $('#modal').html('');
-                    $('.add').removeClass('hidden');
-                }, 200);
-                loadData();
-            })
-        }
-    });
+  $("#submitAddBtn").click(function (e) {
+    $(".add").addClass("hidden");
+    e.preventDefault();
+    var fullName = $("#full_name").val();
+    var dob = $("#dob").val();
+    var gender = $("input[name='inline-radio-group']:checked").val();
+    var address = $("#address").val();
+    var phone = $("#phone").val();
+    var email = $("#email").val();
+    var lop = $("#Lớp").val();
+    if (
+      fullName === "" ||
+      dob === "" ||
+      gender === undefined ||
+      address === "" ||
+      phone === "" ||
+      email === "" ||
+      lop === ""
+    ) {
+      Toast.fire({
+        icon: "error",
+        title: "Vui lòng điền đầy đủ thông tin",
+      });
+      $(".add").removeClass("hidden");
+    } else {
+      Toast.fire({
+        icon: "success",
+        title: "Thêm thành công",
+      }).then(() => {
+        var newData = {
+          name: fullName,
+          gender: gender,
+          birthYear: new Date(dob),
+          address: address,
+          phoneNumber: phone,
+          email: email,
+          course: lop,
+        };
+        tableData.push(newData);
+        $("#modal").removeClass("opacity-100");
+        $("#modal").addClass("invisible opacity-0");
+        setTimeout(function () {
+          $("#modal").html("");
+          $(".add").removeClass("hidden");
+        }, 200);
+        loadData();
+      });
+    }
+  });
 }
-function loadModal(id) {
-
-}
+function loadModal(id) {}
 function loadData() {
-    var str = '';
-    tableData.forEach((el, index) => {
-        str += `
+  $.ajax({
+    type: "get",
+    url: "http://localhost:3000/teachers",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("apitoken"),
+    },
+    dataType: "JSON",
+    success: function (res) {
+      tableData = res.data;
+      var str = "";
+      res.data.forEach((el, index) => {
+        str +=
+          `
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" >
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            `+ el['name'] + `
+            ` +
+          el["name"] +
+          `
         </th>
         <td class="px-6 py-4">
-        `+ el['gender'] + `
+        ` +
+          (el["sex"] === "M" ? "Nam" : "Nữ") +
+          `
         </td>
         <td class="px-6 py-4">
-        `+ formatDate(el['birthYear']) + `
+        ` +
+          formatDate(el["dateofbirth"]) +
+          `
         </td>
         <td class="px-6 py-4">
-        `+ el['address'] + `
+        ` +
+          el["address"] +
+          `
         </td>
         <td class="px-6 py-4">
-        `+ el['phoneNumber'] + `
+        ` +
+          el["phone"] +
+          `
         </td>
         <td class="px-6 py-4">
-        `+ el['email'] + `
-        </td>
-        <td class="px-6 py-4">
-        `+ el['course'] + `
+        ` +
+          el["email"] +
+          `
         </td>
         <td class="px-6 py-4">
             <button type="button" data-tooltip-target="update"
-                class="edit flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="`+ index + `">
+                class="edit flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="` +
+          index +
+          `" data-value="` +
+          el.id +
+          `">
                 <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     viewBox="0 0 20 18">
@@ -428,14 +482,17 @@ function loadData() {
     Chỉnh sửa
     <div class="tooltip-arrow" data-popper-arrow></div>
             </button>
-        </td ></tr> `
-    })
-    $('#student').html(str);
-    editData();
+        </td ></tr> `;
+      });
+      $("#student").html(str);
+      editData();
+    },
+  });
 }
 function formatDate(date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+  date = new Date(date);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
 }

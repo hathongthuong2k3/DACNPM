@@ -1,81 +1,94 @@
 var tableData = [
-    {
-        name: "Thái Ngọc Rạng",
-        gender: "Nam",
-        birthYear: new Date(2003, 0, 1),
-        address: "KTX Khu A, Dĩ An, Bình Dương",
-        phoneNumber: "0912345678",
-        email: "rangthai@gmail.com",
-        course: "IELTS 1",
-        dates: 11,
-        teacherName: "Nguyễn Đức Tùng",
-        status: 0,
-    },
-    {
-        name: "Nguyễn Thị Hằng",
-        gender: "Nữ",
-        birthYear: new Date(1995, 0, 1),
-        address: "123 Main Street, Hanoi",
-        phoneNumber: "0987654321",
-        email: "hangnguyen@gmail.com",
-        course: "TOEFL Prep",
-        dates: 10,
-        teacherName: "Nguyễn Đức Hải",
-        status: 1,
-    },
-    {
-        name: "Lê Văn Hoàng",
-        gender: "Nam",
-        birthYear: new Date(2000, 0, 1),
-        address: "456 Elm Street, Ho Chi Minh City",
-        phoneNumber: "0123456789",
-        email: "hoangle@gmail.com",
-        course: "GRE Math",
-        dates: 0,
-        teacherName: "Nguyễn Phan Anh",
-        status: -1,
-    },
+  {
+    name: "Thái Ngọc Rạng",
+    gender: "Nam",
+    birthYear: new Date(2003, 0, 1),
+    address: "KTX Khu A, Dĩ An, Bình Dương",
+    phoneNumber: "0912345678",
+    email: "rangthai@gmail.com",
+    course: "IELTS 1",
+    dates: 11,
+    teacherName: "Nguyễn Đức Tùng",
+    status: 0,
+  },
+  {
+    name: "Nguyễn Thị Hằng",
+    gender: "Nữ",
+    birthYear: new Date(1995, 0, 1),
+    address: "123 Main Street, Hanoi",
+    phoneNumber: "0987654321",
+    email: "hangnguyen@gmail.com",
+    course: "TOEFL Prep",
+    dates: 10,
+    teacherName: "Nguyễn Đức Hải",
+    status: 1,
+  },
+  {
+    name: "Lê Văn Hoàng",
+    gender: "Nam",
+    birthYear: new Date(2000, 0, 1),
+    address: "456 Elm Street, Ho Chi Minh City",
+    phoneNumber: "0123456789",
+    email: "hoangle@gmail.com",
+    course: "GRE Math",
+    dates: 0,
+    teacherName: "Nguyễn Phan Anh",
+    status: -1,
+  },
 ];
 $(document).ready(function () {
-    loadData();
+  loadData();
 });
 
 function loadData() {
-    var str = '';
-    tableData.forEach((el, index) => {
-        str += `
+  var str = "";
+  tableData.forEach((el, index) => {
+    str +=
+      `
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <span data-id=`+ index + ` class='modal'>
-                                `+ el['name'] + `
+                        <span data-id=` +
+      index +
+      ` class='modal'>
+                                ` +
+      el["name"] +
+      `
                         </span>
                         </th>
                         <td class="px-6 py-4">
-                        `+ el['course'] + `
+                        ` +
+      el["course"] +
+      `
                         </td>
                         <td class="px-6 py-4">
-                        `
-        if (el['status'] == 1) {
-            str += "Đã học xong"
-        }
-        else if (el['status'] == 0) {
-            str += "Đang học"
-        }
-        else if (el['status'] == -1) {
-            str += "Chưa học"
-        }
-        str += `
+                        `;
+    if (el["status"] == 1) {
+      str += "Đã học xong";
+    } else if (el["status"] == 0) {
+      str += "Đang học";
+    } else if (el["status"] == -1) {
+      str += "Chưa học";
+    }
+    str +=
+      `
                         </td>
                         <td class="px-6 py-4">
-                        `+ el['teacherName'] + `
+                        ` +
+      el["teacherName"] +
+      `
                         </td>
                         <td class="px-6 py-4">
-                        `+ el['dates'] + `
+                        ` +
+      el["dates"] +
+      `
                         </td>
                         <td class="px-6 py-4 ">
-                        `
-        if (el['status'] == 1) {
-            str += `<button data-tooltip-target="attend" disabled data-id=` + index + `
+                        `;
+    if (el["status"] == 1) {
+      str +=
+        `<button data-tooltip-target="attend" disabled data-id=` +
+        index +
+        `
             class="addCheck mx-auto p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <svg class="text-center w-6 h-6 text-gray-100 dark:text-white flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -98,7 +111,9 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
         </button>
         <button data-tooltip-target="update" type="button"
-                class="editBtn p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id=`+ index + `>
+                class="editBtn p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id=` +
+        index +
+        `>
                 <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     viewBox="0 0 20 18">
@@ -112,10 +127,12 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
             </button>
     </td>
-</tr>`
-        }
-        else {
-            str += `<button data-tooltip-target="attend" data-id=` + index + `
+</tr>`;
+    } else {
+      str +=
+        `<button data-tooltip-target="attend" data-id=` +
+        index +
+        `
             class="addCheck mx-auto p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <svg class="text-center w-6 h-6 text-gray-100 dark:text-white flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -128,7 +145,9 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
 </div>
         </button>
-        <button data-tooltip-target="warning" data-id=` + index + `
+        <button data-tooltip-target="warning" data-id=` +
+        index +
+        `
             class="addWarn mx-auto p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <span
                 class="material-symbols-outlined text-center w-6 h-6 text-gray-100 dark:text-white flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
@@ -139,7 +158,9 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
         </button>
         <button data-tooltip-target="update" type="button"
-                class="editBtn p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="`+ index + `">
+                class="editBtn p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="` +
+        index +
+        `">
                 <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     viewBox="0 0 20 18">
@@ -153,19 +174,20 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
             </button>
     </td>
-</tr>`
-        }
-    })
-    $('#student').html(str);
-    addCheck();
-    addWarn();
-    loadModal();
-    editModal();
-    $('.modal').click(function (e) {
-        e.preventDefault();
-        var str = ''
-        var id = $(this).attr('data-id');
-        str += `<div class="mb-5 grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+</tr>`;
+    }
+  });
+  $("#student").html(str);
+  addCheck();
+  addWarn();
+  loadModal();
+  editModal();
+  $(".modal").click(function (e) {
+    e.preventDefault();
+    var str = "";
+    var id = $(this).attr("data-id");
+    str +=
+      `<div class="mb-5 grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="col-span-2" id="modal1">
         <form>
             <div>
@@ -174,7 +196,9 @@ function loadData() {
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
                     <input disabled type="text" id="full_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Nguyễn Văn A" value="`+ tableData[id]['name'] + `" required>
+                        placeholder="Nguyễn Văn A" value="` +
+      tableData[id]["name"] +
+      `" required>
                 </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -183,14 +207,21 @@ function loadData() {
                         sinh</label>
                     <input disabled type="date" id="dob"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value=`+ (new Date(tableData[id].birthYear.getTime() - (tableData[id].birthYear.getTimezoneOffset() * 60000))).toISOString().split('T')[0] + `     required>
+                        value=` +
+      new Date(
+        tableData[id].birthYear.getTime() -
+          tableData[id].birthYear.getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .split("T")[0] +
+      `     required>
                 </div>
                 <div>
                     <label for="gender"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giới tính</label>
-                    <div class="flex">`
-        if (tableData[id]['gender'] === "Nam") {
-            str += `<div class="flex items-center mt-3 mr-4">
+                    <div class="flex">`;
+    if (tableData[id]["gender"] === "Nam") {
+      str += `<div class="flex items-center mt-3 mr-4">
                         <input disabled id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
                             checked class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-radio"
@@ -201,10 +232,9 @@ function loadData() {
                             class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-2-radio"
                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
-                    </div>`
-        }
-        else {
-            str += `<div class="flex items-center mt-3 mr-4">
+                    </div>`;
+    } else {
+      str += `<div class="flex items-center mt-3 mr-4">
                         <input disabled id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
                              class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-radio"
@@ -215,9 +245,10 @@ function loadData() {
                         checked class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-2-radio"
                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
-                    </div>`
-        }
-        str += ` 
+                    </div>`;
+    }
+    str +=
+      ` 
                     </div>
                 </div>
             </div>
@@ -227,7 +258,9 @@ function loadData() {
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa chỉ</label>
                     <input disabled type="text" id="address"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" value="`+ tableData[id]['address'] + `"required>
+                        placeholder="" value="` +
+      tableData[id]["address"] +
+      `"required>
                 </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -236,14 +269,18 @@ function loadData() {
                         điện thoại</label>
                     <input disabled type="tel" id="phone"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="0912345678" value="`+ tableData[id]['phoneNumber'] + `"pattern="[0-9]{10}" required>
+                        placeholder="0912345678" value="` +
+      tableData[id]["phoneNumber"] +
+      `"pattern="[0-9]{10}" required>
                 </div>
                 <div>
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa
                         chỉ email</label>
                     <input disabled type="email" id="email"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="nguyenvana@company.com" value="`+ tableData[id]['email'] + `" required>
+                        placeholder="nguyenvana@company.com" value="` +
+      tableData[id]["email"] +
+      `" required>
                 </div>
             </div>
             <div class="mb-6">
@@ -251,7 +288,9 @@ function loadData() {
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
                 <input disabled type="Lớp" id="Lớp"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
+                    placeholder="IELTS 1" value="` +
+      tableData[id]["course"] +
+      `" required>
             </div>
         </form>
     </div>
@@ -275,87 +314,108 @@ function loadData() {
                 </button>
     </div>
             </div></div>`;
-        $('#modal').html(str);
-        $('#modal').removeClass('invisible opacity-0');
-        $('#modal').addClass('opacity-100');
-        $('#editModal').removeClass('opacity-100');
-        $('#editModal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('#editModal').html('');
-        }, 200);
-        $('.closeBtn').click(function (e) {
-            $('#modal').removeClass('opacity-100');
-            $('#modal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('#modal').html('');
-            }, 200);
-        })
+    $("#modal").html(str);
+    $("#modal").removeClass("invisible opacity-0");
+    $("#modal").addClass("opacity-100");
+    $("#editModal").removeClass("opacity-100");
+    $("#editModal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $("#editModal").html("");
+    }, 200);
+    $(".closeBtn").click(function (e) {
+      $("#modal").removeClass("opacity-100");
+      $("#modal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $("#modal").html("");
+      }, 200);
     });
+  });
 }
 function formatDate(date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day} /${month}/${year} `;
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day} /${month}/${year} `;
 }
 
 function addCheck() {
-    $('.addCheck').click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr('data-id');
-        Swal.fire({
-            title: "Bạn chắc chứ?",
-            text: "Bạn đang điểm danh cho " + tableData[id]['name'],
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Xác nhận"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Toast.fire({
-                    icon: "success",
-                    title: tableData[id]['name'] + " đã được điểm danh thành công",
-                }).then(() => {
-                    if (tableData[id]['dates'] == 0) {
-                        tableData[id]['status'] = 0;
-                    }
-                    tableData[id]['dates']++;
-                    loadData();
-                });
-            }
+  $(".addCheck").click(function (e) {
+    e.preventDefault();
+    var id = $(this).attr("data-id");
+    Swal.fire({
+      title: "Bạn chắc chứ?",
+      text: "Bạn đang điểm danh cho " + tableData[id]["name"],
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Xác nhận",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Toast.fire({
+          icon: "success",
+          title: tableData[id]["name"] + " đã được điểm danh thành công",
+        }).then(() => {
+          if (tableData[id]["dates"] == 0) {
+            tableData[id]["status"] = 0;
+          }
+          tableData[id]["dates"]++;
+          loadData();
         });
-    })
+      }
+    });
+  });
 }
 function addWarn() {
-    $('.addWarn').click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr('data-id');
-        Swal.fire({
-            title: "Bạn chắc chứ?",
-            text: "Bạn đang gửi cảnh cáo cho " + tableData[id]['name'],
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Xác nhận"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Toast.fire({
-                    icon: "success",
-                    title: tableData[id]['name'] + " đã được gửi cảnh cáo"
-                })
-            }
+  $(".addWarn").click(function (e) {
+    e.preventDefault();
+    var id = $(this).attr("data-id");
+    var email = $(this).attr("data-email");
+    Swal.fire({
+      title: "Bạn chắc chứ?",
+      text: "Bạn đang gửi cảnh cáo cho " + tableData[id]["name"],
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Xác nhận",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "get",
+          url: "http://localhost:3000/sendWarning",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("apitoken"),
+          },
+          data: {
+            to: email,
+          },
+          dataType: "JSON",
+          success: function (res) {
+            Toast.fire({
+              icon: "success",
+              title: tableData[id]["name"] + " đã được gửi cảnh cáo",
+            });
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            Toast.fire({
+              icon: "error",
+              title: "Gửi không thành công",
+            });
+          },
         });
-    })
+      }
+    });
+  });
 }
 function editModal() {
-    $('.editBtn').click(function (e) {
-        e.preventDefault();
-        $('.addBtn').addClass('hidden');
-        var id = $(this).attr('data-id');
-        var str = '';
-        str += `
+  $(".editBtn").click(function (e) {
+    e.preventDefault();
+    $(".addBtn").addClass("hidden");
+    var id = $(this).attr("data-id");
+    var str = "";
+    str +=
+      `
             <div class="mb-5 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <form id="form">
                 <div class="grid gap-6 mb-6 md:grid-cols-3">
@@ -364,7 +424,9 @@ function editModal() {
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
                         <input type="text" id="namePay" disabled
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Nguyễn Văn A" value="`+ tableData[id]['name'] + `"
+                            placeholder="Nguyễn Văn A" value="` +
+      tableData[id]["name"] +
+      `"
                             required>
                     </div>
                     <div>
@@ -372,13 +434,17 @@ function editModal() {
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
                         <input type="text" id="classPay"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
+                            placeholder="IELTS 1" value="` +
+      tableData[id]["course"] +
+      `" required>
                     </div>
                     <div>
                         <label for="pay"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số buổi</label>
                         <input type="text" id="pay"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="`+ tableData[id]['dates'] + `" required>
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      tableData[id]["dates"] +
+      `" required>
                     </div>
                 </div>    
                 </form>
@@ -402,67 +468,66 @@ function editModal() {
             </div>
         </div>
         </div>
-        `
-        $('#editModal').html(str);
-        $('#editModal').removeClass('invisible opacity-0');
-        $('#editModal').addClass('opacity-100');
-        $('#modal').removeClass('opacity-100');
-        $('#modal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('#modal').html('');
-        }, 200);
-        $('.closeBtn').click(function (e) {
-            $('#editModal').removeClass('opacity-100');
-            $('#editModal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('#editModal').html('');
-            }, 200);
-        })
-        editDate(id);
-    })
+        `;
+    $("#editModal").html(str);
+    $("#editModal").removeClass("invisible opacity-0");
+    $("#editModal").addClass("opacity-100");
+    $("#modal").removeClass("opacity-100");
+    $("#modal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $("#modal").html("");
+    }, 200);
+    $(".closeBtn").click(function (e) {
+      $("#editModal").removeClass("opacity-100");
+      $("#editModal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $("#editModal").html("");
+      }, 200);
+    });
+    editDate(id);
+  });
 }
 function editDate(id) {
-    $('.submitEditBtn').click(function (e) {
-        e.preventDefault();
-        var dates = Number($('#pay').val());
-        if (dates < 0) {
-            Toast.fire({
-                icon: "error",
-                title: "Ngày không hợp lệ"
-            })
+  $(".submitEditBtn").click(function (e) {
+    e.preventDefault();
+    var dates = Number($("#pay").val());
+    if (dates < 0) {
+      Toast.fire({
+        icon: "error",
+        title: "Ngày không hợp lệ",
+      });
+    } else {
+      Swal.fire({
+        title: "Bạn chắc chứ?",
+        text: "Bạn đang chỉnh sửa thông tin của " + tableData[id]["name"],
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Xác nhận",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Toast.fire({
+            icon: "success",
+            title: "Chỉnh sửa thành công",
+          }).then(() => {
+            tableData[id]["dates"] = dates;
+            $("#editModal").removeClass("opacity-100");
+            $("#editModal").addClass("invisible opacity-0");
+            setTimeout(function () {
+              $("#editModal").html("");
+            }, 200);
+            loadData();
+          });
         }
-        else {
-            Swal.fire({
-                title: "Bạn chắc chứ?",
-                text: "Bạn đang chỉnh sửa thông tin của " + tableData[id]['name'],
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Xác nhận"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Toast.fire({
-                        icon: "success",
-                        title: "Chỉnh sửa thành công"
-                    }).then(() => {
-                        tableData[id]['dates'] = dates;
-                        $('#editModal').removeClass('opacity-100');
-                        $('#editModal').addClass('invisible opacity-0');
-                        setTimeout(function () {
-                            $('#editModal').html('');
-                        }, 200);
-                        loadData();
-                    })
-                }
-            });
-        }
-    })
-    $('.closeBtn').click(function (e) {
-        $('#editModal').removeClass('opacity-100');
-        $('#editModal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('#editModal').html('');
-        }, 200);
-    })
+      });
+    }
+  });
+  $(".closeBtn").click(function (e) {
+    $("#editModal").removeClass("opacity-100");
+    $("#editModal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $("#editModal").html("");
+    }, 200);
+  });
 }

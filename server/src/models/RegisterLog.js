@@ -1,7 +1,8 @@
 const pool = require('../config/database');
 class RegisterLog {
   async getRegisterLogs() {
-    const query = `SELECT username,users.email,date,role FROM registerlog INNER JOIN users On idUser = users.id`;
+    const query = `SELECT username,users.email,date,role FROM registerlog INNER JOIN users On idUser = users.id ORDER BY date DESC LIMIT 100
+    `;
     const [result] = await pool.query(query);
     return result;
   }
@@ -11,10 +12,14 @@ class RegisterLog {
     return result;
   }
   async addRegisterLog(email, date, username) {
-    const query1 = `SELECT * FROM users where username=?`
+    const query1 = `SELECT * FROM users where username=?`;
     const [result1] = await pool.query(query1, [username]);
     const query = `INSERT INTO registerlog(idUser,email,date) VALUE (?,?,?)`;
-    const [result] = await pool.query(query, [result1[0].id, email, new Date(date)]);
+    const [result] = await pool.query(query, [
+      result1[0].id,
+      email,
+      new Date(date),
+    ]);
     return result;
   }
 }

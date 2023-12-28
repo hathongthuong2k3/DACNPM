@@ -1,4 +1,4 @@
-const pool = require("../config/database");
+const pool = require('../config/database');
 class Sponsor {
   async getSponsors() {
     const query = `SELECT * FROM sponsors`;

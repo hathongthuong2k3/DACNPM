@@ -1,12 +1,12 @@
 const logRequestMethod = (req, res, next) => {
-    const method = req.method;
-    const path = req.path;
+  const method = req.method;
+  const path = req.path;
 
-    if (path.startsWith('/teachers/')) {
-        console.log(`Request method for ${path}: ${method}`);
-    }
+  if (path.startsWith('/teachers/')) {
+    console.log(`Request method for ${path}: ${method}`);
+  }
 
-    next();
+  next();
 };
 
 module.exports = logRequestMethod;

@@ -1,5 +1,5 @@
-const Sponsor = require("../models/Sponsor");
-const Log = require("../models/Log");
+const Sponsor = require('../models/Sponsor');
+const Log = require('../models/Log');
 class SponsorController {
   async getSponsors(req, res, next) {
     try {
@@ -7,9 +7,9 @@ class SponsorController {
       if (queryResult) {
         const result = await Log.addLog(
           res.user.id,
-          "Xem danh sách nhà tài trợ",
+          'Xem danh sách nhà tài trợ',
           Date.now(),
-          true
+          true,
         );
         return res.json({
           check: true,
@@ -18,23 +18,23 @@ class SponsorController {
       } else {
         const result = await Log.addLog(
           res.user.id,
-          "Xem danh sách nhà tài trợ",
+          'Xem danh sách nhà tài trợ',
           Date.now(),
-          false
+          false,
         );
         return res
           .status(400)
-          .json({ check: false, error: "Không có nhà tài trợ" });
+          .json({ check: false, error: 'Không có nhà tài trợ' });
       }
     } catch (error) {
       const result = await Log.addLog(
         res.user.id,
-        "Xem danh sách nhà tài trợ",
+        'Xem danh sách nhà tài trợ',
         Date.now(),
-        false
+        false,
       );
-      console.error("Error:", error);
-      return res.status(500).json({ check: false, error: "Lỗi máy chủ" });
+      console.error('Error:', error);
+      return res.status(500).json({ check: false, error: 'Lỗi máy chủ' });
     }
   }
   async addSponsor(req, res, next) {
@@ -44,9 +44,9 @@ class SponsorController {
       if (queryResult) {
         const result = await Log.addLog(
           res.user.id,
-          "Thêm nhà tài trợ",
+          'Thêm nhà tài trợ',
           Date.now(),
-          true
+          true,
         );
         return res.json({
           check: true,
@@ -54,35 +54,35 @@ class SponsorController {
       } else {
         const result = await Log.addLog(
           res.user.id,
-          "Thêm nhà tài trợ",
+          'Thêm nhà tài trợ',
           Date.now(),
-          false
+          false,
         );
         return res
           .status(400)
-          .json({ check: false, error: "nhà tài trợ đã tồn tại" });
+          .json({ check: false, error: 'nhà tài trợ đã tồn tại' });
       }
     } catch (error) {
       const result = await Log.addLog(
         res.user.id,
-        "Xem nhà tài trợ",
+        'Xem nhà tài trợ',
         Date.now(),
-        false
+        false,
       );
-      console.error("Error:", error);
-      return res.status(500).json({ check: false, error: "Lỗi máy chủ" });
+      console.error('Error:', error);
+      return res.status(500).json({ check: false, error: 'Lỗi máy chủ' });
     }
   }
   async editSponsor(req, res, next) {
     try {
-      const { id, name, amount,status } = req.query;
-      const queryResult = await Sponsor.updateSponsor(id, name, amount,status);
+      const { id, name, amount, status } = req.body;
+      const queryResult = await Sponsor.updateSponsor(id, name, amount, status);
       if (queryResult) {
         const result = await Log.addLog(
           res.user.id,
-          "Chỉnh sửa nhà tài trợ",
+          'Chỉnh sửa nhà tài trợ',
           Date.now(),
-          true
+          true,
         );
         return res.json({
           check: true,
@@ -90,23 +90,23 @@ class SponsorController {
       } else {
         const result = await Log.addLog(
           res.user.id,
-          "Chỉnh sửa nhà tài trợ",
+          'Chỉnh sửa nhà tài trợ',
           Date.now(),
-          false
+          false,
         );
         return res
           .status(400)
-          .json({ check: false, error: "Nhà tài trợ không tồn tại" });
+          .json({ check: false, error: 'Nhà tài trợ không tồn tại' });
       }
     } catch (error) {
       const result = await Log.addLog(
         res.user.id,
-        "Chỉnh sửa nhà tài trợ",
+        'Chỉnh sửa nhà tài trợ',
         Date.now(),
-        false
+        false,
       );
-      console.error("Error:", error);
-      return res.status(500).json({ check: false, error: "Lỗi máy chủ" });
+      console.error('Error:', error);
+      return res.status(500).json({ check: false, error: 'Lỗi máy chủ' });
     }
   }
   async removeSponsor(req, res, next) {
@@ -116,9 +116,9 @@ class SponsorController {
       if (queryResult) {
         const result = await Log.addLog(
           res.user.id,
-          "Xem nhà tài trợ",
+          'Xem nhà tài trợ',
           Date.now(),
-          true
+          true,
         );
         return res.json({
           check: true,
@@ -126,23 +126,23 @@ class SponsorController {
       } else {
         const result = await Log.addLog(
           res.user.id,
-          "Xóa nhà tài trợ",
+          'Xóa nhà tài trợ',
           Date.now(),
-          false
+          false,
         );
         return res
           .status(400)
-          .json({ check: false, error: "Nhà tài trợ không tồn tại" });
+          .json({ check: false, error: 'Nhà tài trợ không tồn tại' });
       }
     } catch (error) {
       const result = await Log.addLog(
         res.user.id,
-        "Xóa nhà tài trợ",
+        'Xóa nhà tài trợ',
         Date.now(),
-        false
+        false,
       );
-      console.error("Error:", error);
-      return res.status(500).json({ check: false, error: "Lỗi máy chủ" });
+      console.error('Error:', error);
+      return res.status(500).json({ check: false, error: 'Lỗi máy chủ' });
     }
   }
 }

@@ -1,108 +1,120 @@
 var tableData = [
-    {
-        name: "Thái Ngọc Rạng",
-        gender: "Nam",
-        birthYear: new Date(2003, 0, 1),
-        address: "KTX Khu A, Dĩ An, Bình Dương",
-        phoneNumber: "0912345678",
-        email: "rangthai@gmail.com",
-        course: "IELTS 1",
-        dates: 11,
-        teacherName: "Nguyễn Đức Tùng",
-        status: 0,
-        listening: 1.0,
-        speaking: 2.0,
-        reading: 3.0,
-        writing: 4.0,
-        payClass: "IELTS1",
-        payCash: 2000000,
-        payStatus: 0,
-        prizeClass: "",
-        prizeCash: 0,
-        prizeStatus: 0,
-    },
-    {
-        name: "Nguyễn Thị Hằng",
-        gender: "Nữ",
-        birthYear: new Date(1995, 0, 1),
-        address: "123 Main Street, Hanoi",
-        phoneNumber: "0987654321",
-        email: "hangnguyen@gmail.com",
-        course: "TOEFL Prep",
-        dates: 10,
-        teacherName: "Nguyễn Đức Hải",
-        status: 1,
-        listening: 1.0,
-        speaking: 5.0,
-        reading: 3.0,
-        writing: 4.0,
-        payClass: "TOEIC",
-        payCash: 3000000,
-        payStatus: 0,
-        prizeClass: "TOEIC",
-        prizeCash: 2000000,
-        prizeStatus: 0,
-    },
-    {
-        name: "Lê Văn Hoàng",
-        gender: "Nam",
-        birthYear: new Date(2000, 0, 1),
-        address: "456 Elm Street, Ho Chi Minh City",
-        phoneNumber: "0123456789",
-        email: "hoangle@gmail.com",
-        course: "GRE Math",
-        dates: 0,
-        teacherName: "Nguyễn Phan Anh",
-        status: -1,
-        listening: 1.0,
-        speaking: 2.0,
-        reading: 9.0,
-        writing: 8.0,
-        payClass: "IELTS2",
-        payCash: 3000000,
-        payStatus: 1,
-        prizeClass: "",
-        prizeCash: 0,
-        prizeStatus: 0,
-    },
+  {
+    name: "Thái Ngọc Rạng",
+    gender: "Nam",
+    birthYear: new Date(2003, 0, 1),
+    address: "KTX Khu A, Dĩ An, Bình Dương",
+    phoneNumber: "0912345678",
+    email: "rangthai@gmail.com",
+    course: "IELTS 1",
+    dates: 11,
+    teacherName: "Nguyễn Đức Tùng",
+    status: 0,
+    listening: 1.0,
+    speaking: 2.0,
+    reading: 3.0,
+    writing: 4.0,
+    payClass: "IELTS1",
+    payCash: 2000000,
+    payStatus: 0,
+    prizeClass: "",
+    prizeCash: 0,
+    prizeStatus: 0,
+  },
+  {
+    name: "Nguyễn Thị Hằng",
+    gender: "Nữ",
+    birthYear: new Date(1995, 0, 1),
+    address: "123 Main Street, Hanoi",
+    phoneNumber: "0987654321",
+    email: "hangnguyen@gmail.com",
+    course: "TOEFL Prep",
+    dates: 10,
+    teacherName: "Nguyễn Đức Hải",
+    status: 1,
+    listening: 1.0,
+    speaking: 5.0,
+    reading: 3.0,
+    writing: 4.0,
+    payClass: "TOEIC",
+    payCash: 3000000,
+    payStatus: 0,
+    prizeClass: "TOEIC",
+    prizeCash: 2000000,
+    prizeStatus: 0,
+  },
+  {
+    name: "Lê Văn Hoàng",
+    gender: "Nam",
+    birthYear: new Date(2000, 0, 1),
+    address: "456 Elm Street, Ho Chi Minh City",
+    phoneNumber: "0123456789",
+    email: "hoangle@gmail.com",
+    course: "GRE Math",
+    dates: 0,
+    teacherName: "Nguyễn Phan Anh",
+    status: -1,
+    listening: 1.0,
+    speaking: 2.0,
+    reading: 9.0,
+    writing: 8.0,
+    payClass: "IELTS2",
+    payCash: 3000000,
+    payStatus: 1,
+    prizeClass: "",
+    prizeCash: 0,
+    prizeStatus: 0,
+  },
 ];
 $(document).ready(function () {
-    loadData();
+  loadData();
 });
 function loadData() {
-    var payStr = '';
-    var prizeStr = '';
-    tableData.forEach((el, index) => {
-        if (el['payClass'] !== "") {
-            payStr += `<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+  var payStr = "";
+  var prizeStr = "";
+  tableData.forEach((el, index) => {
+    if (el["payClass"] !== "") {
+      payStr +=
+        `<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <span data-id=`+ index + ` class="studentModal">
-                    `+ el['name'] + `
+                <span data-id=` +
+        index +
+        ` class="studentModal">
+                    ` +
+        el["name"] +
+        `
                 </span>
             </th>
             <td class="px-6 py-4">
-            `+ el['payClass'] + `
+            ` +
+        el["payClass"] +
+        `
             </td>
             <td class="px-6 py-4">
-            `+ el['payCash'].toLocaleString('en-US') + ` đ
+            ` +
+        el["payCash"].toLocaleString("en-US") +
+        ` đ
             </td>
             <td class="px-6 py-4">
-            `
-            if (el['payStatus'] == 0) {
-                payStr += "Chưa nhận"
-            }
-            else {
-                payStr += "Đã nhận"
-            }
-            payStr += `
+            `;
+      if (el["payStatus"] == 0) {
+        payStr += "Chưa nhận";
+      } else {
+        payStr += "Đã nhận";
+      }
+      payStr +=
+        `
             </td>
             <td class="px-6 py-4 flex justify-center">
-                <button data-id=`+ index + ` data-tooltip-target="notification"
-                    class="payWarning flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" `
-            if (el['payStatus'] == 1) {
-                payStr += 'disabled'
-            }
-            payStr += `>
+                <button data-id=` +
+        index +
+        ` data-tooltip-target="notification"
+                    class="payWarning flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" `;
+      if (el["payStatus"] == 1) {
+        payStr += "disabled";
+      }
+      payStr +=
+        `>
                     <svg class="w-6 h-6 text-gray-500 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                         viewBox="0 0 18 19">
@@ -114,7 +126,9 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
                 </button>
             <button type="button" data-tooltip-target="update"
-                class="editPayBtn flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="`+ index + `">
+                class="editPayBtn flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="` +
+        index +
+        `">
                 <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     viewBox="0 0 20 18">
@@ -128,7 +142,9 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
             </button>
             <button type="button" data-tooltip-target="delete"
-                class="deletePayBtn flex items-center p-2 text-gray-500 hover:text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="`+ index + `">
+                class="deletePayBtn flex items-center p-2 text-gray-500 hover:text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="` +
+        index +
+        `">
                 <svg class="w-5 h-5 text-gray-500 hover:text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
     <path d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z"/>
   </svg>
@@ -137,38 +153,50 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
             </button>
         </td >
-        </tr>`
-        }
-        if (el['prizeClass'] !== "") {
-            prizeStr += `<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+        </tr>`;
+    }
+    if (el["prizeClass"] !== "") {
+      prizeStr +=
+        `<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <span data-id=`+ index + ` class="studentModal">
-                    `+ el['name'] + `
+                <span data-id=` +
+        index +
+        ` class="studentModal">
+                    ` +
+        el["name"] +
+        `
                 </span>
             </th>
             <td class="px-6 py-4">
-            `+ el['prizeClass'] + `
+            ` +
+        el["prizeClass"] +
+        `
             </td>
             <td class="px-6 py-4">
-            `+ el['prizeCash'].toLocaleString('en-US') + ` đ
+            ` +
+        el["prizeCash"].toLocaleString("en-US") +
+        ` đ
             </td>
             <td class="px-6 py-4">
-            `
-            if (el['payStatus'] == 0) {
-                prizeStr += "Chưa nhận"
-            }
-            else {
-                prizeStr += "Đã nhận"
-            }
-            prizeStr += `
+            `;
+      if (el["payStatus"] == 0) {
+        prizeStr += "Chưa nhận";
+      } else {
+        prizeStr += "Đã nhận";
+      }
+      prizeStr +=
+        `
             </td>
             <td class="px-6 py-4 flex justify-center">
-                <button data-id=`+ index + ` data-tooltip-target="notification1"
-                    class="prizeWarning flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"`
-            if (el['prizeStatus'] == 1) {
-                prizeStr += 'disabled'
-            }
-            prizeStr += `>
+                <button data-id=` +
+        index +
+        ` data-tooltip-target="notification1"
+                    class="prizeWarning flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"`;
+      if (el["prizeStatus"] == 1) {
+        prizeStr += "disabled";
+      }
+      prizeStr +=
+        `>
                     <svg class="w-6 h-6 text-gray-500 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                         viewBox="0 0 18 19">
@@ -179,7 +207,9 @@ function loadData() {
     Thông báo nhận thưởng
     <div class="tooltip-arrow" data-popper-arrow></div>
                 </button>
-                <button type="button" data-id=`+ index + ` data-tooltip-target="update1"
+                <button type="button" data-id=` +
+        index +
+        ` data-tooltip-target="update1"
                 class="editPrizeBtn flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -194,7 +224,9 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
             </button>
             <button type="button" data-tooltip-target="delete1"
-                class="deletePrizeBtn flex items-center p-2 text-gray-500 hover:text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="`+ index + `">
+                class="deletePrizeBtn flex items-center p-2 text-gray-500 hover:text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="` +
+        index +
+        `">
                 <svg class="w-5 h-5 text-gray-500 hover:text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
     <path d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z"/>
   </svg>
@@ -203,26 +235,27 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
             </button>
             </td>
-        </tr>`
-        }
-    })
-    $('#payData').html(payStr);
-    $('#prizeData').html(prizeStr);
-    loadStudentModal();
-    addPayModal();
-    addPrizeModal();
-    addWarn();
-    editPayModal();
-    deletePay();
-    editPrizeModal();
-    deletePrize();
+        </tr>`;
+    }
+  });
+  $("#payData").html(payStr);
+  $("#prizeData").html(prizeStr);
+  loadStudentModal();
+  addPayModal();
+  addPrizeModal();
+  addWarn();
+  editPayModal();
+  deletePay();
+  editPrizeModal();
+  deletePrize();
 }
 function loadStudentModal() {
-    $('.studentModal').click(function (e) {
-        e.preventDefault();
-        var str = ''
-        var id = $(this).attr('data-id');
-        str += `
+  $(".studentModal").click(function (e) {
+    e.preventDefault();
+    var str = "";
+    var id = $(this).attr("data-id");
+    str +=
+      `
         <div class="mb-5 grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="col-span-2" id="modal1">
         <form>
@@ -232,7 +265,9 @@ function loadStudentModal() {
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
                     <input disabled type="text" id="full_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Nguyễn Văn A" value="`+ tableData[id]['name'] + `" required>
+                        placeholder="Nguyễn Văn A" value="` +
+      tableData[id]["name"] +
+      `" required>
                 </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -241,14 +276,21 @@ function loadStudentModal() {
                         sinh</label>
                     <input disabled type="date" id="dob"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value=`+ (new Date(tableData[id].birthYear.getTime() - (tableData[id].birthYear.getTimezoneOffset() * 60000))).toISOString().split('T')[0] + `     required>
+                        value=` +
+      new Date(
+        tableData[id].birthYear.getTime() -
+          tableData[id].birthYear.getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .split("T")[0] +
+      `     required>
                 </div>
                 <div>
                     <label for="gender"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giới tính</label>
-                    <div class="flex">`
-        if (tableData[id]['gender'] === "Nam") {
-            str += `<div class="flex items-center mt-3 mr-4">
+                    <div class="flex">`;
+    if (tableData[id]["gender"] === "Nam") {
+      str += `<div class="flex items-center mt-3 mr-4">
                         <input disabled id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
                             checked class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-radio"
@@ -259,10 +301,9 @@ function loadStudentModal() {
                             class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-2-radio"
                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
-                    </div>`
-        }
-        else {
-            str += `<div class="flex items-center mt-3 mr-4">
+                    </div>`;
+    } else {
+      str += `<div class="flex items-center mt-3 mr-4">
                         <input disabled id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
                              class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-radio"
@@ -273,9 +314,10 @@ function loadStudentModal() {
                         checked class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-2-radio"
                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
-                    </div>`
-        }
-        str += ` 
+                    </div>`;
+    }
+    str +=
+      ` 
                     </div>
                 </div>
             </div>
@@ -285,7 +327,9 @@ function loadStudentModal() {
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa chỉ</label>
                     <input disabled type="text" id="address"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" value="`+ tableData[id]['address'] + `"required>
+                        placeholder="" value="` +
+      tableData[id]["address"] +
+      `"required>
                 </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -294,14 +338,18 @@ function loadStudentModal() {
                         điện thoại</label>
                     <input disabled type="tel" id="phone"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="0912345678" value="`+ tableData[id]['phoneNumber'] + `"pattern="[0-9]{10}" required>
+                        placeholder="0912345678" value="` +
+      tableData[id]["phoneNumber"] +
+      `"pattern="[0-9]{10}" required>
                 </div>
                 <div>
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa
                         chỉ email</label>
                     <input disabled type="email" id="email"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="nguyenvana@company.com" value="`+ tableData[id]['email'] + `" required>
+                        placeholder="nguyenvana@company.com" value="` +
+      tableData[id]["email"] +
+      `" required>
                 </div>
             </div>
             <div class="mb-6">
@@ -309,7 +357,9 @@ function loadStudentModal() {
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
                 <input disabled type="Lớp" id="Lớp"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
+                    placeholder="IELTS 1" value="` +
+      tableData[id]["course"] +
+      `" required>
             </div>
         </form>
     </div>
@@ -331,34 +381,34 @@ function loadStudentModal() {
                     </span>
                 </button>
             </div></div>`;
-        $('#studentModal').html(str);
-        $('#studentModal').removeClass('invisible opacity-0');
-        $('#studentModal').addClass('opacity-100');
-        $('#payModal').removeClass('opacity-100');
-        $('#payModal').addClass('invisible opacity-0');
-        $('#prizeModal').removeClass('opacity-100');
-        $('#prizeModal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('.payModal').removeClass('hidden');
-            $('.prizeModal').removeClass('hidden');
-            $('#payModal').html('');
-            $('#prizeModal').html('');
-        }, 200);
-        $('.closeBtn').click(function (e) {
-            $('#studentModal').removeClass('opacity-100');
-            $('#studentModal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('#studentModal').html('');
-            }, 200);
-        })
+    $("#studentModal").html(str);
+    $("#studentModal").removeClass("invisible opacity-0");
+    $("#studentModal").addClass("opacity-100");
+    $("#payModal").removeClass("opacity-100");
+    $("#payModal").addClass("invisible opacity-0");
+    $("#prizeModal").removeClass("opacity-100");
+    $("#prizeModal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $(".payModal").removeClass("hidden");
+      $(".prizeModal").removeClass("hidden");
+      $("#payModal").html("");
+      $("#prizeModal").html("");
+    }, 200);
+    $(".closeBtn").click(function (e) {
+      $("#studentModal").removeClass("opacity-100");
+      $("#studentModal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $("#studentModal").html("");
+      }, 200);
     });
+  });
 }
 function addPayModal() {
-    $('.payModal').click(function (e) {
-        e.preventDefault();
-        $('.payModal').addClass('hidden');
-        var str = '';
-        str += `
+  $(".payModal").click(function (e) {
+    e.preventDefault();
+    $(".payModal").addClass("hidden");
+    var str = "";
+    str += `
             <div class="grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="col-span-2">
             <form id="payForm">
@@ -414,32 +464,32 @@ function addPayModal() {
             </div>
         </div>
         </div>
-        `
-        $('#payModal').html(str);
-        $('#payModal').removeClass('invisible opacity-0');
-        $('#payModal').addClass('opacity-100');
-        $('#studentModal').removeClass('opacity-100');
-        $('#studentModal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('#studentModal').html('');
-        }, 200);
-        $('.closeBtn').click(function (e) {
-            $('#payModal').removeClass('opacity-100');
-            $('#payModal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('.payModal').removeClass('hidden');
-                $('#payModal').html('');
-            }, 200);
-        })
-        addPay();
+        `;
+    $("#payModal").html(str);
+    $("#payModal").removeClass("invisible opacity-0");
+    $("#payModal").addClass("opacity-100");
+    $("#studentModal").removeClass("opacity-100");
+    $("#studentModal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $("#studentModal").html("");
+    }, 200);
+    $(".closeBtn").click(function (e) {
+      $("#payModal").removeClass("opacity-100");
+      $("#payModal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $(".payModal").removeClass("hidden");
+        $("#payModal").html("");
+      }, 200);
     });
+    addPay();
+  });
 }
 function addPrizeModal() {
-    $('.prizeModal').click(function (e) {
-        e.preventDefault();
-        $('.prizeModal').addClass('hidden');
-        var str = '';
-        str += `
+  $(".prizeModal").click(function (e) {
+    e.preventDefault();
+    $(".prizeModal").addClass("hidden");
+    var str = "";
+    str += `
             <div class="grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="col-span-2">
             <form id="prizeForm">
@@ -495,251 +545,281 @@ function addPrizeModal() {
             </div>
         </div>
         </div>
-        `
-        $('#prizeModal').html(str);
-        $('#prizeModal').removeClass('invisible opacity-0');
-        $('#prizeModal').addClass('opacity-100');
-        $('#studentModal').removeClass('opacity-100');
-        $('#studentModal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('#studentModal').html('');
-        }, 200);
-        $('.closeBtn').click(function (e) {
-            $('#prizeModal').removeClass('opacity-100');
-            $('#prizeModal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('.prizeModal').removeClass('hidden');
-                $('#prizeModal').html('');
-            }, 200);
-        })
-        addPrize();
+        `;
+    $("#prizeModal").html(str);
+    $("#prizeModal").removeClass("invisible opacity-0");
+    $("#prizeModal").addClass("opacity-100");
+    $("#studentModal").removeClass("opacity-100");
+    $("#studentModal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $("#studentModal").html("");
+    }, 200);
+    $(".closeBtn").click(function (e) {
+      $("#prizeModal").removeClass("opacity-100");
+      $("#prizeModal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $(".prizeModal").removeClass("hidden");
+        $("#prizeModal").html("");
+      }, 200);
     });
+    addPrize();
+  });
 }
 function addPay() {
-    $('.submitAddPayBtn').click(function (e) {
-        e.preventDefault();
-        var fullName = $('#namePay').val();
-        var course = $('#classPay').val();
-        var payAmount = Number($('#pay').val());
-        var status = $('#payStatus').val();
-        if (fullName == '') {
-            Toast.fire({
-                icon: "error",
-                title: "Vui lòng nhập tên"
-            })
+  $(".submitAddPayBtn").click(function (e) {
+    e.preventDefault();
+    var fullName = $("#namePay").val();
+    var course = $("#classPay").val();
+    var payAmount = Number($("#pay").val());
+    var status = $("#payStatus").val();
+    if (fullName == "") {
+      Toast.fire({
+        icon: "error",
+        title: "Vui lòng nhập tên",
+      });
+    } else if (course == "") {
+      Toast.fire({
+        icon: "error",
+        title: "Vui lòng nhập lớp",
+      });
+    } else if (payAmount == "") {
+      Toast.fire({
+        icon: "error",
+        title: "Vui lòng nhập khoản thu",
+      });
+    } else if (status == "") {
+      Toast.fire({
+        icon: "error",
+        title: "Vui lòng chọn trạng thái",
+      });
+    } else {
+      var check = false;
+      tableData.forEach((el) => {
+        if (el["name"] === fullName && el["payClass"] === course) {
+          Toast.fire({
+            icon: "error",
+            title: "Đã tồn tại học phí",
+          });
+          check = true;
+        } else if (el["name"] === fullName) {
+          check = true;
+          Toast.fire({
+            icon: "success",
+            title: "Thêm thành công",
+          }).then(() => {
+            tableData.push({
+              name: el["name"],
+              gender: el["gender"],
+              birthYear: el["birthYear"],
+              address: el["address"],
+              phoneNumber: el["phoneNumber"],
+              email: el["email"],
+              course: el["course"],
+              dates: el["dates"],
+              teacherName: el["teacherName"],
+              status: el["status"],
+              listening: el["listening"],
+              speaking: el["speaking"],
+              reading: el["reading"],
+              writing: el["writing"],
+              payClass: course,
+              payCash: payAmount,
+              payStatus: status,
+              prizeClass: "",
+              prizeCash: 0,
+              prizeStatus: 0,
+            });
+            loadData();
+            $("#payModal").removeClass("opacity-100");
+            $("#payModal").addClass("invisible opacity-0");
+            setTimeout(function () {
+              $(".payModal").removeClass("hidden");
+              $("#payModal").html("");
+            }, 200);
+          });
         }
-        else if (course == '') {
-            Toast.fire({
-                icon: "error",
-                title: "Vui lòng nhập lớp"
-            })
-        }
-        else if (payAmount == '') {
-            Toast.fire({
-                icon: "error",
-                title: "Vui lòng nhập khoản thu"
-            })
-        }
-        else if (status == '') {
-            Toast.fire({
-                icon: "error",
-                title: "Vui lòng chọn trạng thái"
-            })
-        }
-        else {
-            var check = false;
-            tableData.forEach((el) => {
-                if (el['name'] === fullName && el['payClass'] === course) {
-                    Toast.fire({
-                        icon: "error",
-                        title: "Đã tồn tại học phí"
-                    })
-                    check = true;
-                }
-                else if (el['name'] === fullName) {
-                    check = true;
-                    Toast.fire({
-                        icon: "success",
-                        title: "Thêm thành công"
-                    }).then(() => {
-                        tableData.push({
-                            'name': el['name'],
-                            'gender': el['gender'],
-                            'birthYear': el['birthYear'],
-                            'address': el['address'],
-                            'phoneNumber': el['phoneNumber'],
-                            'email': el['email'],
-                            'course': el['course'],
-                            'dates': el['dates'],
-                            'teacherName': el['teacherName'],
-                            'status': el['status'],
-                            'listening': el['listening'],
-                            'speaking': el['speaking'],
-                            'reading': el['reading'],
-                            'writing': el['writing'],
-                            'payClass': course,
-                            'payCash': payAmount,
-                            'payStatus': status,
-                            'prizeClass': "",
-                            'prizeCash': 0,
-                            'prizeStatus': 0,
-                        })
-                        loadData();
-                        $('#payModal').removeClass('opacity-100');
-                        $('#payModal').addClass('invisible opacity-0');
-                        setTimeout(function () {
-                            $('.payModal').removeClass('hidden');
-                            $('#payModal').html('');
-                        }, 200);
-                    })
-                }
-            })
-            if (check === false) {
-                Toast.fire({
-                    icon: "error",
-                    title: "Tên không tồn tại"
-                })
-            }
-        }
-    })
+      });
+      if (check === false) {
+        Toast.fire({
+          icon: "error",
+          title: "Tên không tồn tại",
+        });
+      }
+    }
+  });
 }
 function addPrize() {
-    $('.submitAddPrizeBtn').click(function (e) {
-        e.preventDefault();
-        var fullName = $('#namePrize').val();
-        var course = $('#classPrize').val();
-        var prizeAmount = Number($('#prize').val());
-        var status = $('#prizeStatus').val();
-        if (fullName == '') {
-            Toast.fire({
-                icon: "error",
-                title: "Vui lòng nhập tên"
-            })
+  $(".submitAddPrizeBtn").click(function (e) {
+    e.preventDefault();
+    var fullName = $("#namePrize").val();
+    var course = $("#classPrize").val();
+    var prizeAmount = Number($("#prize").val());
+    var status = $("#prizeStatus").val();
+    if (fullName == "") {
+      Toast.fire({
+        icon: "error",
+        title: "Vui lòng nhập tên",
+      });
+    } else if (course == "") {
+      Toast.fire({
+        icon: "error",
+        title: "Vui lòng nhập lớp",
+      });
+    } else if (prizeAmount == "") {
+      Toast.fire({
+        icon: "error",
+        title: "Vui lòng nhập khoản thu",
+      });
+    } else if (status == "") {
+      Toast.fire({
+        icon: "error",
+        title: "Vui lòng chọn trạng thái",
+      });
+    } else {
+      var check = false;
+      tableData.forEach((el) => {
+        if (el["name"] === fullName && el["prizeClass"] === course) {
+          Toast.fire({
+            icon: "error",
+            title: "Đã tồn tại học phí",
+          });
+          check = true;
+        } else if (el["name"] === fullName) {
+          check = true;
+          Toast.fire({
+            icon: "success",
+            title: "Thêm thành công",
+          }).then(() => {
+            tableData.push({
+              name: el["name"],
+              gender: el["gender"],
+              birthYear: el["birthYear"],
+              address: el["address"],
+              phoneNumber: el["phoneNumber"],
+              email: el["email"],
+              course: el["course"],
+              dates: el["dates"],
+              teacherName: el["teacherName"],
+              status: el["status"],
+              listening: el["listening"],
+              speaking: el["speaking"],
+              reading: el["reading"],
+              writing: el["writing"],
+              payClass: "",
+              payCash: 0,
+              payStatus: 0,
+              prizeClass: course,
+              prizeCash: prizeAmount,
+              prizeStatus: status,
+            });
+            loadData();
+            $("#prizeModal").removeClass("opacity-100");
+            $("#prizeModal").addClass("invisible opacity-0");
+            setTimeout(function () {
+              $(".prizeModal").removeClass("hidden");
+              $("#prizeModal").html("");
+            }, 200);
+          });
         }
-        else if (course == '') {
-            Toast.fire({
-                icon: "error",
-                title: "Vui lòng nhập lớp"
-            })
-        }
-        else if (prizeAmount == '') {
-            Toast.fire({
-                icon: "error",
-                title: "Vui lòng nhập khoản thu"
-            })
-        }
-        else if (status == '') {
-            Toast.fire({
-                icon: "error",
-                title: "Vui lòng chọn trạng thái"
-            })
-        }
-        else {
-            var check = false;
-            tableData.forEach((el) => {
-                if (el['name'] === fullName && el['prizeClass'] === course) {
-                    Toast.fire({
-                        icon: "error",
-                        title: "Đã tồn tại học phí"
-                    })
-                    check = true;
-                }
-                else if (el['name'] === fullName) {
-                    check = true;
-                    Toast.fire({
-                        icon: "success",
-                        title: "Thêm thành công"
-                    }).then(() => {
-                        tableData.push({
-                            'name': el['name'],
-                            'gender': el['gender'],
-                            'birthYear': el['birthYear'],
-                            'address': el['address'],
-                            'phoneNumber': el['phoneNumber'],
-                            'email': el['email'],
-                            'course': el['course'],
-                            'dates': el['dates'],
-                            'teacherName': el['teacherName'],
-                            'status': el['status'],
-                            'listening': el['listening'],
-                            'speaking': el['speaking'],
-                            'reading': el['reading'],
-                            'writing': el['writing'],
-                            'payClass': "",
-                            'payCash': 0,
-                            'payStatus': 0,
-                            'prizeClass': course,
-                            'prizeCash': prizeAmount,
-                            'prizeStatus': status,
-                        })
-                        loadData();
-                        $('#prizeModal').removeClass('opacity-100');
-                        $('#prizeModal').addClass('invisible opacity-0');
-                        setTimeout(function () {
-                            $('.prizeModal').removeClass('hidden');
-                            $('#prizeModal').html('');
-                        }, 200);
-                    })
-                }
-            })
-            if (check === false) {
-                Toast.fire({
-                    icon: "error",
-                    title: "Tên không tồn tại"
-                })
-            }
-        }
-    });
+      });
+      if (check === false) {
+        Toast.fire({
+          icon: "error",
+          title: "Tên không tồn tại",
+        });
+      }
+    }
+  });
 }
 function addWarn() {
-    $('.payWarning').click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr('data-id');
-        Swal.fire({
-            title: "Bạn chắc chứ?",
-            text: "Bạn đang gửi thông báo nhận lương cho " + tableData[id]['name'],
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Xác nhận"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Toast.fire({
-                    icon: "success",
-                    title: "Gửi thông báo thành công"
-                })
-            }
+  $(".payWarning").click(function (e) {
+    e.preventDefault();
+    var id = $(this).attr("data-id");
+    var email = $(this).attr("data-email");
+    Swal.fire({
+      title: "Bạn chắc chứ?",
+      text: "Bạn đang gửi thông báo nhận lương cho " + tableData[id]["name"],
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Xác nhận",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "get",
+          url: "http://localhost:3000/sendSalary",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("apitoken"),
+          },
+          data: {
+            to: email,
+          },
+          dataType: "JSON",
+          success: function (res) {
+            Toast.fire({
+              icon: "success",
+              title: tableData[id]["name"] + " đã được gửi thông báo",
+            });
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            Toast.fire({
+              icon: "error",
+              title: "Gửi không thành công",
+            });
+          },
         });
-    })
-    $('.prizeWarning').click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr('data-id');
-        Swal.fire({
-            title: "Bạn chắc chứ?",
-            text: "Bạn đang gửi thông báo nhận thưởng cho " + tableData[id]['name'],
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Xác nhận"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Toast.fire({
-                    icon: "success",
-                    title: "Gửi thông báo thành công"
-                })
-            }
+      }
+    });
+  });
+  $(".prizeWarning").click(function (e) {
+    e.preventDefault();
+    var id = $(this).attr("data-id");
+    Swal.fire({
+      title: "Bạn chắc chứ?",
+      text: "Bạn đang gửi thông báo nhận thưởng cho " + tableData[id]["name"],
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Xác nhận",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "get",
+          url: "http://localhost:3000/sendPrize",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("apitoken"),
+          },
+          data: {
+            to: email,
+          },
+          dataType: "JSON",
+          success: function (res) {
+            Toast.fire({
+              icon: "success",
+              title: tableData[id]["name"] + " đã được gửi thông báo",
+            });
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            Toast.fire({
+              icon: "error",
+              title: "Gửi không thành công",
+            });
+          },
         });
-    })
+      }
+    });
+  });
 }
 function editPayModal() {
-    $('.editPayBtn').click(function (e) {
-        e.preventDefault();
-        $('.payModal').addClass('hidden');
-        var id = $(this).attr('data-id');
-        var str = '';
-        str += `
+  $(".editPayBtn").click(function (e) {
+    e.preventDefault();
+    $(".payModal").addClass("hidden");
+    var id = $(this).attr("data-id");
+    var str = "";
+    str +=
+      `
             <div class="grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="col-span-2">
             <form id="payForm">
@@ -749,7 +829,9 @@ function editPayModal() {
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
                         <input type="text" id="namePay"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Nguyễn Văn A" value="`+ tableData[id]['name'] + `"
+                            placeholder="Nguyễn Văn A" value="` +
+      tableData[id]["name"] +
+      `"
                             required>
                     </div>
                     <div>
@@ -757,28 +839,32 @@ function editPayModal() {
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
                         <input type="text" id="classPay"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="IELTS 1" value="`+ tableData[id]['payClass'] + `" required>
+                            placeholder="IELTS 1" value="` +
+      tableData[id]["payClass"] +
+      `" required>
                     </div>
                     <div>
                         <label for="pay"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số tiền nhận</label>
                         <input type="text" id="pay"
-                            class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="`+ tableData[id]['payCash'] + `" required>
+                            class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      tableData[id]["payCash"] +
+      `" required>
                     </div>
                     <div>
                     <label for="payStatus" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trạng thái</label>
                     <select id="payStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                       <option value="">Chọn trạng thái</option>
-                      <option value="0"`
-        if (tableData[id]['payStatus'] == 0) {
-            str += 'selected'
-        }
-        str += `>Chưa nhận</option>
-                      <option value="1"`
-        if (tableData[id]['payStatus'] == 1) {
-            str += 'selected'
-        }
-        str += `>Đã nhận</option>
+                      <option value="0"`;
+    if (tableData[id]["payStatus"] == 0) {
+      str += "selected";
+    }
+    str += `>Chưa nhận</option>
+                      <option value="1"`;
+    if (tableData[id]["payStatus"] == 1) {
+      str += "selected";
+    }
+    str += `>Đã nhận</option>
                     </select>
                     </div>
                 </div>    
@@ -803,99 +889,108 @@ function editPayModal() {
             </div>
         </div>
         </div>
-        `
-        $('#payModal').html(str);
-        $('#payModal').removeClass('invisible opacity-0');
-        $('#payModal').addClass('opacity-100');
-        $('#studentModal').removeClass('opacity-100');
-        $('#studentModal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('#studentModal').html('');
-        }, 200);
-        $('.closeBtn').click(function (e) {
-            $('#payModal').removeClass('opacity-100');
-            $('#payModal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('.payModal').removeClass('hidden');
-                $('#payModal').html('');
-            }, 200);
-        })
-        editPay();
-    })
+        `;
+    $("#payModal").html(str);
+    $("#payModal").removeClass("invisible opacity-0");
+    $("#payModal").addClass("opacity-100");
+    $("#studentModal").removeClass("opacity-100");
+    $("#studentModal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $("#studentModal").html("");
+    }, 200);
+    $(".closeBtn").click(function (e) {
+      $("#payModal").removeClass("opacity-100");
+      $("#payModal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $(".payModal").removeClass("hidden");
+        $("#payModal").html("");
+      }, 200);
+    });
+    editPay();
+  });
 }
 function editPay() {
-    $('.submitEditPayBtn').click(function (e) {
-        e.preventDefault();
-        var fullName = $('#namePay').val();
-        var course = $('#classPay').val();
-        var payAmount = Number($('#pay').val());
-        var status = $('#payStatus').val();
-        tableData.forEach((el) => {
-            if (el['name'] === fullName && el['payClass'] === course) {
-                Swal.fire({
-                    title: "Bạn chắc chứ?",
-                    text: "Bạn đang chỉnh sửa thông tin của " + el['name'] + " dạy lớp " + el['payClass'],
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Xác nhận"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Toast.fire({
-                            icon: "success",
-                            title: "Chỉnh sửa thành công"
-                        }).then(() => {
-                            el['payCash'] = payAmount
-                            el['payStatus'] = status
-                            $('#payModal').removeClass('opacity-100');
-                            $('#payModal').addClass('invisible opacity-0');
-                            setTimeout(function () {
-                                $('.payModal').removeClass('hidden');
-                                $('#payModal').html('');
-                            }, 200);
-                            loadData();
-                        })
-                    }
-                });
-            }
-        })
-    })
+  $(".submitEditPayBtn").click(function (e) {
+    e.preventDefault();
+    var fullName = $("#namePay").val();
+    var course = $("#classPay").val();
+    var payAmount = Number($("#pay").val());
+    var status = $("#payStatus").val();
+    tableData.forEach((el) => {
+      if (el["name"] === fullName && el["payClass"] === course) {
+        Swal.fire({
+          title: "Bạn chắc chứ?",
+          text:
+            "Bạn đang chỉnh sửa thông tin của " +
+            el["name"] +
+            " dạy lớp " +
+            el["payClass"],
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Xác nhận",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Toast.fire({
+              icon: "success",
+              title: "Chỉnh sửa thành công",
+            }).then(() => {
+              el["payCash"] = payAmount;
+              el["payStatus"] = status;
+              $("#payModal").removeClass("opacity-100");
+              $("#payModal").addClass("invisible opacity-0");
+              setTimeout(function () {
+                $(".payModal").removeClass("hidden");
+                $("#payModal").html("");
+              }, 200);
+              loadData();
+            });
+          }
+        });
+      }
+    });
+  });
 }
 function deletePay() {
-    $('.deletePayBtn').click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr('data-id');
-        Swal.fire({
-            title: "Bạn chắc chứ?",
-            text: "Bạn đang xóa thông tin của " + tableData[id]['name'] + " dạy lớp " + tableData[id]['payClass'],
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Xác nhận"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Toast.fire({
-                    icon: "success",
-                    title: "Xóa thành công"
-                }).then(() => {
-                    tableData[id]['payClass'] = '';
-                    tableData[id]['payCash'] = 0;
-                    tableData[id]['payStatus'] = 0;
-                    loadData();
-                })
-            }
+  $(".deletePayBtn").click(function (e) {
+    e.preventDefault();
+    var id = $(this).attr("data-id");
+    Swal.fire({
+      title: "Bạn chắc chứ?",
+      text:
+        "Bạn đang xóa thông tin của " +
+        tableData[id]["name"] +
+        " dạy lớp " +
+        tableData[id]["payClass"],
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Xác nhận",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Toast.fire({
+          icon: "success",
+          title: "Xóa thành công",
+        }).then(() => {
+          tableData[id]["payClass"] = "";
+          tableData[id]["payCash"] = 0;
+          tableData[id]["payStatus"] = 0;
+          loadData();
         });
-    })
+      }
+    });
+  });
 }
 function editPrizeModal() {
-    $('.editPrizeBtn').click(function (e) {
-        e.preventDefault();
-        $('.prizeModal').addClass('hidden');
-        var id = $(this).attr('data-id');
-        var str = '';
-        str += `
+  $(".editPrizeBtn").click(function (e) {
+    e.preventDefault();
+    $(".prizeModal").addClass("hidden");
+    var id = $(this).attr("data-id");
+    var str = "";
+    str +=
+      `
             <div class="grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="col-span-2">
             <form id="prizeForm">
@@ -905,7 +1000,9 @@ function editPrizeModal() {
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
                         <input type="text" id="namePrize"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Nguyễn Văn A" value="`+ tableData[id]['name'] + `"
+                            placeholder="Nguyễn Văn A" value="` +
+      tableData[id]["name"] +
+      `"
                             required>
                     </div>
                     <div>
@@ -913,28 +1010,32 @@ function editPrizeModal() {
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
                         <input type="text" id="classPrize"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="IELTS 1" value="`+ tableData[id]['prizeClass'] + `" required>
+                            placeholder="IELTS 1" value="` +
+      tableData[id]["prizeClass"] +
+      `" required>
                     </div>
                     <div>
                         <label for="prize"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số tiền nhận</label>
                         <input type="text" id="prize"
-                            class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="`+ tableData[id]['prizeCash'] + `" required>
+                            class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      tableData[id]["prizeCash"] +
+      `" required>
                     </div>
                     <div>
                     <label for="prizeStatus" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trạng thái</label>
                     <select id="prizeStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                       <option value="">Chọn trạng thái</option>
-                      <option value="0"`
-        if (tableData[id]['prizeStatus'] == 0) {
-            str += 'selected'
-        }
-        str += `>Chưa nhận</option>
-                      <option value="1"`
-        if (tableData[id]['prizeStatus'] == 1) {
-            str += 'selected'
-        }
-        str += `>Đã nhận</option>
+                      <option value="0"`;
+    if (tableData[id]["prizeStatus"] == 0) {
+      str += "selected";
+    }
+    str += `>Chưa nhận</option>
+                      <option value="1"`;
+    if (tableData[id]["prizeStatus"] == 1) {
+      str += "selected";
+    }
+    str += `>Đã nhận</option>
                     </select>
                     </div>
                 </div>    
@@ -959,89 +1060,97 @@ function editPrizeModal() {
             </div>
         </div>
         </div>
-        `
-        $('#prizeModal').html(str);
-        $('#prizeModal').removeClass('invisible opacity-0');
-        $('#prizeModal').addClass('opacity-100');
-        $('#studentModal').removeClass('opacity-100');
-        $('#studentModal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('#studentModal').html('');
-        }, 200);
-        $('.closeBtn').click(function (e) {
-            $('#prizeModal').removeClass('opacity-100');
-            $('#prizeModal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('.prizeModal').removeClass('hidden');
-                $('#prizeModal').html('');
-            }, 200);
-        })
-        editPrize();
-    })
+        `;
+    $("#prizeModal").html(str);
+    $("#prizeModal").removeClass("invisible opacity-0");
+    $("#prizeModal").addClass("opacity-100");
+    $("#studentModal").removeClass("opacity-100");
+    $("#studentModal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $("#studentModal").html("");
+    }, 200);
+    $(".closeBtn").click(function (e) {
+      $("#prizeModal").removeClass("opacity-100");
+      $("#prizeModal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $(".prizeModal").removeClass("hidden");
+        $("#prizeModal").html("");
+      }, 200);
+    });
+    editPrize();
+  });
 }
 function editPrize() {
-    $('.submitEditPrizeBtn').click(function (e) {
-        e.preventDefault();
-        var fullName = $('#namePrize').val();
-        var course = $('#classPrize').val();
-        var prizeAmount = Number($('#prize').val());
-        var status = $('#prizeStatus').val();
-        tableData.forEach((el) => {
-            if (el['name'] === fullName && el['prizeClass'] === course) {
-                Swal.fire({
-                    title: "Bạn chắc chứ?",
-                    text: "Bạn đang chỉnh sửa thông tin của " + el['name'] + " dạy lớp " + el['prizeClass'],
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Xác nhận"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Toast.fire({
-                            icon: "success",
-                            title: "Chỉnh sửa thành công"
-                        }).then(() => {
-                            el['prizeCash'] = prizeAmount
-                            el['prizeStatus'] = status
-                            $('#prizeModal').removeClass('opacity-100');
-                            $('#prizeModal').addClass('invisible opacity-0');
-                            setTimeout(function () {
-                                $('.prizeModal').removeClass('hidden');
-                                $('#prizeModal').html('');
-                            }, 200);
-                            loadData();
-                        })
-                    }
-                });
-            }
-        })
-    })
+  $(".submitEditPrizeBtn").click(function (e) {
+    e.preventDefault();
+    var fullName = $("#namePrize").val();
+    var course = $("#classPrize").val();
+    var prizeAmount = Number($("#prize").val());
+    var status = $("#prizeStatus").val();
+    tableData.forEach((el) => {
+      if (el["name"] === fullName && el["prizeClass"] === course) {
+        Swal.fire({
+          title: "Bạn chắc chứ?",
+          text:
+            "Bạn đang chỉnh sửa thông tin của " +
+            el["name"] +
+            " dạy lớp " +
+            el["prizeClass"],
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Xác nhận",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Toast.fire({
+              icon: "success",
+              title: "Chỉnh sửa thành công",
+            }).then(() => {
+              el["prizeCash"] = prizeAmount;
+              el["prizeStatus"] = status;
+              $("#prizeModal").removeClass("opacity-100");
+              $("#prizeModal").addClass("invisible opacity-0");
+              setTimeout(function () {
+                $(".prizeModal").removeClass("hidden");
+                $("#prizeModal").html("");
+              }, 200);
+              loadData();
+            });
+          }
+        });
+      }
+    });
+  });
 }
 function deletePrize() {
-    $('.deletePrizeBtn').click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr('data-id');
-        Swal.fire({
-            title: "Bạn chắc chứ?",
-            text: "Bạn đang xóa thông tin của " + tableData[id]['name'] + " dạy lớp " + tableData[id]['prizeClass'],
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Xác nhận"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Toast.fire({
-                    icon: "success",
-                    title: "Xóa thành công"
-                }).then(() => {
-                    tableData[id]['prizeClass'] = '';
-                    tableData[id]['prizeCash'] = 0;
-                    tableData[id]['prizeStatus'] = 0;
-                    loadData();
-                })
-            }
+  $(".deletePrizeBtn").click(function (e) {
+    e.preventDefault();
+    var id = $(this).attr("data-id");
+    Swal.fire({
+      title: "Bạn chắc chứ?",
+      text:
+        "Bạn đang xóa thông tin của " +
+        tableData[id]["name"] +
+        " dạy lớp " +
+        tableData[id]["prizeClass"],
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Xác nhận",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Toast.fire({
+          icon: "success",
+          title: "Xóa thành công",
+        }).then(() => {
+          tableData[id]["prizeClass"] = "";
+          tableData[id]["prizeCash"] = 0;
+          tableData[id]["prizeStatus"] = 0;
+          loadData();
         });
-    })
+      }
+    });
+  });
 }

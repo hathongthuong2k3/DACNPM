@@ -1,6 +1,6 @@
-const Admin = require("../models/Admin");
-const { requireApiKey } = require("../middleware/useApiKey");
-const Log = require("../models/Log");
+const Admin = require('../models/Admin');
+const { requireApiKey } = require('../middleware/useApiKey');
+const Log = require('../models/Log');
 class AdminController {
   async getAdmin(req, res, next) {
     try {
@@ -8,9 +8,9 @@ class AdminController {
       if (queryResult) {
         const result = await Log.addLog(
           res.user.id,
-          "Xem thông tin tài khoản",
+          'Xem thông tin tài khoản',
           Date.now(),
-          true
+          true,
         );
         return res.json({
           check: true,
@@ -25,23 +25,23 @@ class AdminController {
       } else {
         const result = await Log.addLog(
           res.user.id,
-          "Xem thông tin tài khoản",
+          'Xem thông tin tài khoản',
           Date.now(),
-          false
+          false,
         );
         return res
           .status(404)
-          .json({ check: false, error: "Tài khoản không tồn tại" });
+          .json({ check: false, msg: 'Tài khoản không tồn tại' });
       }
     } catch (error) {
       const result = await Log.addLog(
         res.user.id,
-        "Xem thông tin tài khoản",
+        'Xem thông tin tài khoản',
         Date.now(),
-        false
+        false,
       );
-      console.error("Error:", error);
-      return res.status(500).json({ check: false, error: "Lỗi máy chủ" });
+      console.error('Error:', error);
+      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
     }
   }
   async getIncome(req, res, next) {
@@ -50,9 +50,9 @@ class AdminController {
       if (queryResult) {
         const result = await Log.addLog(
           res.user.id,
-          "Xem thu nhập",
+          'Xem thu nhập',
           Date.now(),
-          true
+          true,
         );
         return res.json({
           check: true,
@@ -61,23 +61,21 @@ class AdminController {
       } else {
         const result = await Log.addLog(
           res.user.id,
-          "Xem thu nhập",
+          'Xem thu nhập',
           Date.now(),
-          false
+          false,
         );
-        return res
-          .status(404)
-          .json({ check: false, error: "Không có lịch sử" });
+        return res.status(404).json({ check: false, msg: 'Không có lịch sử' });
       }
     } catch (error) {
       const result = await Log.addLog(
         res.user.id,
-        "Xem thu nhập",
+        'Xem thu nhập',
         Date.now(),
-        false
+        false,
       );
-      console.error("Error:", error);
-      return res.status(500).json({ check: false, error: "Lỗi máy chủ" });
+      console.error('Error:', error);
+      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
     }
   }
   async getOutcome(req, res, next) {
@@ -86,9 +84,9 @@ class AdminController {
       if (queryResult) {
         const result = await Log.addLog(
           res.user.id,
-          "Xem chi phí",
+          'Xem chi phí',
           Date.now(),
-          true
+          true,
         );
         return res.json({
           check: true,
@@ -97,23 +95,21 @@ class AdminController {
       } else {
         const result = await Log.addLog(
           res.user.id,
-          "Xem chi phí",
+          'Xem chi phí',
           Date.now(),
-          false
+          false,
         );
-        return res
-          .status(404)
-          .json({ check: false, error: "Không có lịch sử" });
+        return res.status(404).json({ check: false, msg: 'Không có lịch sử' });
       }
     } catch (error) {
       const result = await Log.addLog(
         res.user.id,
-        "Xem chi phí",
+        'Xem chi phí',
         Date.now(),
-        false
+        false,
       );
-      console.error("Error:", error);
-      return res.status(500).json({ check: false, error: "Lỗi máy chủ" });
+      console.error('Error:', error);
+      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
     }
   }
   async getStat(req, res, next) {
@@ -122,9 +118,9 @@ class AdminController {
       if (queryResult) {
         const result = await Log.addLog(
           res.user.id,
-          "Xem số lượng truy cập",
+          'Xem số lượng truy cập',
           Date.now(),
-          true
+          true,
         );
         return res.json({
           check: true,
@@ -133,23 +129,21 @@ class AdminController {
       } else {
         const result = await Log.addLog(
           res.user.id,
-          "Xem số lượng truy cập",
+          'Xem số lượng truy cập',
           Date.now(),
-          false
+          false,
         );
-        return res
-          .status(404)
-          .json({ check: false, error: "Không có lịch sử" });
+        return res.status(404).json({ check: false, msg: 'Không có lịch sử' });
       }
     } catch (error) {
       const result = await Log.addLog(
         res.user.id,
-        "Xem số lượng truy cập",
+        'Xem số lượng truy cập',
         Date.now(),
-        false
+        false,
       );
-      console.error("Error:", error);
-      return res.status(500).json({ check: false, error: "Lỗi máy chủ" });
+      console.error('Error:', error);
+      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
     }
   }
 }

@@ -6,7 +6,7 @@ class RegisterLogController {
       if (queryResult) {
         return res.json({
           check: true,
-          data: queryResult
+          data: queryResult,
         });
       } else {
         return res
@@ -25,7 +25,7 @@ class RegisterLogController {
       if (queryResult) {
         return res.json({
           check: true,
-          data: queryResult
+          data: queryResult,
         });
       } else {
         return res

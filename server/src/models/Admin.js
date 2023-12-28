@@ -1,4 +1,4 @@
-const pool = require("../config/database");
+const pool = require('../config/database');
 class Admin {
   async getAdmin(id, role) {
     const query = `SELECT * FROM ` + role + ` WHERE id = ?`;
@@ -69,6 +69,28 @@ JOIN
 JOIN
     courses ON classes.idCourse = courses.id
 WHERE teacherjoinclass.paidStatus IS NOT NULL
+UNION ALL
+SELECT
+    staff.name AS name,
+    0 AS className,
+    paid AS prize,
+    managestaff.paidStatus AS status
+FROM
+    staff
+JOIN
+    managestaff ON idStaff=id
+WHERE paidStatus IS NOT NULL
+UNION ALL
+SELECT
+    staff.name AS name,
+    0 AS className,
+    prize,
+    managestaff.prizeStatus AS status
+FROM
+    staff
+JOIN
+    managestaff ON idStaff=id
+WHERE prizeStatus IS NOT NULL
 `;
     const [result] = await pool.query(query);
     return result;

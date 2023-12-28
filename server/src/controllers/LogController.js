@@ -6,7 +6,7 @@ class LogController {
       if (queryResult) {
         return res.json({
           check: true,
-          data: queryResult
+          data: queryResult,
         });
       } else {
         return res
@@ -25,7 +25,7 @@ class LogController {
       if (queryResult) {
         return res.json({
           check: true,
-          data: queryResult
+          data: queryResult,
         });
       } else {
         return res
@@ -42,7 +42,7 @@ class LogController {
       const queryResult = await Log.addLog();
       if (queryResult) {
         return res.json({
-          check: true
+          check: true,
         });
       } else {
         return res

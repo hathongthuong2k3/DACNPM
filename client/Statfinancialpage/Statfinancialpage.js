@@ -8,6 +8,7 @@ $(document).ready(function () {
 });
 function loadData() {
   var str = "";
+  var total = 0;
   data.forEach((el, index) => {
     str +=
       ` <tr
@@ -42,8 +43,16 @@ function loadData() {
     `
     </td>
 </tr>`;
+    if (el.status === 1) {
+      if (el.type === "Chi trả") {
+        total -= el["amount"];
+      } else {
+        total += el["amount"];
+      }
+    }
   });
   $("#listAll").html(str);
+  $("#total").html(total.toLocaleString("en-US") + " đ");
 }
 function loadIncome() {
   $.ajax({
@@ -55,6 +64,7 @@ function loadIncome() {
     dataType: "JSON",
     success: function (res) {
       var str = "";
+      let total = 0;
       res.data.forEach((el, index) => {
         data.push({
           name: el.name + " thuộc lớp " + el.className,
@@ -62,7 +72,9 @@ function loadIncome() {
           amount: el.pay,
           status: el.status,
         });
-        console.log(data);
+        if (el.status === 1) {
+          total += el.pay;
+        }
         str +=
           `<tr
         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -99,6 +111,7 @@ function loadIncome() {
 `;
       });
       $("#income").html(str);
+      $("#totalIncome").html(total.toLocaleString("en-US") + " đ");
       loadData();
     },
   });
@@ -113,13 +126,26 @@ function loadOutcome() {
     dataType: "JSON",
     success: function (res) {
       var str = "";
+      let total = 0;
       res.data.forEach((el, index) => {
-        data.push({
-          name: el.name + " thuộc lớp " + el.className,
-          type: "Chi trả",
-          amount: el.prize,
-          status: el.status,
-        });
+        if (el.className === "0") {
+          data.push({
+            name: el.name,
+            type: "Chi trả",
+            amount: el.prize,
+            status: el.status,
+          });
+        } else {
+          data.push({
+            name: el.name + " thuộc lớp " + el.className,
+            type: "Chi trả",
+            amount: el.prize,
+            status: el.status,
+          });
+        }
+        if (el.status === "0") {
+          total += el.prize;
+        }
         str +=
           `<tr
           class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -135,7 +161,7 @@ function loadOutcome() {
           </td>
           <td class="px-6 py-4">
           ` +
-          el["className"] +
+          (el["className"] === "0" ? "Nhân viên" : el["className"]) +
           `
           </td>
           <td class="px-6 py-4">
@@ -156,6 +182,7 @@ function loadOutcome() {
   `;
       });
       $("#outcome").html(str);
+      $("#totalOutcome").html(total.toLocaleString("en-US") + " đ");
       loadData();
     },
   });
@@ -170,6 +197,7 @@ function loadSponsor() {
     dataType: "JSON",
     success: function (res) {
       var str = "";
+      let total = 0;
       sponsorData = res.data;
       res.data.forEach((el, index) => {
         data.push({
@@ -178,7 +206,9 @@ function loadSponsor() {
           amount: el.amount,
           status: el.status,
         });
-
+        if (el.status === 1) {
+          total += el.amount;
+        }
         str +=
           `<tr
             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -210,6 +240,8 @@ function loadSponsor() {
             <td class="px-6 py-4 flex justify-center">
     <button type="button" data-id=` +
           index +
+          ` data-value=` +
+          el.id +
           ` data-tooltip-target="update"
         class="editBtn flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
         <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -226,7 +258,9 @@ function loadSponsor() {
             <div class="tooltip-arrow" data-popper-arrow></div>
     </button>
     <button type="button" data-tooltip-target="delete"
-        class="deleteBtn flex items-center p-2 text-gray-500 hover:text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+        class="deleteBtn flex items-center p-2 text-gray-500 hover:text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-value=` +
+          el.id +
+          `
         data-id=` +
           index +
           `>
@@ -246,8 +280,10 @@ function loadSponsor() {
     `;
       });
       $("#sponsor").html(str);
+      $("#totalSponsor").html(total.toLocaleString("en-US") + " đ");
       loadData();
       loadEditData();
+      deleteData();
     },
   });
 }
@@ -278,10 +314,11 @@ function loadAddData() {
             <div>
                 <label for="status"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trạng thái</label>
-                <input type="text" id="status"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="1000000"
-                    required>
+                    <select id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                    <option value="" selected>Chọn trạng thái</option>
+                    <option value="0">Chưa hoàn thành</option>
+                    <option value="1">Đã hoàn thành</option>
+                  </select>
             </div>
         </div>
 </form>
@@ -309,7 +346,6 @@ function loadAddData() {
     $("#modal").removeClass("invisible opacity-0");
     $("#modal").addClass("opacity-100");
     $(".add").addClass("hidden");
-    addData();
     $(".closeBtn").click(function (e) {
       $("#modal").removeClass("opacity-100");
       $("#modal").addClass("invisible opacity-0");
@@ -318,6 +354,7 @@ function loadAddData() {
         $(".add").removeClass("hidden");
       }, 200);
     });
+    addData();
   });
 }
 function addData() {
@@ -351,6 +388,7 @@ function addData() {
             icon: "success",
             title: "Thêm thành công",
           }).then(() => {
+            loadSponsor();
             $("#modal").removeClass("opacity-100");
             $("#modal").addClass("invisible opacity-0");
             setTimeout(function () {
@@ -372,7 +410,9 @@ function addData() {
 function loadEditData() {
   $(".editBtn").click(function (e) {
     e.preventDefault();
+    $(".add").addClass("hidden");
     var id = $(this).attr("data-id");
+    var sponsorid = $(this).attr("data-value");
     var str = "";
     str +=
       `
@@ -380,9 +420,9 @@ function loadEditData() {
             <form id="addForm">
                 <div class="grid gap-6 mb-6 md:grid-cols-3">
                     <div>
-                        <label for="className"
+                        <label for="name"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp học</label>
-                        <input type="text" id="className" data-value=` +
+                        <input type="text" id="name" data-value=` +
       sponsorData[id]["name"] +
       `
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -392,20 +432,25 @@ function loadEditData() {
                             required>
                     </div>
                     <div>
-                        <label for="maxStudent"
+                        <label for="amount"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sĩ số tối đa</label>
-                        <input type="text" id="maxStudent"
+                        <input type="text" id="amount"
                             class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nguyễn Văn A" value="` +
-      sponsorData[id]["maxStudent"] +
+      sponsorData[id]["amount"] +
       `" required>
                     </div>
                     <div>
-                        <label for="maxStudent"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sĩ số tối đa</label>
-                        <input type="text" id="maxStudent"
-                            class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nguyễn Văn A" value="` +
-      sponsorData[id]["maxStudent"] +
-      `" required>
+                        <label for="status"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trạng thái</label>
+                            <select id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <option value="">Chọn trạng thái</option>
+                            <option value="0" ` +
+      (sponsorData[id]["status"] === 0 ? "selected" : "") +
+      `>Chưa hoàn thành</option>
+                            <option value="1" ` +
+      (sponsorData[id]["status"] === 1 ? "selected" : "") +
+      `>Đã hoàn thành</option>
+                          </select>
                     </div>
                 </div>
         </form>
@@ -441,43 +486,26 @@ function loadEditData() {
         $("#modal").html("");
       }, 200);
     });
-    editData(id);
+    editData(id, sponsorid);
   });
 }
-function editData(id) {
+function editData(id, sponsorid) {
   $(".submitEditBtn").click(function (e) {
     e.preventDefault();
-    var oldname = $("#className").attr("data-value");
-    var className = $("#className").val();
-    var courseName = $("#courseName").val();
-    var schedule = $("#schedule").val();
-    var maxStudents = $("#maxStudent").val();
-    var startDate = $("#startDate").val();
-    var endDate = $("#endDate").val();
-    var address = $("#address").val();
-    if (
-      !className ||
-      !courseName ||
-      !schedule ||
-      !maxStudents ||
-      !startDate ||
-      !endDate ||
-      !address
-    ) {
+    var name = $("#name").val();
+    var amount = Number($("#amount").val());
+    var status = Number($("#status").val());
+    console.log(name, amount, status);
+    if (!name || !amount || status === "") {
       Toast.fire({
         icon: "error",
         title: "Vui lòng nhập đầy đủ thông tin",
       });
       return;
     }
-    maxStudents = parseInt(maxStudents);
     Swal.fire({
       title: "Bạn chắc chứ?",
-      text:
-        "Bạn đang chỉnh sửa thông tin của " +
-        classData[0][id]["name"] +
-        " thuộc khóa " +
-        classData[0][id]["courseName"],
+      text: "Bạn đang chỉnh sửa thông tin của " + sponsorData[id]["name"],
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -487,19 +515,15 @@ function editData(id) {
       if (result.isConfirmed) {
         $.ajax({
           type: "patch",
-          url: "http://localhost:3000/classes/class",
+          url: "http://localhost:3000/sponsors/sponsor",
           headers: {
             Authorization: "Bearer " + localStorage.getItem("apitoken"),
           },
           data: {
-            name: className,
-            idCourse: courseName,
-            schedule: schedule,
-            maxStudent: maxStudents,
-            startDate: startDate,
-            endDate: endDate,
-            address: address,
-            oldname: oldname,
+            name: name,
+            amount: amount,
+            status: status,
+            id: sponsorid,
           },
           dataType: "JSON",
           success: function (res) {
@@ -507,11 +531,12 @@ function editData(id) {
               icon: "success",
               title: "Sửa lớp thành công",
             }).then(() => {
-              $("#editModal").removeClass("opacity-100");
-              $("#editModal").addClass("invisible opacity-0");
+              loadSponsor();
+              $("#modal").removeClass("opacity-100");
+              $("#modal").addClass("invisible opacity-0");
               setTimeout(function () {
-                $(".addModal").removeClass("hidden");
-                $("#editModal").html("");
+                $(".add").removeClass("hidden");
+                $("#modal").html("");
               }, 200);
               loadData();
             });
@@ -538,13 +563,13 @@ function deleteData() {
   $(".deleteBtn").click(function (e) {
     e.preventDefault();
     var id = $(this).attr("data-id");
+    var sponsorid = $(this).attr("data-value");
     Swal.fire({
       title: "Bạn chắc chứ?",
       text:
         "Bạn đang xóa thông tin của " +
-        classData[0][id]["name"] +
-        " thuộc khóa " +
-        classData[0][id]["courseName"],
+        sponsorData[id]["name"] +
+        " thuộc khóa ",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -554,9 +579,7 @@ function deleteData() {
       if (result.isConfirmed) {
         $.ajax({
           type: "delete",
-          url:
-            "http://localhost:3000/classes/class?name=" +
-            classData[0][id]["name"],
+          url: "http://localhost:3000/sponsors/sponsor?id=" + sponsorid,
           headers: {
             Authorization: "Bearer " + localStorage.getItem("apitoken"),
           },
@@ -567,7 +590,7 @@ function deleteData() {
                 icon: "success",
                 title: "Xóa thành công",
               }).then(() => {
-                loadData();
+                loadSponsor();
               });
             }
           },

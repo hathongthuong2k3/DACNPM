@@ -1,21 +1,21 @@
-const User = require("../models/User");
-const { createApiKey, requireApiKey } = require("../middleware/useApiKey");
-const RegisterLog = require("../models/RegisterLog");
+const User = require('../models/User');
+const { createApiKey, requireApiKey } = require('../middleware/useApiKey');
+const RegisterLog = require('../models/RegisterLog');
 class UserController {
   // [GET] /login
   async login(req, res) {
     try {
       const { username, userpassword } = req.query;
 
-      if (!username || username === "") {
+      if (!username || username === '') {
         return res
           .status(400)
-          .json({ check: false, msg: "Chưa nhập tài khoản" });
+          .json({ check: false, msg: 'Chưa nhập tài khoản' });
       }
-      if (!userpassword || userpassword === "") {
+      if (!userpassword || userpassword === '') {
         return res
           .status(400)
-          .json({ check: false, msg: "Chưa nhập mật khẩu" });
+          .json({ check: false, msg: 'Chưa nhập mật khẩu' });
       }
       const queryResult = await User.getUser(username, userpassword);
       if (queryResult) {
@@ -31,11 +31,11 @@ class UserController {
       } else {
         return res
           .status(404)
-          .json({ check: false, msg: "Tài khoản không tồn tại" });
+          .json({ check: false, msg: 'Tài khoản không tồn tại' });
       }
     } catch (error) {
-      console.error("Error:", error);
-      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
+      console.error('Error:', error);
+      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
     }
   }
   async getInfo(req, res) {
@@ -49,11 +49,11 @@ class UserController {
       } else {
         return res
           .status(404)
-          .json({ check: false, msg: "Tài khoản không tồn tại" });
+          .json({ check: false, msg: 'Tài khoản không tồn tại' });
       }
     } catch (error) {
-      console.error("Error:", error);
-      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
+      console.error('Error:', error);
+      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
     }
   }
 
@@ -71,42 +71,42 @@ class UserController {
         role,
         key,
       } = req.body;
-      if (!username || username == "") {
+      if (!username || username == '') {
         return res
           .status(400)
-          .json({ check: false, msg: "Chưa nhập tài khoản" });
+          .json({ check: false, msg: 'Chưa nhập tài khoản' });
       }
-      if (!userpassword || userpassword == "") {
+      if (!userpassword || userpassword == '') {
         return res
           .status(400)
-          .json({ check: false, msg: "Chưa nhập mật khẩu" });
+          .json({ check: false, msg: 'Chưa nhập mật khẩu' });
       }
-      if (!name || name == "") {
-        return res.status(400).json({ check: false, msg: "Chưa nhập tên" });
+      if (!name || name == '') {
+        return res.status(400).json({ check: false, msg: 'Chưa nhập tên' });
       }
-      if (!email || email == "") {
-        return res.status(400).json({ check: false, msg: "Chưa nhập email" });
+      if (!email || email == '') {
+        return res.status(400).json({ check: false, msg: 'Chưa nhập email' });
       }
-      if (!dob || dob == "") {
+      if (!dob || dob == '') {
         return res
           .status(400)
-          .json({ check: false, msg: "Chưa nhập ngày sinh" });
+          .json({ check: false, msg: 'Chưa nhập ngày sinh' });
       }
-      if (!sex || sex == "") {
+      if (!sex || sex == '') {
         return res
           .status(400)
-          .json({ check: false, msg: "Chưa nhập giới tính" });
+          .json({ check: false, msg: 'Chưa nhập giới tính' });
       }
-      if (!phone || phone == "") {
+      if (!phone || phone == '') {
         return res
           .status(400)
-          .json({ check: false, msg: "Chưa nhập số điện thoại" });
+          .json({ check: false, msg: 'Chưa nhập số điện thoại' });
       }
-      if (!address || address == "") {
-        return res.status(400).json({ check: false, msg: "Chưa nhập địa chỉ" });
+      if (!address || address == '') {
+        return res.status(400).json({ check: false, msg: 'Chưa nhập địa chỉ' });
       }
-      if (!role || role == "") {
-        return res.status(400).json({ check: false, msg: "Không có vai trò" });
+      if (!role || role == '') {
+        return res.status(400).json({ check: false, msg: 'Không có vai trò' });
       }
       const queryResult = await User.addUser(
         username,
@@ -117,13 +117,13 @@ class UserController {
         sex,
         phone,
         address,
-        role
+        role,
       );
       if (queryResult) {
         const result = await RegisterLog.addRegisterLog(
           email,
           Date.now(),
-          username
+          username,
         );
         return res.json({
           check: true,
@@ -131,11 +131,11 @@ class UserController {
       } else {
         return res
           .status(400)
-          .json({ check: false, msg: "Tài khoản đã tồn tại" });
+          .json({ check: false, msg: 'Tài khoản đã tồn tại' });
       }
     } catch (error) {
-      console.error("Error:", error);
-      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
+      console.error('Error:', error);
+      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
     }
   }
   async changeAccount(req, res) {
@@ -143,29 +143,29 @@ class UserController {
       //const string = req.headers.authorization;
       const { name, email, dob, sex, phone, address } = req.query;
       //console.log(string.split(" ")[1])
-      if (!name || name == "") {
-        return res.status(400).json({ check: false, msg: "Chưa nhập tên" });
+      if (!name || name == '') {
+        return res.status(400).json({ check: false, msg: 'Chưa nhập tên' });
       }
-      if (!email || email == "") {
-        return res.status(400).json({ check: false, msg: "Chưa nhập email" });
+      if (!email || email == '') {
+        return res.status(400).json({ check: false, msg: 'Chưa nhập email' });
       }
-      if (!dob || dob == "") {
+      if (!dob || dob == '') {
         return res
           .status(400)
-          .json({ check: false, msg: "Chưa nhập ngày sinh" });
+          .json({ check: false, msg: 'Chưa nhập ngày sinh' });
       }
-      if (!sex || sex == "") {
+      if (!sex || sex == '') {
         return res
           .status(400)
-          .json({ check: false, msg: "Chưa nhập giới tính" });
+          .json({ check: false, msg: 'Chưa nhập giới tính' });
       }
-      if (!phone || phone == "") {
+      if (!phone || phone == '') {
         return res
           .status(400)
-          .json({ check: false, msg: "Chưa nhập số điện thoại" });
+          .json({ check: false, msg: 'Chưa nhập số điện thoại' });
       }
-      if (!address || address == "") {
-        return res.status(400).json({ check: false, msg: "Chưa nhập địa chỉ" });
+      if (!address || address == '') {
+        return res.status(400).json({ check: false, msg: 'Chưa nhập địa chỉ' });
       }
       const queryResult = await User.updateUser(
         res.user.id,
@@ -175,37 +175,37 @@ class UserController {
         sex,
         phone,
         address,
-        res.id.role
+        res.id.role,
       );
       if (queryResult == true) {
         const result = await Log.addLog(
           res.user.id,
-          "Chỉnh sửa tài khoản",
+          'Chỉnh sửa tài khoản',
           Date.now(),
-          true
+          true,
         );
         return res.json({
           check: true,
-          msg: "Thay đổi dữ liệu thành công",
+          msg: 'Thay đổi dữ liệu thành công',
         });
       } else {
         const result = await Log.addLog(
           res.user.id,
-          "Chỉnh sửa tài khoản",
+          'Chỉnh sửa tài khoản',
           Date.now(),
-          false
+          false,
         );
-        return res.status(400).json({ check: false, msg: "Dữ liệu không đổi" });
+        return res.status(400).json({ check: false, msg: 'Dữ liệu không đổi' });
       }
     } catch (error) {
       const result = await Log.addLog(
         res.user.id,
-        "Chỉnh sửa tài khoản",
+        'Chỉnh sửa tài khoản',
         Date.now(),
-        false
+        false,
       );
-      console.error("Error:", error);
-      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
+      console.error('Error:', error);
+      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
     }
   }
 }

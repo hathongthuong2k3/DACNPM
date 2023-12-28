@@ -1,111 +1,121 @@
 var tableData = [
-    {
-        name: "Thái Ngọc Rạng",
-        gender: "Nam",
-        birthYear: new Date(2003, 0, 1),
-        address: "KTX Khu A, Dĩ An, Bình Dương",
-        phoneNumber: "0912345678",
-        email: "rangthai@gmail.com",
-        course: "IELTS 1",
-        dates: 11,
-        teacherName: "Nguyễn Đức Tùng",
-        status: 0,
-        listening: 1.0,
-        speaking: 2.0,
-        reading: 3.0,
-        writing: 4.0,
-        payClass: "IELTS1",
-        payCash: 2000000,
-        payStatus: 0,
-        prizeClass: "",
-        prizeCash: 0,
-        prizeStatus: 0,
-        rate: 2
-    },
-    {
-        name: "Nguyễn Thị Hằng",
-        gender: "Nữ",
-        birthYear: new Date(1995, 0, 1),
-        address: "123 Main Street, Hanoi",
-        phoneNumber: "0987654321",
-        email: "hangnguyen@gmail.com",
-        course: "TOEFL Prep",
-        dates: 10,
-        teacherName: "Nguyễn Đức Hải",
-        status: 1,
-        listening: 1.0,
-        speaking: 5.0,
-        reading: 3.0,
-        writing: 4.0,
-        payClass: "TOEIC",
-        payCash: 3000000,
-        payStatus: 0,
-        prizeClass: "TOEIC",
-        prizeCash: 2000000,
-        prizeStatus: 0,
-        rate: 5
-    },
-    {
-        name: "Lê Văn Hoàng",
-        gender: "Nam",
-        birthYear: new Date(2000, 0, 1),
-        address: "456 Elm Street, Ho Chi Minh City",
-        phoneNumber: "0123456789",
-        email: "hoangle@gmail.com",
-        course: "GRE Math",
-        dates: 0,
-        teacherName: "Nguyễn Phan Anh",
-        status: -1,
-        listening: 1.0,
-        speaking: 2.0,
-        reading: 9.0,
-        writing: 8.0,
-        payClass: "IELTS2",
-        payCash: 3000000,
-        payStatus: 1,
-        prizeClass: "",
-        prizeCash: 0,
-        prizeStatus: 0,
-        rate: 3
-    },
+  {
+    name: "Thái Ngọc Rạng",
+    gender: "Nam",
+    birthYear: new Date(2003, 0, 1),
+    address: "KTX Khu A, Dĩ An, Bình Dương",
+    phoneNumber: "0912345678",
+    email: "rangthai@gmail.com",
+    course: "IELTS 1",
+    dates: 11,
+    teacherName: "Nguyễn Đức Tùng",
+    status: 0,
+    listening: 1.0,
+    speaking: 2.0,
+    reading: 3.0,
+    writing: 4.0,
+    payClass: "IELTS1",
+    payCash: 2000000,
+    payStatus: 0,
+    prizeClass: "",
+    prizeCash: 0,
+    prizeStatus: 0,
+    rate: 2,
+  },
+  {
+    name: "Nguyễn Thị Hằng",
+    gender: "Nữ",
+    birthYear: new Date(1995, 0, 1),
+    address: "123 Main Street, Hanoi",
+    phoneNumber: "0987654321",
+    email: "hangnguyen@gmail.com",
+    course: "TOEFL Prep",
+    dates: 10,
+    teacherName: "Nguyễn Đức Hải",
+    status: 1,
+    listening: 1.0,
+    speaking: 5.0,
+    reading: 3.0,
+    writing: 4.0,
+    payClass: "TOEIC",
+    payCash: 3000000,
+    payStatus: 0,
+    prizeClass: "TOEIC",
+    prizeCash: 2000000,
+    prizeStatus: 0,
+    rate: 5,
+  },
+  {
+    name: "Lê Văn Hoàng",
+    gender: "Nam",
+    birthYear: new Date(2000, 0, 1),
+    address: "456 Elm Street, Ho Chi Minh City",
+    phoneNumber: "0123456789",
+    email: "hoangle@gmail.com",
+    course: "GRE Math",
+    dates: 0,
+    teacherName: "Nguyễn Phan Anh",
+    status: -1,
+    listening: 1.0,
+    speaking: 2.0,
+    reading: 9.0,
+    writing: 8.0,
+    payClass: "IELTS2",
+    payCash: 3000000,
+    payStatus: 1,
+    prizeClass: "",
+    prizeCash: 0,
+    prizeStatus: 0,
+    rate: 3,
+  },
 ];
 $(document).ready(function () {
-    loadData();
+  loadData();
 });
 function loadData() {
-    var str = '';
-    tableData.forEach((el, index) => {
-        str += `<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+  var str = "";
+  tableData.forEach((el, index) => {
+    str +=
+      `<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            <span class="teacherModal" data-id=`+ index + `>
-                `+ el['name'] + `
+            <span class="teacherModal" data-id=` +
+      index +
+      `>
+                ` +
+      el["name"] +
+      `
             </span>
         </th>
         <td class="px-6 py-4">
-        `+ el['course'] + `
+        ` +
+      el["course"] +
+      `
         </td>
         <td class="px-6 py-4">
-        <div class="flex items-center space-x-1 justify-center">`
-        for (let i = 0; i < el['rate']; i++) {
-            str += `<svg class="w-4 h-4 text-yellow-300" aria-hidden="true"
+        <div class="flex items-center space-x-1 justify-center">`;
+    for (let i = 0; i < el["rate"]; i++) {
+      str += `<svg class="w-4 h-4 text-yellow-300" aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
             <path
                 d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-        </svg>`
-        }
-        for (let i = el['rate']; i < 5; i++) {
-            str += `<svg class="w-4 h-4 text-gray-300 dark:text-gray-500" aria-hidden="true"
+        </svg>`;
+    }
+    for (let i = el["rate"]; i < 5; i++) {
+      str += `<svg class="w-4 h-4 text-gray-300 dark:text-gray-500" aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
             <path
                 d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
         </svg>
-        `
-        }
-        str += `    
+        `;
+    }
+    str +=
+      `    
             </div>
         </td>
         <td class="px-6 py-4 ">
-            <button data-tooltip-target="cheer" data-id=`+ index + `
+            <button data-tooltip-target="cheer" data-id=` +
+      index +
+      `
                 class="addCheer mx-auto p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <svg class="w-6 h-6 text-gray-500 hover:text-gray-900 dark:text-white"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -117,7 +127,9 @@ function loadData() {
     Tuyên dương
     <div class="tooltip-arrow" data-popper-arrow></div>
             </button>
-            <button data-tooltip-target="warning" data-id=`+ index + `
+            <button data-tooltip-target="warning" data-id=` +
+      index +
+      `
                 class="addWarn mx-auto p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <span
                     class="material-symbols-outlined text-center w-6 h-6 text-gray-100 dark:text-white flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
@@ -128,7 +140,9 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
             </button>
             <button data-tooltip-target="update" type="button"
-                class="rateModal p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="`+ index + `">
+                class="rateModal p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" data-id="` +
+      index +
+      `">
                 <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     viewBox="0 0 20 18">
@@ -142,65 +156,106 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
             </button>
         </td>
-    </tr>`
-        $('#teacher').html(str)
-        addWarn();
-        addCheer();
-        loadTeacherModal();
-        loadRateModal();
-        addRateModal();
-    })
+    </tr>`;
+    $("#teacher").html(str);
+    addWarn();
+    addCheer();
+    loadTeacherModal();
+    loadRateModal();
+    addRateModal();
+  });
 }
 function addWarn() {
-    $('.addWarn').click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr('data-id');
-        Swal.fire({
-            title: "Bạn chắc chứ?",
-            text: "Bạn đang gửi cảnh cáo cho " + tableData[id]['name'],
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Xác nhận"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Toast.fire({
-                    icon: "success",
-                    title: tableData[id]['name'] + " đã được gửi cảnh cáo"
-                })
-            }
+  $(".addWarn").click(function (e) {
+    e.preventDefault();
+    var id = $(this).attr("data-id");
+    var email = $(this).attr("data-email");
+    Swal.fire({
+      title: "Bạn chắc chứ?",
+      text: "Bạn đang gửi cảnh cáo cho " + tableData[id]["name"],
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Xác nhận",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "get",
+          url: "http://localhost:3000/sendWarning",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("apitoken"),
+          },
+          data: {
+            to: email,
+          },
+          dataType: "JSON",
+          success: function (res) {
+            Toast.fire({
+              icon: "success",
+              title: tableData[id]["name"] + " đã được gửi cảnh cáo",
+            });
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            Toast.fire({
+              icon: "error",
+              title: "Gửi không thành công",
+            });
+          },
         });
-    })
+      }
+    });
+  });
 }
 function addCheer() {
-    $('.addCheer').click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr('data-id');
-        Swal.fire({
-            title: "Bạn chắc chứ?",
-            text: "Bạn đang gửi thông báo tuyên dương cho " + tableData[id]['name'],
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Xác nhận"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Toast.fire({
-                    icon: "success",
-                    title: tableData[id]['name'] + " đã được gửi thông báo"
-                })
-            }
+  $(".addCheer").click(function (e) {
+    e.preventDefault();
+    var id = $(this).attr("data-id");
+    var email = $(this).attr("data-email");
+    Swal.fire({
+      title: "Bạn chắc chứ?",
+      text: "Bạn đang gửi thông báo tuyên dương cho " + tableData[id]["name"],
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Xác nhận",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          type: "get",
+          url: "http://localhost:3000/sendCheer",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("apitoken"),
+          },
+          data: {
+            to: email,
+          },
+          dataType: "JSON",
+          success: function (res) {
+            Toast.fire({
+              icon: "success",
+              title: tableData[id]["name"] + " đã được sự tuyên dương",
+            });
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            Toast.fire({
+              icon: "error",
+              title: "Gửi không thành công",
+            });
+          },
         });
-    })
+      }
+    });
+  });
 }
 function loadTeacherModal() {
-    $('.teacherModal').click(function (e) {
-        e.preventDefault();
-        var str = ''
-        var id = $(this).attr('data-id');
-        str += `
+  $(".teacherModal").click(function (e) {
+    e.preventDefault();
+    var str = "";
+    var id = $(this).attr("data-id");
+    str +=
+      `
         <div class="grid grid-cols-3 gap-4 mb-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="col-span-2 " id="modal1">
         <form>
@@ -210,7 +265,9 @@ function loadTeacherModal() {
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
                     <input disabled type="text" id="full_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Nguyễn Văn A" value="`+ tableData[id]['name'] + `" required>
+                        placeholder="Nguyễn Văn A" value="` +
+      tableData[id]["name"] +
+      `" required>
                 </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -219,14 +276,21 @@ function loadTeacherModal() {
                         sinh</label>
                     <input disabled type="date" id="dob"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value=`+ (new Date(tableData[id].birthYear.getTime() - (tableData[id].birthYear.getTimezoneOffset() * 60000))).toISOString().split('T')[0] + `     required>
+                        value=` +
+      new Date(
+        tableData[id].birthYear.getTime() -
+          tableData[id].birthYear.getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .split("T")[0] +
+      `     required>
                 </div>
                 <div>
                     <label for="gender"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giới tính</label>
-                    <div class="flex">`
-        if (tableData[id]['gender'] === "Nam") {
-            str += `<div class="flex items-center mt-3 mr-4">
+                    <div class="flex">`;
+    if (tableData[id]["gender"] === "Nam") {
+      str += `<div class="flex items-center mt-3 mr-4">
                         <input disabled id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
                             checked class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-radio"
@@ -237,10 +301,9 @@ function loadTeacherModal() {
                             class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-2-radio"
                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
-                    </div>`
-        }
-        else {
-            str += `<div class="flex items-center mt-3 mr-4">
+                    </div>`;
+    } else {
+      str += `<div class="flex items-center mt-3 mr-4">
                         <input disabled id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
                              class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-radio"
@@ -251,9 +314,10 @@ function loadTeacherModal() {
                         checked class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-2-radio"
                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
-                    </div>`
-        }
-        str += ` 
+                    </div>`;
+    }
+    str +=
+      ` 
                     </div>
                 </div>
             </div>
@@ -263,7 +327,9 @@ function loadTeacherModal() {
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa chỉ</label>
                     <input disabled type="text" id="address"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" value="`+ tableData[id]['address'] + `"required>
+                        placeholder="" value="` +
+      tableData[id]["address"] +
+      `"required>
                 </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -272,14 +338,18 @@ function loadTeacherModal() {
                         điện thoại</label>
                     <input disabled type="tel" id="phone"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="0912345678" value="`+ tableData[id]['phoneNumber'] + `"pattern="[0-9]{10}" required>
+                        placeholder="0912345678" value="` +
+      tableData[id]["phoneNumber"] +
+      `"pattern="[0-9]{10}" required>
                 </div>
                 <div>
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa
                         chỉ email</label>
                     <input disabled type="email" id="email"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="nguyenvana@company.com" value="`+ tableData[id]['email'] + `" required>
+                        placeholder="nguyenvana@company.com" value="` +
+      tableData[id]["email"] +
+      `" required>
                 </div>
             </div>
             <div class="mb-6">
@@ -287,7 +357,9 @@ function loadTeacherModal() {
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
                 <input disabled type="Lớp" id="Lớp"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
+                    placeholder="IELTS 1" value="` +
+      tableData[id]["course"] +
+      `" required>
             </div>
         </form>
     </div>
@@ -311,30 +383,31 @@ function loadTeacherModal() {
                 </button>
     </div>
             </div></div>`;
-        $('#teacherModal').html(str);
-        $('#teacherModal').removeClass('invisible opacity-0');
-        $('#teacherModal').addClass('opacity-100');
-        $('#rateModal').removeClass('opacity-100');
-        $('#rateModal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('#rateModal').html('');
-        }, 200);
-        $('.closeBtn').click(function (e) {
-            $('#teacherModal').removeClass('opacity-100');
-            $('#teacherModal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('.addRate').removeClass('hidden');
-                $('#teacherModal').html('');
-            }, 200);
-        })
+    $("#teacherModal").html(str);
+    $("#teacherModal").removeClass("invisible opacity-0");
+    $("#teacherModal").addClass("opacity-100");
+    $("#rateModal").removeClass("opacity-100");
+    $("#rateModal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $("#rateModal").html("");
+    }, 200);
+    $(".closeBtn").click(function (e) {
+      $("#teacherModal").removeClass("opacity-100");
+      $("#teacherModal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $(".addRate").removeClass("hidden");
+        $("#teacherModal").html("");
+      }, 200);
     });
+  });
 }
 function loadRateModal() {
-    $('.rateModal').click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr('data-id');
-        var str = '';
-        str += `<div class="col-span-2 mb-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+  $(".rateModal").click(function (e) {
+    e.preventDefault();
+    var id = $(this).attr("data-id");
+    var str = "";
+    str +=
+      `<div class="col-span-2 mb-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <form id="editForm">
             <div class="grid gap-6 mb-6 md:grid-cols-3">
                 <div>
@@ -342,21 +415,27 @@ function loadRateModal() {
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
                     <input disabled type="text" id="full_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Nguyễn Văn A" value="`+ tableData[id]['name'] + `" required>
+                        placeholder="Nguyễn Văn A" value="` +
+      tableData[id]["name"] +
+      `" required>
                 </div>
                 <div>
                     <label for="Lớp"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
                     <input type="Lớp" id="Lớp"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
+                        placeholder="IELTS 1" value="` +
+      tableData[id]["course"] +
+      `" required>
                 </div>
                 <div>
                     <label for="rate"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Đánh giá</label>
                     <input type="number" id="rate"
                         class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value=`+ tableData[id]['rate'] + ` required>
+                        value=` +
+      tableData[id]["rate"] +
+      ` required>
                 </div>
             </div>
         </form>
@@ -377,74 +456,77 @@ function loadRateModal() {
                 </span>
             </button>
         </div>
-    </div>`
-        $('#rateModal').html(str);
-        $('.addRate').addClass('hidden');
-        $('#rateModal').removeClass('invisible opacity-0');
-        $('#rateModal').addClass('opacity-100');
-        editData(id);
-        $('#teacherModal').removeClass('opacity-100');
-        $('#teacherModal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('#teacherModal').html('');
-        }, 200);
-        $('.closeBtn').click(function (e) {
-            $('#rateModal').removeClass('opacity-100');
-            $('#rateModal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('.addRate').removeClass('hidden');
-                $('#rateModal').html('');
-            }, 200);
-        })
+    </div>`;
+    $("#rateModal").html(str);
+    $(".addRate").addClass("hidden");
+    $("#rateModal").removeClass("invisible opacity-0");
+    $("#rateModal").addClass("opacity-100");
+    editData(id);
+    $("#teacherModal").removeClass("opacity-100");
+    $("#teacherModal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $("#teacherModal").html("");
+    }, 200);
+    $(".closeBtn").click(function (e) {
+      $("#rateModal").removeClass("opacity-100");
+      $("#rateModal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $(".addRate").removeClass("hidden");
+        $("#rateModal").html("");
+      }, 200);
     });
+  });
 }
 function editData(id) {
-    $('.submitEditBtn').click(function (e) {
-        e.preventDefault();
-        var course = $('#Lớp').val();
-        var rate = Number($('#rate').val());
-        if (rate > 5 || rate < 0) {
-            Toast.fire({
-                icon: "error",
-                title: "Đánh giá không hợp lệ"
-            })
+  $(".submitEditBtn").click(function (e) {
+    e.preventDefault();
+    var course = $("#Lớp").val();
+    var rate = Number($("#rate").val());
+    if (rate > 5 || rate < 0) {
+      Toast.fire({
+        icon: "error",
+        title: "Đánh giá không hợp lệ",
+      });
+    } else {
+      Swal.fire({
+        title: "Bạn chắc chứ?",
+        text:
+          "Đánh giá của " +
+          tableData[id]["name"] +
+          "dạy lớp " +
+          tableData[id]["course"] +
+          " đang bị chỉnh sửa",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Xác nhận",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Toast.fire({
+            icon: "success",
+            title: "Sửa đánh giá thành công",
+          }).then(() => {
+            tableData[id]["course"] = course;
+            tableData[id]["rate"] = rate;
+            $("#rateModal").removeClass("opacity-100");
+            $("#rateModal").addClass("invisible opacity-0");
+            setTimeout(function () {
+              $(".addRate").removeClass("hidden");
+              $("#rateModal").html("");
+            }, 200);
+            loadData();
+          });
         }
-        else {
-            Swal.fire({
-                title: "Bạn chắc chứ?",
-                text: "Đánh giá của " + tableData[id]['name'] + "dạy lớp " + tableData[id]['course'] + " đang bị chỉnh sửa",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Xác nhận"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Toast.fire({
-                        icon: "success",
-                        title: "Sửa đánh giá thành công"
-                    }).then(() => {
-                        tableData[id]['course'] = course;
-                        tableData[id]['rate'] = rate;
-                        $('#rateModal').removeClass('opacity-100');
-                        $('#rateModal').addClass('invisible opacity-0');
-                        setTimeout(function () {
-                            $('.addRate').removeClass('hidden');
-                            $('#rateModal').html('');
-                        }, 200);
-                        loadData();
-                    })
-                }
-            });
-        }
-
-    })
+      });
+    }
+  });
 }
 function addRateModal() {
-    $('.addRate').click(function (e) {
-        e.preventDefault();
-        var str = '';
-        str += `
+  $(".addRate").click(function (e) {
+    e.preventDefault();
+    var str = "";
+    str += `
             <div class="col-span-2 mb-5 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <form id="addForm">
             <div class="grid gap-6 mb-6 md:grid-cols-3">
@@ -489,105 +571,101 @@ function addRateModal() {
             </button>
             </div>
     </div>
-        `
-        $('#rateModal').html(str);
-        $('.addRate').addClass('hidden');
-        $('#rateModal').removeClass('invisible opacity-0');
-        $('#rateModal').addClass('opacity-100');
-        $('#teacherModal').removeClass('opacity-100');
-        $('#teacherModal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('#teacherModal').html('');
-        }, 200);
-        $('.closeBtn').click(function (e) {
-            $('#rateModal').removeClass('opacity-100');
-            $('#rateModal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('.addRate').removeClass('hidden');
-                $('#rateModal').html('');
-            }, 200);
-        })
-        addRate();
+        `;
+    $("#rateModal").html(str);
+    $(".addRate").addClass("hidden");
+    $("#rateModal").removeClass("invisible opacity-0");
+    $("#rateModal").addClass("opacity-100");
+    $("#teacherModal").removeClass("opacity-100");
+    $("#teacherModal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $("#teacherModal").html("");
+    }, 200);
+    $(".closeBtn").click(function (e) {
+      $("#rateModal").removeClass("opacity-100");
+      $("#rateModal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $(".addRate").removeClass("hidden");
+        $("#rateModal").html("");
+      }, 200);
     });
+    addRate();
+  });
 }
 function addRate() {
-    $('.submitAddBtn').click(function (e) {
-        e.preventDefault();
-        var fullName = $('#full_name').val();
-        var course = $('#Lớp').val();
-        var rate = $('#rate').val();
-        if (fullName == '') {
-            Toast.fire({
-                icon: "error",
-                title: "Vui lòng nhập tên"
-            })
+  $(".submitAddBtn").click(function (e) {
+    e.preventDefault();
+    var fullName = $("#full_name").val();
+    var course = $("#Lớp").val();
+    var rate = $("#rate").val();
+    if (fullName == "") {
+      Toast.fire({
+        icon: "error",
+        title: "Vui lòng nhập tên",
+      });
+    } else if (course == "") {
+      Toast.fire({
+        icon: "error",
+        title: "Vui lòng nhập lớp",
+      });
+    } else if (rate == "") {
+      Toast.fire({
+        icon: "error",
+        title: "Vui lòng nhập đánh giá",
+      });
+    } else if (rate > 5 || rate < 0) {
+      Toast.fire({
+        icon: "error",
+        title: "Đánh giá không hợp lệ",
+      });
+    } else {
+      var check = false;
+      tableData.forEach((el) => {
+        if (el["name"] === fullName) {
+          check = true;
+          Toast.fire({
+            icon: "success",
+            title: "Thêm thành công",
+          }).then(() => {
+            tableData.push({
+              name: el["name"],
+              gender: el["gender"],
+              birthYear: el["birthYear"],
+              address: el["address"],
+              phoneNumber: el["phoneNumber"],
+              email: el["email"],
+              course: course,
+              dates: el["dates"],
+              teacherName: el["teacherName"],
+              status: el["status"],
+              listening: el["listening"],
+              speaking: el["speaking"],
+              reading: el["reading"],
+              writing: el["writing"],
+              payClass: el["payClass"],
+              payCash: el["payCash"],
+              payStatus: el["payStatus"],
+              prizeClass: el["prizeClass"],
+              prizeCash: el["prizeCash"],
+              prizeStatus: el["prizeStatus"],
+              rate: parseInt(rate),
+            });
+            $("#rateModal").removeClass("opacity-100");
+            $("#rateModal").addClass("invisible opacity-0");
+            setTimeout(function () {
+              $(".addRate").removeClass("hidden");
+              $("#rateModal").html("");
+            }, 200);
+            loadData();
+          });
         }
-        else if (course == '') {
-            Toast.fire({
-                icon: "error",
-                title: "Vui lòng nhập lớp"
-            })
-        }
-        else if (rate == '') {
-            Toast.fire({
-                icon: "error",
-                title: "Vui lòng nhập đánh giá"
-            })
-        }
-        else if (rate > 5 || rate < 0) {
-            Toast.fire({
-                icon: "error",
-                title: "Đánh giá không hợp lệ"
-            })
-        }
-        else {
-            var check = false;
-            tableData.forEach((el) => {
-                if (el['name'] === fullName) {
-                    check = true;
-                    Toast.fire({
-                        icon: "success",
-                        title: "Thêm thành công"
-                    }).then(() => {
-                        tableData.push({
-                            'name': el['name'],
-                            'gender': el['gender'],
-                            'birthYear': el['birthYear'],
-                            'address': el['address'],
-                            'phoneNumber': el['phoneNumber'],
-                            'email': el['email'],
-                            'course': course,
-                            'dates': el['dates'],
-                            'teacherName': el['teacherName'],
-                            'status': el['status'],
-                            'listening': el['listening'],
-                            'speaking': el['speaking'],
-                            'reading': el['reading'],
-                            'writing': el['writing'],
-                            'payClass': el['payClass'],
-                            'payCash': el['payCash'],
-                            'payStatus': el['payStatus'],
-                            'prizeClass': el['prizeClass'],
-                            'prizeCash': el['prizeCash'],
-                            'prizeStatus': el['prizeStatus'],
-                            'rate': parseInt(rate)
-                        })
-                        $('#rateModal').removeClass('opacity-100');
-                        $('#rateModal').addClass('invisible opacity-0');
-                        setTimeout(function () {
-                            $('.addRate').removeClass('hidden');
-                            $('#rateModal').html('');
-                        }, 200);
-                        loadData();
-                    })
-                }
-            })
-            if (check === false) {
-                Toast.fire({
-                    icon: "error",
-                    title: "Tên không tồn tại"
-                })
-            }
-        }
-    })
+      });
+      if (check === false) {
+        Toast.fire({
+          icon: "error",
+          title: "Tên không tồn tại",
+        });
+      }
+    }
+  });
 }
