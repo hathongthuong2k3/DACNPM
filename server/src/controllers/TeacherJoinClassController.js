@@ -1,4 +1,4 @@
-const TeacherJoinClass = require('../models/TeacherJoinClass');
+const TeacherJoinClass = require("../models/TeacherJoinClass");
 
 class TeacherJoinClassController {
   async getTeacherJoinClasses(req, res) {
@@ -13,29 +13,25 @@ class TeacherJoinClassController {
       } else {
         return res
           .status(400)
-          .json({ check: false, msg: 'Không có giáo viên' });
+          .json({ check: false, msg: "Không có giáo viên" });
       }
     } catch (error) {
-      console.log('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.log("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
   async addTeacherJoinClass(req, res) {
     try {
-      const { idTeacher, idClass, attendDate } = req.body;
-      if (!idTeacher || idTeacher == '') {
-        return { success: false, check: false, msg: 'idTeacher is required' };
+      const { idTeacher, idClass } = req.body;
+      if (!idTeacher || idTeacher == "") {
+        return { success: false, check: false, msg: "idTeacher is required" };
       }
-      if (!idClass || idClass == '') {
-        return { success: false, check: false, msg: 'idClass is required' };
-      }
-      if (!attendDate || attendDate == '') {
-        return { success: false, check: false, msg: 'attendDate is required' };
+      if (!idClass || idClass == "") {
+        return { success: false, check: false, msg: "idClass is required" };
       } else {
         const queryResult = await TeacherJoinClass.addTeacherJoinClass(
           idTeacher,
-          idClass,
-          attendDate,
+          idClass
         );
 
         if (queryResult) {
@@ -45,12 +41,12 @@ class TeacherJoinClassController {
         } else {
           return res
             .status(400)
-            .json({ check: false, msg: 'Dữ liệu đã tồn tại' });
+            .json({ check: false, msg: "Lớp học đã có giáo viên" });
         }
       }
     } catch (error) {
-      console.error('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.error("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
 
@@ -116,28 +112,100 @@ class TeacherJoinClassController {
   //     return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
   //   }
   // }
+  async getNullClass(req, res, next) {
+    try {
+      const result = await TeacherJoinClass.getNullClass();
+      if (result) {
+        return res.json({
+          check: true,
+          data: result,
+        });
+      } else {
+        return res.status(400).json({ check: false, msg: "Không có lớp học" });
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
+    }
+  }
+  async getNullPrize(req, res, next) {
+    try {
+      const result = await TeacherJoinClass.getNullPrize();
+      if (result) {
+        return res.json({
+          check: true,
+          data: result,
+        });
+      } else {
+        return res.status(400).json({ check: false, msg: "Không có lớp học" });
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
+    }
+  }
+  async getNullSalary(req, res, next) {
+    try {
+      const result = await TeacherJoinClass.getNullSalary();
+      if (result) {
+        return res.json({
+          check: true,
+          data: result,
+        });
+      } else {
+        return res.status(400).json({ check: false, msg: "Không có lớp học" });
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
+    }
+  }
+  async getNullRating(req, res, next) {
+    try {
+      const result = await TeacherJoinClass.getNullRating();
+      if (result) {
+        return res.json({
+          check: true,
+          data: result,
+        });
+      } else {
+        return res.status(400).json({ check: false, msg: "Không có lớp học" });
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
+    }
+  }
   async updateDate(req, res) {
     try {
-      const { id, attendDate, status } = req.body;
-      if (!id || id == '') {
+      const { id, idClass, attendDate, status } = req.body;
+      if (!id || id == "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Hãy chọn giáo viên cần chỉnh sửa' });
+          .json({ check: false, msg: "Hãy chọn giáo viên cần chỉnh sửa" });
       }
-      if (!attendDate || attendDate == '') {
-        return res.status(400).json({ check: false, msg: 'Hãy nhập ngày' });
+      if (!attendDate || attendDate == "") {
+        return res.status(400).json({ check: false, msg: "Hãy nhập ngày" });
       }
-      if (!status || status == '') {
-        return res
-          .status(400)
-          .json({ check: false, msg: 'Hãy nhập trạng thái' });
+      // if (!status || status == "") {
+      //   return res
+      //     .status(400)
+      //     .json({ check: false, msg: "Hãy nhập trạng thái" });
+      // }
+      if (!idClass || idClass == "") {
+        return res.status(400).json({ check: false, msg: "Hãy nhập lớp" });
       } else {
         const queryResult = await TeacherJoinClass.updateDate(
           attendDate,
           status,
           id,
+          idClass
         );
-
+        if (queryResult === -1) {
+          return res
+            .status(400)
+            .json({ check: false, msg: "Số buổi không hợp lệ" });
+        }
         if (queryResult) {
           return res.json({
             check: true,
@@ -145,24 +213,24 @@ class TeacherJoinClassController {
         } else {
           return res
             .status(400)
-            .json({ check: false, msg: 'Dữ liệu không thay đổi' });
+            .json({ check: false, msg: "Dữ liệu không thay đổi" });
         }
       }
     } catch (error) {
-      console.error('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.error("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
   async updateRating(req, res) {
     try {
       const { id, rating } = req.body;
-      if (!id || id == '') {
+      if (!id || id == "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Hãy chọn giáo viên cần chỉnh sửa' });
+          .json({ check: false, msg: "Hãy chọn giáo viên cần chỉnh sửa" });
       }
-      if (!rating || rating == '') {
-        return res.status(400).json({ check: false, msg: 'Hãy nhập đánh giá' });
+      if (!rating || rating == "") {
+        return res.status(400).json({ check: false, msg: "Hãy nhập đánh giá" });
       } else {
         const queryResult = await TeacherJoinClass.updateRating(rating, id);
         if (queryResult) {
@@ -172,26 +240,26 @@ class TeacherJoinClassController {
         } else {
           return res
             .status(400)
-            .json({ check: false, msg: 'Dữ liệu không thay đổi' });
+            .json({ check: false, msg: "Dữ liệu không thay đổi" });
         }
       }
     } catch (error) {
-      console.error('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.error("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
   async updateSalary(req, res) {
     try {
       const { id, paidStatus } = req.body;
-      if (!id || id == '') {
+      if (!id || id == "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Hãy chọn giáo viên cần chỉnh sửa' });
+          .json({ check: false, msg: "Hãy chọn giáo viên cần chỉnh sửa" });
       }
-      if (!paidStatus || paidStatus == '') {
+      if (!paidStatus || paidStatus == "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Hãy chọn trạng thái' });
+          .json({ check: false, msg: "Hãy chọn trạng thái" });
       } else {
         const queryResult = await TeacherJoinClass.updateSalary(paidStatus, id);
         if (queryResult) {
@@ -201,26 +269,26 @@ class TeacherJoinClassController {
         } else {
           return res
             .status(400)
-            .json({ check: false, msg: 'Dữ liệu không thay đổi' });
+            .json({ check: false, msg: "Dữ liệu không thay đổi" });
         }
       }
     } catch (error) {
-      console.error('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.error("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
   async updatePrize(req, res) {
     try {
       const { id, prizeStatus } = req.body;
-      if (!id || id == '') {
+      if (!id || id == "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Hãy chọn giáo viên cần chỉnh sửa' });
+          .json({ check: false, msg: "Hãy chọn giáo viên cần chỉnh sửa" });
       }
-      if (!prizeStatus || prizeStatus == '') {
+      if (!prizeStatus || prizeStatus == "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Hãy chọn trạng thái' });
+          .json({ check: false, msg: "Hãy chọn trạng thái" });
       } else {
         const queryResult = await TeacherJoinClass.updatePrize(prizeStatus, id);
         if (queryResult) {
@@ -230,21 +298,21 @@ class TeacherJoinClassController {
         } else {
           return res
             .status(400)
-            .json({ check: false, msg: 'Dữ liệu không thay đổi' });
+            .json({ check: false, msg: "Dữ liệu không thay đổi" });
         }
       }
     } catch (error) {
-      console.error('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.error("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
   async deleteSalary(req, res) {
     try {
       const { id } = req.body;
-      if (!id || id == '') {
+      if (!id || id == "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Hãy chọn giáo viên cần chỉnh sửa' });
+          .json({ check: false, msg: "Hãy chọn giáo viên cần chỉnh sửa" });
       } else {
         const queryResult = await TeacherJoinClass.deleteSalary(id);
         if (queryResult) {
@@ -254,21 +322,21 @@ class TeacherJoinClassController {
         } else {
           return res
             .status(400)
-            .json({ check: false, msg: 'Dữ liệu không thay đổi' });
+            .json({ check: false, msg: "Dữ liệu không thay đổi" });
         }
       }
     } catch (error) {
-      console.error('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.error("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
   async deletePrize(req, res) {
     try {
       const { id } = req.body;
-      if (!id || id == '') {
+      if (!id || id == "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Hãy chọn giáo viên cần chỉnh sửa' });
+          .json({ check: false, msg: "Hãy chọn giáo viên cần chỉnh sửa" });
       } else {
         const queryResult = await TeacherJoinClass.deletePrize(id);
         if (queryResult) {
@@ -278,22 +346,22 @@ class TeacherJoinClassController {
         } else {
           return res
             .status(400)
-            .json({ check: false, msg: 'Dữ liệu không thay đổi' });
+            .json({ check: false, msg: "Dữ liệu không thay đổi" });
         }
       }
     } catch (error) {
-      console.error('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.error("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
   async deleteTeacherJoinClass(req, res) {
     try {
       const { id } = req.body;
 
-      if (!id || id == '') {
+      if (!id || id == "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Hãy chọn giáo viên cần xóa' });
+          .json({ check: false, msg: "Hãy chọn giáo viên cần xóa" });
       }
 
       const queryResult = await TeacherJoinClass.deleteTeacherJoinClass(id);
@@ -304,11 +372,11 @@ class TeacherJoinClassController {
       } else {
         return res
           .status(400)
-          .json({ check: false, msg: 'Giáo viên không dạy lớp này' });
+          .json({ check: false, msg: "Giáo viên không dạy lớp này" });
       }
     } catch (error) {
-      console.error('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.error("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
 }

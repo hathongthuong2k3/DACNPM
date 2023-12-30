@@ -38,6 +38,7 @@
 // ];
 var tableData = [];
 var temp = [];
+var nullClass = [];
 $.ajax({
   type: "get",
   url: "http://localhost:3000/teachers",
@@ -49,11 +50,24 @@ $.ajax({
     tableData = res.data;
   },
 });
+
 $(document).ready(function () {
   loadData();
+  addModal();
 });
 
 function loadData() {
+  $.ajax({
+    type: "get",
+    url: "http://localhost:3000/teacherjoinclasses/date",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("apitoken"),
+    },
+    dataType: "JSON",
+    success: function (res) {
+      nullClass = res.data;
+    },
+  });
   var str = "";
   $.ajax({
     type: "get",
@@ -65,13 +79,23 @@ function loadData() {
     success: function (res) {
       var str = "";
       temp = res.data;
+      console.log(temp);
+      console.log(tableData);
       res.data.forEach((el, index) => {
+        let x = new Object();
+        tableData.forEach((item, y) => {
+          if (item.id === el.idTeacher) {
+            x.email = item.email;
+            x.id = y;
+            return;
+          }
+        });
         str +=
           `
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <span class="modal" data-id=` +
-          index +
+          x.id +
           `>
                                 ` +
           el["name"] +
@@ -164,7 +188,9 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
 </div>
         </button>
-        <button data-tooltip-target="warning" data-id=` +
+        <button data-tooltip-target="warning" data-email=` +
+            x.email +
+            ` data-id=` +
             index +
             `
             class="addWarn mx-auto p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -361,15 +387,32 @@ function addCheck() {
       confirmButtonText: "Xác nhận",
     }).then((result) => {
       if (result.isConfirmed) {
-        Toast.fire({
-          icon: "success",
-          title: temp[id]["name"] + " đã được điểm danh thành công",
-        }).then(() => {
-          if (tableData[id]["dates"] == 0) {
-            tableData[id]["status"] = 0;
-          }
-          tableData[id]["dates"]++;
-          loadData();
+        $.ajax({
+          type: "patch",
+          url: "http://localhost:3000/teacherjoinclasses/date",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("apitoken"),
+          },
+          data: {
+            id: temp[id].id,
+            idClass: temp[id].idClass,
+            attendDate: temp[id].attendDate + 1,
+          },
+          dataType: "JSON",
+          success: function (res) {
+            Toast.fire({
+              icon: "success",
+              title: temp[id]["name"] + " đã được điểm danh thành công",
+            }).then(() => {
+              loadData();
+            });
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            Toast.fire({
+              icon: "error",
+              title: jqXHR.responseJSON.msg,
+            });
+          },
         });
       }
     });
@@ -379,7 +422,7 @@ function addWarn() {
   $(".addWarn").click(function (e) {
     e.preventDefault();
     var id = $(this).attr("data-id");
-    var email = $(this).attr("data-email");
+    var email = tableData[id]["email"];
     Swal.fire({
       title: "Bạn chắc chứ?",
       text: "Bạn đang gửi cảnh cáo cho " + tableData[id]["name"],
@@ -417,7 +460,141 @@ function addWarn() {
     });
   });
 }
-function loadModal() {}
+function addModal() {
+  $(".add").click(function (e) {
+    e.preventDefault();
+    $(".add").addClass("hidden");
+    var id = $(this).attr("data-id");
+    var str = "";
+    str += `
+            <div class="gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <form id="form">
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label for="name"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
+                            <select id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Chọn giảng viên</option>`;
+    tableData.forEach((el) => {
+      str += `<option value=` + el.id + `>` + el.name + `</option>`;
+    });
+    str += `
+                            
+                            </select>
+                    </div>
+                    <div>
+                        <label for="class"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
+                            <select id="class" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Chọn lớp học</option>`;
+    nullClass.forEach((el) => {
+      str += `<option value=` + el.id + `>` + el.name + `</option>`;
+    });
+    str += `
+                            
+                            </select>
+                    </div>
+                </div>    
+                </form>
+        <div style="margin-top: 4vh;">        
+            <div class="w-full flex justify-between">
+                <button type="submit"
+                    class="closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+                    <span
+                        class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        Hủy
+                    </span>
+                </button>
+                <button form="form" type="submit"
+                    class="submitAddBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
+                    <span
+                        class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                        Thêm
+                    </span>
+                </button>
+                </div>
+            </div>
+        </div>
+        </div>
+        `;
+    $("#editModal").html(str);
+    $("#editModal").removeClass("invisible opacity-0");
+    $("#editModal").addClass("opacity-100");
+    $("#modal").removeClass("opacity-100");
+    $("#modal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $("#modal").html("");
+    }, 200);
+    $(".closeBtn").click(function (e) {
+      $("#editModal").removeClass("opacity-100");
+      $("#editModal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $("#editModal").html("");
+      }, 200);
+    });
+    addDate();
+  });
+}
+function addDate() {
+  $(".submitAddBtn").click(function (e) {
+    e.preventDefault();
+    var name = $("#name").val();
+    var className = $("#class").val();
+    if (!name || name === "") {
+      Toast.fire({
+        icon: "error",
+        title: "Hãy nhập tên",
+      });
+    }
+    if (!className || className === "") {
+      Toast.fire({
+        icon: "error",
+        title: "Hãy nhập lớp",
+      });
+    } else {
+      $.ajax({
+        type: "post",
+        url: "http://localhost:3000/teacherjoinclasses/class",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("apitoken"),
+        },
+        data: {
+          idTeacher: name,
+          idClass: className,
+        },
+        dataType: "JSON",
+        success: function (res) {
+          Toast.fire({
+            icon: "success",
+            title: "Thêm thành công",
+          }).then(() => {
+            loadData();
+            $("#editModal").removeClass("opacity-100");
+            $("#editModal").addClass("invisible opacity-0");
+            setTimeout(function () {
+              $(".add").removeClass("hidden");
+              $("#editModal").html("");
+            }, 200);
+          });
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          Toast.fire({
+            icon: "error",
+            title: jqXHR.responseJSON.msg,
+          });
+        },
+      });
+    }
+  });
+  $(".closeBtn").click(function (e) {
+    $("#editModal").removeClass("opacity-100");
+    $("#editModal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $(".add").removeClass("hidden");
+      $("#editModal").html("");
+    }, 200);
+  });
+}
 function editModal() {
   $(".editBtn").click(function (e) {
     e.preventDefault();
@@ -435,17 +612,17 @@ function editModal() {
                         <input type="text" id="namePay" disabled
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Nguyễn Văn A" value="` +
-      tableData[id]["name"] +
+      temp[id]["name"] +
       `"
                             required>
                     </div>
                     <div>
                         <label for="classPay"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
-                        <input type="text" id="classPay"
+                        <input disabled type="text" id="classPay"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="IELTS 1" value="` +
-      tableData[id]["className"] +
+      temp[id]["className"] +
       `" required>
                     </div>
                     <div>
@@ -453,8 +630,24 @@ function editModal() {
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Số buổi</label>
                         <input type="text" id="pay"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
-      tableData[id]["attendDate"] +
+      temp[id]["attendDate"] +
       `" required>
+                    </div>
+                    <div>
+                        <label for="status"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trạng thái</label>
+                            <select id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="-1" ` +
+      (temp[id]["status"] === -1 ? "selected" : "") +
+      `>Chưa dạy</option>
+                            <option value="0" ` +
+      (temp[id]["status"] === 0 ? "selected" : "") +
+      `>Đang dạy</option>
+                            <option value="1" ` +
+      (temp[id]["status"] === 1 ? "selected" : "") +
+      `>Đã dạy</option>
+                            
+                            </select>
                     </div>
                 </div>    
                 </form>
@@ -501,6 +694,7 @@ function editDate(id) {
   $(".submitEditBtn").click(function (e) {
     e.preventDefault();
     var dates = $("#pay").val();
+    var status = $("#status").val();
     if (dates < 0) {
       Toast.fire({
         icon: "error",
@@ -509,7 +703,7 @@ function editDate(id) {
     } else {
       Swal.fire({
         title: "Bạn chắc chứ?",
-        text: "Bạn đang chỉnh sửa thông tin của " + tableData[id]["name"],
+        text: "Bạn đang chỉnh sửa thông tin của " + temp[id]["name"],
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -517,17 +711,40 @@ function editDate(id) {
         confirmButtonText: "Xác nhận",
       }).then((result) => {
         if (result.isConfirmed) {
-          Toast.fire({
-            icon: "success",
-            title: "Chỉnh sửa thành công",
-          }).then(() => {
-            tableData[id]["dates"] = Number(dates);
-            $("#editModal").removeClass("opacity-100");
-            $("#editModal").addClass("invisible opacity-0");
-            setTimeout(function () {
-              $("#editModal").html("");
-            }, 200);
-            loadData();
+          $.ajax({
+            type: "patch",
+            url: "http://localhost:3000/teacherjoinclasses/date",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("apitoken"),
+            },
+            data: {
+              id: temp[id].id,
+              idClass: temp[id].idClass,
+              attendDate: dates,
+              status: status,
+            },
+            dataType: "JSON",
+            success: function (res) {
+              Toast.fire({
+                icon: "success",
+                title: "Chỉnh sửa thành công",
+              }).then(() => {
+                loadData();
+                $("#editModal").removeClass("opacity-100");
+                $("#editModal").addClass("invisible opacity-0");
+                setTimeout(function () {
+                  $(".add").removeClass("hidden");
+                  $("#editModal").html("");
+                }, 200);
+                loadData();
+              });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              Toast.fire({
+                icon: "error",
+                title: jqXHR.responseJSON.msg,
+              });
+            },
           });
         }
       });
@@ -537,6 +754,7 @@ function editDate(id) {
     $("#editModal").removeClass("opacity-100");
     $("#editModal").addClass("invisible opacity-0");
     setTimeout(function () {
+      $(".add").removeClass("hidden");
       $("#editModal").html("");
     }, 200);
   });
