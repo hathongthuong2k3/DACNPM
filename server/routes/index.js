@@ -7,6 +7,7 @@ const RegisterLogRouter = require("./registerlog");
 const LogRouter = require("./log");
 const SponsorRouter = require("./sponsor");
 const FileRouter = require("./file");
+const EmailRouter = require("./email");
 const MailRouter = require("./mail");
 const TeacherJoinClass = require("./teacherjoinclass");
 const TeacherRouter = require("./teacher");
@@ -26,6 +27,7 @@ function route(app) {
   app.use("/logs", requireApiKey, LogRouter);
   app.use("/sponsors", requireApiKey, SponsorRouter);
   app.use("/files", requireApiKey, FileRouter);
+  app.use("/emails", requireApiKey, EmailRouter);
   app.use("/teachers", requireApiKey, TeacherRouter);
   app.use("/teacherjoinclasses", requireApiKey, TeacherJoinClass);
   app.use("/students", requireApiKey, StudentRouter);

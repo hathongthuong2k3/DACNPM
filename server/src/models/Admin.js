@@ -1,4 +1,4 @@
-const pool = require('../config/database');
+const pool = require("../config/database");
 class Admin {
   async getAdmin(id, role) {
     const query = `SELECT * FROM ` + role + ` WHERE id = ?`;
@@ -28,7 +28,7 @@ WHERE studentjoinclass.paidStatus IS NOT NULL
     const query = `SELECT
     students.name AS name,
     classes.name AS className,
-    courses.paid AS prize,
+    courses.paidStudent AS prize,
     studentjoinclass.prizeStatus AS status
 FROM
     students
@@ -43,7 +43,7 @@ UNION ALL
 SELECT
     teachers.name AS name,
     classes.name AS className,
-    courses.paid AS prize,
+    courses.paidTeacher AS prize,
     teacherjoinclass.prizeStatus AS status
 FROM
     teachers
@@ -58,7 +58,7 @@ UNION ALL
 SELECT
     teachers.name AS name,
     classes.name AS className,
-    courses.paid AS prize,
+    courses.paidTeacher AS prize,
     teacherjoinclass.paidStatus AS status
 FROM
     teachers
