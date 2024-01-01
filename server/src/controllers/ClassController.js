@@ -1,5 +1,5 @@
-const Class = require('../models/Class');
-const Log = require('../models/Log');
+const Class = require("../models/Class");
+const Log = require("../models/Log");
 class ClassController {
   async getClasses(req, res, next) {
     try {
@@ -7,9 +7,9 @@ class ClassController {
       if (queryResult) {
         const result = await Log.addLog(
           res.user.id,
-          'Xem danh sách lớp học',
+          "Xem danh sách lớp học",
           Date.now(),
-          true,
+          true
         );
         return res.json({
           check: true,
@@ -18,23 +18,57 @@ class ClassController {
       } else {
         const result = await Log.addLog(
           res.user.id,
-          'Xem danh sách lớp học',
+          "Xem danh sách lớp học",
           Date.now(),
-          false,
+          false
         );
-        return res.status(400).json({ check: false, msg: 'Không có lớp học' });
+        return res.status(400).json({ check: false, msg: "Không có lớp học" });
       }
     } catch (error) {
       const result = await Log.addLog(
         res.user.id,
-        'Xem danh sách lớp học',
+        "Xem danh sách lớp học",
         Date.now(),
-        false,
+        false
       );
-      console.error('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.error("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
+  // async getClassess(req, res, next) {
+  //   try {
+  //     const queryResult = await Class.getClassess();
+  //     if (queryResult) {
+  //       const result = await Log.addLog(
+  //         res.user.id,
+  //         "Xem danh sách lớp học",
+  //         Date.now(),
+  //         true
+  //       );
+  //       return res.json({
+  //         check: true,
+  //         data: queryResult,
+  //       });
+  //     } else {
+  //       const result = await Log.addLog(
+  //         res.user.id,
+  //         "Xem danh sách lớp học",
+  //         Date.now(),
+  //         false
+  //       );
+  //       return res.status(400).json({ check: false, msg: "Không có lớp học" });
+  //     }
+  //   } catch (error) {
+  //     const result = await Log.addLog(
+  //       res.user.id,
+  //       "Xem danh sách lớp học",
+  //       Date.now(),
+  //       false
+  //     );
+  //     console.error("Error:", error);
+  //     return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
+  //   }
+  // }
   async getClass(req, res, next) {
     try {
       const { name } = req.query;
@@ -42,9 +76,9 @@ class ClassController {
       if (queryResult) {
         const result = await Log.addLog(
           res.user.id,
-          'Xem lớp học',
+          "Xem lớp học",
           Date.now(),
-          true,
+          true
         );
         return res.json({
           check: true,
@@ -53,15 +87,15 @@ class ClassController {
       } else {
         const result = await Log.addLog(
           res.user.id,
-          'Xem lớp học',
+          "Xem lớp học",
           Date.now(),
-          false,
+          false
         );
-        return res.status(400).json({ check: false, msg: 'Không có lớp học' });
+        return res.status(400).json({ check: false, msg: "Không có lớp học" });
       }
     } catch (error) {
-      console.error('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.error("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
   async addClass(req, res, next) {
@@ -75,36 +109,36 @@ class ClassController {
         address,
         schedule,
       } = req.body;
-      if (!name || name == '') {
-        return res.status(400).json({ check: false, msg: 'Chưa nhập tên lớp' });
+      if (!name || name == "") {
+        return res.status(400).json({ check: false, msg: "Chưa nhập tên lớp" });
       }
-      if (!idCourse || idCourse === '') {
+      if (!idCourse || idCourse === "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Chưa chọn khóa học' });
+          .json({ check: false, msg: "Chưa chọn khóa học" });
       }
-      if (!startDate || startDate === '') {
+      if (!startDate || startDate === "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Chưa nhập ngày bắt đầu' });
+          .json({ check: false, msg: "Chưa nhập ngày bắt đầu" });
       }
-      if (!endDate || endDate === '') {
+      if (!endDate || endDate === "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Chưa nhập ngày kết thúc' });
+          .json({ check: false, msg: "Chưa nhập ngày kết thúc" });
       }
-      if (!maxStudent || maxStudent === '') {
+      if (!maxStudent || maxStudent === "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Chưa nhập sĩ số tối đa' });
+          .json({ check: false, msg: "Chưa nhập sĩ số tối đa" });
       }
-      if (!address || address === '') {
-        return res.status(400).json({ check: false, msg: 'Chưa nhập cơ sở' });
+      if (!address || address === "") {
+        return res.status(400).json({ check: false, msg: "Chưa nhập cơ sở" });
       }
-      if (!schedule || schedule === '') {
+      if (!schedule || schedule === "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Chưa nhập lịch học' });
+          .json({ check: false, msg: "Chưa nhập lịch học" });
       }
       const queryResult = await Class.addClass(
         name,
@@ -113,39 +147,39 @@ class ClassController {
         endDate,
         maxStudent,
         address,
-        schedule,
+        schedule
       );
       if (queryResult) {
         const result = await Log.addLog(
           res.user.id,
-          'Thêm lớp học',
+          "Thêm lớp học",
           Date.now(),
-          true,
+          true
         );
         return res.json({
           check: true,
-          msg: 'Thêm thành công',
+          msg: "Thêm thành công",
         });
       } else {
         const result = await Log.addLog(
           res.user.id,
-          'Thêm lớp học',
+          "Thêm lớp học",
           Date.now(),
-          false,
+          false
         );
         return res
           .status(400)
-          .json({ check: false, msg: 'Lớp học đã tồn tại' });
+          .json({ check: false, msg: "Lớp học đã tồn tại" });
       }
     } catch (error) {
       const result = await Log.addLog(
         res.user.id,
-        'Thêm lớp học',
+        "Thêm lớp học",
         Date.now(),
-        false,
+        false
       );
-      console.error('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.error("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
   async editClass(req, res, next) {
@@ -161,36 +195,36 @@ class ClassController {
         address,
         schedule,
       } = req.body;
-      if (!oldname || oldname == '') {
+      if (!oldname || oldname == "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Chưa chọn lớp cần chỉnh' });
+          .json({ check: false, msg: "Chưa chọn lớp cần chỉnh" });
       }
-      if (!name || name == '') {
-        return res.status(400).json({ check: false, msg: 'Chưa nhập tên lớp' });
+      if (!name || name == "") {
+        return res.status(400).json({ check: false, msg: "Chưa nhập tên lớp" });
       }
-      if (!startDate || startDate === '') {
+      if (!startDate || startDate === "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Chưa nhập ngày bắt đầu' });
+          .json({ check: false, msg: "Chưa nhập ngày bắt đầu" });
       }
-      if (!endDate || endDate === '') {
+      if (!endDate || endDate === "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Chưa nhập ngày kết thúc' });
+          .json({ check: false, msg: "Chưa nhập ngày kết thúc" });
       }
-      if (!maxStudent || maxStudent === '') {
+      if (!maxStudent || maxStudent === "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Chưa nhập sĩ số tối đa' });
+          .json({ check: false, msg: "Chưa nhập sĩ số tối đa" });
       }
-      if (!address || address === '') {
-        return res.status(400).json({ check: false, msg: 'Chưa nhập cơ sở' });
+      if (!address || address === "") {
+        return res.status(400).json({ check: false, msg: "Chưa nhập cơ sở" });
       }
-      if (!schedule || schedule === '') {
+      if (!schedule || schedule === "") {
         return res
           .status(400)
-          .json({ check: false, msg: 'Chưa nhập lịch học' });
+          .json({ check: false, msg: "Chưa nhập lịch học" });
       }
       const queryResult = await Class.updateClass(
         name,
@@ -200,37 +234,37 @@ class ClassController {
         maxStudent,
         address,
         schedule,
-        oldname,
+        oldname
       );
       if (queryResult == true) {
         const result = await Log.addLog(
           res.user.id,
-          'Chỉnh sửa lớp học',
+          "Chỉnh sửa lớp học",
           Date.now(),
-          true,
+          true
         );
         return res.json({
           check: true,
-          msg: 'Chỉnh sửa lớp học thành công',
+          msg: "Chỉnh sửa lớp học thành công",
         });
       } else {
         const result = await Log.addLog(
           res.user.id,
-          'Chỉnh sửa lớp học',
+          "Chỉnh sửa lớp học",
           Date.now(),
-          false,
+          false
         );
-        return res.status(400).json({ check: false, msg: 'Dữ liệu không đổi' });
+        return res.status(400).json({ check: false, msg: "Dữ liệu không đổi" });
       }
     } catch (error) {
       const result = await Log.addLog(
         res.user.id,
-        'Chỉnh sửa lớp học',
+        "Chỉnh sửa lớp học",
         Date.now(),
-        false,
+        false
       );
-      console.error('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.error("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
   async removeClass(req, res, next) {
@@ -240,9 +274,9 @@ class ClassController {
       if (queryResult) {
         const result = await Log.addLog(
           res.user.id,
-          'Xóa lớp học',
+          "Xóa lớp học",
           Date.now(),
-          true,
+          true
         );
         return res.json({
           check: true,
@@ -250,21 +284,21 @@ class ClassController {
       } else {
         const result = await Log.addLog(
           res.user.id,
-          'Xóa lớp học',
+          "Xóa lớp học",
           Date.now(),
-          false,
+          false
         );
-        return res.status(400).json({ check: false, msg: 'Không có lớp học' });
+        return res.status(400).json({ check: false, msg: "Không có lớp học" });
       }
     } catch (error) {
       const result = await Log.addLog(
         res.user.id,
-        'Xóa lớp học',
+        "Xóa lớp học",
         Date.now(),
-        false,
+        false
       );
-      console.error('Error:', error);
-      return res.status(500).json({ check: false, msg: 'Lỗi máy chủ' });
+      console.error("Error:", error);
+      return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
 }

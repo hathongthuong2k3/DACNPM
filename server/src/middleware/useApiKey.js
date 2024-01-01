@@ -1,7 +1,7 @@
-var jwt = require('jsonwebtoken');
-var nodemailer = require('nodemailer');
-const User = require('../models/User');
-const Log = require('../models/Log');
+var jwt = require("jsonwebtoken");
+var nodemailer = require("nodemailer");
+const User = require("../models/User");
+const Log = require("../models/Log");
 var index = 1;
 
 const createApiKey = (data) => {
@@ -10,49 +10,51 @@ const createApiKey = (data) => {
       exp: Math.floor(Date.now() / 1000) + 8 * 60 * 60,
       data: data,
     },
-    'secret',
+    "secret"
   );
   return token;
 };
 const transporter = nodemailer.createTransport({
   port: 465,
-  host: 'smtp.gmail.com',
+  host: "smtp.gmail.com",
   auth: {
-    user: 'thaingocrang2014@gmail.com',
-    pass: 'kkxmcqhenpyhqkzv',
+    user: "thaingocrang2014@gmail.com",
+    pass: "kkxmcqhenpyhqkzv",
   },
   secure: true,
 });
 const requireApiKey = (req, res, next) => {
   if (!req.headers.authorization) {
-    return res.status(403).json({ check: false, msg: 'Bạn chưa đăng nhập' });
+    return res.status(403).json({ check: false, msg: "Bạn chưa đăng nhập" });
   }
-  const apiKey = req.headers.authorization.split(' ')[1];
-  jwt.verify(apiKey, 'secret', async (err, decoded) => {
+  const apiKey = req.headers.authorization.split(" ")[1];
+  jwt.verify(apiKey, "secret", async (err, decoded) => {
     if (err || !decoded) {
-      return res.status(404).json({ check: false, msg: 'Bạn chưa đăng nhập' });
+      return res.status(404).json({ check: false, msg: "Bạn chưa đăng nhập" });
     } else {
       const queryResult = await User.authUser(
         decoded.data.id,
-        decoded.data.role,
+        decoded.data.role
       );
       const admin =
-        decoded.data.role !== 'admin' &&
-        (req.baseUrl === '/admins' ||
-          req.baseUrl === '/classes' ||
-          req.baseUrl === '/courses' ||
-          req.baseUrl === '/register-logs' ||
-          req.baseUrl === '/logs');
-      const staff = decoded.data.role !== 'staff' && req.baseUrl === '/files';
+        decoded.data.role !== "admin" &&
+        (req.baseUrl === "/admins" ||
+          req.baseUrl === "/courses" ||
+          req.baseUrl === "/register-logs" ||
+          req.baseUrl === "/logs");
+      const staff =
+        (decoded.data.role !== "staff" || decoded.data.role !== "admin") &&
+        req.baseUrl === "/files" &&
+        req.baseUrl === "/classes";
       if (admin || staff) {
         return res
           .status(403)
-          .json({ check: false, msg: 'Đây là nơi không dành cho bạn' });
+          .json({ check: false, msg: "Đây là nơi không dành cho bạn" });
       }
       if (!queryResult || queryResult == null) {
         return res
           .status(404)
-          .json({ check: false, msg: 'Bạn chưa đăng nhập' });
+          .json({ check: false, msg: "Bạn chưa đăng nhập" });
       }
       res.user = queryResult;
       next();
@@ -66,13 +68,13 @@ const sendMail = async (req, res, next) => {
   if (!checkMail) {
     return res
       .status(403)
-      .json({ check: false, msg: 'Bạn không có quyền đăng ký' });
+      .json({ check: false, msg: "Bạn không có quyền đăng ký" });
   } else {
     const mailData = {
-      from: 'BK English Center',
+      from: "BK English Center",
 
       to: to,
-      subject: 'Đăng ký tài khoản',
+      subject: "Đăng ký tài khoản",
       html:
         `
             <b>Chào bạn! </b>
@@ -92,7 +94,7 @@ const sendMail = async (req, res, next) => {
       }
       res.status(200).send({
         check: true,
-        message: 'Mail send',
+        message: "Mail send",
         message_id: info.messageId,
       });
     });
@@ -101,10 +103,10 @@ const sendMail = async (req, res, next) => {
 const sendCheer = async (req, res, next) => {
   const { to } = req.query;
   const mailData = {
-    from: 'BK English Center',
+    from: "BK English Center",
 
     to: to,
-    subject: 'Tuyên dương',
+    subject: "Tuyên dương",
     html: `
             <b>Chào bạn! </b>
             <br/> 
@@ -116,9 +118,9 @@ const sendCheer = async (req, res, next) => {
     if (error) {
       const result = await Log.addLog(
         res.user.id,
-        'Gửi email tuyên dương',
+        "Gửi email tuyên dương",
         Date.now(),
-        false,
+        false
       );
       res.status(400).send({
         check: false,
@@ -127,13 +129,13 @@ const sendCheer = async (req, res, next) => {
     } else {
       const result = await Log.addLog(
         res.user.id,
-        'Gửi email tuyên dương',
+        "Gửi email tuyên dương",
         Date.now(),
-        true,
+        true
       );
       res.status(200).send({
         check: true,
-        message: 'Mail send',
+        message: "Mail send",
         message_id: info.messageId,
       });
     }
@@ -142,10 +144,10 @@ const sendCheer = async (req, res, next) => {
 const sendPay = async (req, res, next) => {
   const { to } = req.query;
   const mailData = {
-    from: 'BK English Center',
+    from: "BK English Center",
 
     to: to,
-    subject: 'Đóng tiền học phí',
+    subject: "Đóng tiền học phí",
     html: `
             <b>Chào bạn! </b>
             <br/> 
@@ -157,9 +159,9 @@ const sendPay = async (req, res, next) => {
     if (error) {
       const result = await Log.addLog(
         res.user.id,
-        'Gửi thông báo đóng học phí',
+        "Gửi thông báo đóng học phí",
         Date.now(),
-        false,
+        false
       );
       res.status(400).send({
         check: false,
@@ -168,13 +170,13 @@ const sendPay = async (req, res, next) => {
     } else {
       const result = await Log.addLog(
         res.user.id,
-        'Gửi thông báo đóng học phí',
+        "Gửi thông báo đóng học phí",
         Date.now(),
-        true,
+        true
       );
       res.status(200).send({
         check: true,
-        message: 'Mail send',
+        message: "Mail send",
         message_id: info.messageId,
       });
     }
@@ -183,10 +185,10 @@ const sendPay = async (req, res, next) => {
 const sendSalary = async (req, res, next) => {
   const { to } = req.query;
   const mailData = {
-    from: 'BK English Center',
+    from: "BK English Center",
 
     to: to,
-    subject: 'Nhận lương',
+    subject: "Nhận lương",
     html: `
             <b>Chào bạn! </b>
             <br/> 
@@ -198,9 +200,9 @@ const sendSalary = async (req, res, next) => {
     if (error) {
       const result = await Log.addLog(
         res.user.id,
-        'Gửi thông báo nhận lương',
+        "Gửi thông báo nhận lương",
         Date.now(),
-        false,
+        false
       );
       res.status(400).send({
         check: false,
@@ -209,13 +211,13 @@ const sendSalary = async (req, res, next) => {
     } else {
       const result = await Log.addLog(
         res.user.id,
-        'Gửi thông báo nhận lương',
+        "Gửi thông báo nhận lương",
         Date.now(),
-        true,
+        true
       );
       res.status(200).send({
         check: true,
-        message: 'Mail send',
+        message: "Mail send",
         message_id: info.messageId,
       });
     }
@@ -224,10 +226,10 @@ const sendSalary = async (req, res, next) => {
 const sendPrize = async (req, res, next) => {
   const { to } = req.query;
   const mailData = {
-    from: 'BK English Center',
+    from: "BK English Center",
 
     to: to,
-    subject: 'Tuyên dương',
+    subject: "Tuyên dương",
     html: `
             <b>Chào bạn! </b>
             <br/> 
@@ -239,9 +241,9 @@ const sendPrize = async (req, res, next) => {
     if (error) {
       const result = await Log.addLog(
         res.user.id,
-        'Gửi thông báo nhận thưởng',
+        "Gửi thông báo nhận thưởng",
         Date.now(),
-        false,
+        false
       );
       res.status(400).send({
         check: false,
@@ -250,13 +252,13 @@ const sendPrize = async (req, res, next) => {
     } else {
       const result = await Log.addLog(
         res.user.id,
-        'Gửi thông báo nhận thưởng',
+        "Gửi thông báo nhận thưởng",
         Date.now(),
-        true,
+        true
       );
       res.status(200).send({
         check: true,
-        message: 'Mail send',
+        message: "Mail send",
         message_id: info.messageId,
       });
     }
@@ -265,10 +267,10 @@ const sendPrize = async (req, res, next) => {
 const sendWarning = async (req, res, next) => {
   const { to } = req.query;
   const mailData = {
-    from: 'BK English Center',
+    from: "BK English Center",
 
     to: to,
-    subject: 'Yêu cầu chấn chỉnh',
+    subject: "Yêu cầu chấn chỉnh",
     html: `
             <b>Chào bạn! </b>
             <br/> 
@@ -280,9 +282,9 @@ const sendWarning = async (req, res, next) => {
     if (error) {
       const result = await Log.addLog(
         res.user.id,
-        'Gửi thông báo cảnh cáo',
+        "Gửi thông báo cảnh cáo",
         Date.now(),
-        false,
+        false
       );
       res.status(400).send({
         check: false,
@@ -291,31 +293,31 @@ const sendWarning = async (req, res, next) => {
     } else {
       const result = await Log.addLog(
         res.user.id,
-        'Gửi thông báo cảnh cáo',
+        "Gửi thông báo cảnh cáo",
         Date.now(),
-        true,
+        true
       );
       res.status(200).send({
         check: true,
-        message: 'Mail send',
+        message: "Mail send",
         message_id: info.messageId,
       });
     }
   });
 };
 const requireOtp = (req, res, next) => {
-  if (req.body.role === 'admin' || req.body.role === 'staff') {
+  if (req.body.role === "admin" || req.body.role === "staff") {
     if (!req.headers.authorization) {
       return res
         .status(403)
-        .json({ check: false, msg: 'Bạn không có quyền đăng ký' });
+        .json({ check: false, msg: "Bạn không có quyền đăng ký" });
     } else {
-      const apiKey = req.headers.authorization.split(' ')[1];
-      jwt.verify(apiKey, 'secret', async (err, decoded) => {
+      const apiKey = req.headers.authorization.split(" ")[1];
+      jwt.verify(apiKey, "secret", async (err, decoded) => {
         if (err || !decoded) {
           return res
             .status(404)
-            .json({ check: false, msg: 'Bạn không có quyền đăng ký' });
+            .json({ check: false, msg: "Bạn không có quyền đăng ký" });
         } else {
           if (decoded.data === index) {
             index++;
@@ -323,7 +325,7 @@ const requireOtp = (req, res, next) => {
           } else {
             return res
               .status(404)
-              .json({ check: false, msg: 'Bạn không có quyền đăng ký' });
+              .json({ check: false, msg: "Bạn không có quyền đăng ký" });
           }
         }
       });

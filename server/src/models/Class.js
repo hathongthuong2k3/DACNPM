@@ -1,4 +1,4 @@
-const pool = require('../config/database');
+const pool = require("../config/database");
 class Class {
   async getClasses() {
     var res = [];
@@ -11,11 +11,16 @@ class Class {
           const query1 = `SELECT COUNT(*) AS countStudent FROM studentjoinclass WHERE idClass=?`;
           const [result1] = await pool.query(query1, el.id);
           res.push(result1);
-        }),
+        })
       );
     }
     return res;
   }
+  // async getClassess() {
+  //   const query = `SELECT classes.id, classes.name FROM classes`;
+  //   const [result] = await pool.query(query);
+  //   return result;
+  // }
   async getClass(name) {
     const query = `SELECT classes.name,classes.address,maxStudent,startDate,endDate,maxStudent,courses.name AS courseName,teachers.name AS teacherName FROM classes JOIN courses ON classes.idCourse = courses.id LEFT JOIN teacherjoinclass ON classes.id = teacherjoinclass.idClass LEFT JOIN teachers ON teacherjoinclass.idTeacher=teachers.id Where classes.name= ?`;
     const [result] = await pool.query(query, [name]);
@@ -28,7 +33,7 @@ class Class {
     endDate,
     maxStudent,
     address,
-    schedule,
+    schedule
   ) {
     const query1 = `SELECT * FROM classes WHERE name=?`;
     const [result1] = await pool.query(query1, [name]);
@@ -56,7 +61,7 @@ class Class {
     maxStudent,
     address,
     schedule,
-    oldname,
+    oldname
   ) {
     const query = `UPDATE classes SET name = ?,idCourse=?, startDate=?, endDate=?, maxStudent=?, address=?, schedule=? WHERE name = ?`;
     const [result] = await pool.query(query, [

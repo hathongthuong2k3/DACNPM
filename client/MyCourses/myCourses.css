@@ -66,7 +66,7 @@ body {
 }
 
 .my-courses {
-    height: 80vh;
+    /* height: 80vh; */
     margin: 8px auto;
     background-color: #fff;
     width: 80%;

@@ -79,8 +79,6 @@ function loadData() {
     success: function (res) {
       var str = "";
       temp = res.data;
-      console.log(temp);
-      console.log(tableData);
       res.data.forEach((el, index) => {
         let x = new Object();
         tableData.forEach((item, y) => {

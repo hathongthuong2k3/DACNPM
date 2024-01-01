@@ -1,54 +1,49 @@
-const TeacherJoinClass = require("../models/TeacherJoinClass");
+const StudentJoinClass = require("../models/StudentJoinClass");
 
-class TeacherJoinClassController {
-  async getTeacherJoinClasses(req, res) {
+class StudentJoinClassController {
+  async getStudentJoinClasses(req, res) {
     try {
-      const result = await TeacherJoinClass.getTeacherJoinClasses();
-
+      const result = await StudentJoinClass.getStudentJoinClasses();
       if (result) {
         return res.json({
           check: true,
           data: result,
         });
       } else {
-        return res
-          .status(400)
-          .json({ check: false, msg: "Không có giáo viên" });
+        return res.status(400).json({ check: false, msg: "Không có học viên" });
       }
     } catch (error) {
       console.log("Error:", error);
       return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
-  async getTeacherJoinClass(req, res) {
+  async getStudentJoinClass(req, res) {
     try {
-      const result = await TeacherJoinClass.getTeacherJoinClass(res.user.id);
+      const result = await StudentJoinClass.getStudentJoinClass(res.user.id);
       if (result) {
         return res.json({
           check: true,
           data: result,
         });
       } else {
-        return res
-          .status(400)
-          .json({ check: false, msg: "Không có giáo viên" });
+        return res.status(400).json({ check: false, msg: "Không có học viên" });
       }
     } catch (error) {
       console.log("Error:", error);
       return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
-  async addTeacherJoinClass(req, res) {
+  async addStudentJoinClass(req, res) {
     try {
-      const { idTeacher, idClass } = req.body;
-      if (!idTeacher || idTeacher == "") {
-        return { success: false, check: false, msg: "idTeacher is required" };
+      const { idStudent, idClass } = req.body;
+      if (!idStudent || idStudent == "") {
+        return { success: false, check: false, msg: "idStudent is required" };
       }
       if (!idClass || idClass == "") {
         return { success: false, check: false, msg: "idClass is required" };
       } else {
-        const queryResult = await TeacherJoinClass.addTeacherJoinClass(
-          idTeacher,
+        const queryResult = await StudentJoinClass.addStudentJoinClass(
+          idStudent,
           idClass
         );
 
@@ -68,11 +63,11 @@ class TeacherJoinClassController {
     }
   }
 
-  // async editTeacherJoinClass(req, res) {
+  // async editStudentJoinClass(req, res) {
   //   try {
   //     const {
   //       id,
-  //       idTeacher,
+  //       idStudent,
   //       idClass,
   //       attendDate,
   //       rating,
@@ -85,7 +80,7 @@ class TeacherJoinClassController {
   //         .status(400)
   //         .json({ check: false, msg: "Hãy chọn giáo viên cần chỉnh sửa" });
   //     }
-  //     if (!idTeacher || idTeacher == "") {
+  //     if (!idStudent || idStudent == "") {
   //       return res
   //         .status(400)
   //         .json({ check: false, msg: "Hãy chọn giáo viên cần chỉnh sửa" });
@@ -96,7 +91,7 @@ class TeacherJoinClassController {
   //         .json({ check: false, msg: "Hãy chọn lớp cần chỉnh sửa" });
   //     }
   //     if (
-  //       (idTeacher && idTeacher !== "") ||
+  //       (idStudent && idStudent !== "") ||
   //       (idClass && idClass !== "") ||
   //       (attendDate && attendDate !== "") ||
   //       (rating && rating !== "") ||
@@ -104,8 +99,8 @@ class TeacherJoinClassController {
   //       (prize && prize !== "") ||
   //       (prizeStatus && prizeStatus !== "")
   //     ) {
-  //       const queryResult = await TeacherJoinClass.editTeacherJoinClass(
-  //         idTeacher,
+  //       const queryResult = await StudentJoinClass.editStudentJoinClass(
+  //         idStudent,
   //         idClass,
   //         attendDate,
   //         rating,
@@ -132,7 +127,7 @@ class TeacherJoinClassController {
   // }
   async getNullClass(req, res, next) {
     try {
-      const result = await TeacherJoinClass.getNullClass();
+      const result = await StudentJoinClass.getNullClass();
       if (result) {
         return res.json({
           check: true,
@@ -148,7 +143,7 @@ class TeacherJoinClassController {
   }
   async getNullPrize(req, res, next) {
     try {
-      const result = await TeacherJoinClass.getNullPrize();
+      const result = await StudentJoinClass.getNullPrize();
       if (result) {
         return res.json({
           check: true,
@@ -164,7 +159,7 @@ class TeacherJoinClassController {
   }
   async getNullSalary(req, res, next) {
     try {
-      const result = await TeacherJoinClass.getNullSalary();
+      const result = await StudentJoinClass.getNullSalary();
       if (result) {
         return res.json({
           check: true,
@@ -180,7 +175,7 @@ class TeacherJoinClassController {
   }
   async getPrize(req, res, next) {
     try {
-      const result = await TeacherJoinClass.getPrize();
+      const result = await StudentJoinClass.getPrize();
       if (result) {
         return res.json({
           check: true,
@@ -196,7 +191,7 @@ class TeacherJoinClassController {
   }
   async getSalary(req, res, next) {
     try {
-      const result = await TeacherJoinClass.getSalary();
+      const result = await StudentJoinClass.getSalary();
       if (result) {
         return res.json({
           check: true,
@@ -212,7 +207,7 @@ class TeacherJoinClassController {
   }
   async getNullRating(req, res, next) {
     try {
-      const result = await TeacherJoinClass.getNullRating();
+      const result = await StudentJoinClass.getNullRating();
       if (result) {
         return res.json({
           check: true,
@@ -245,7 +240,7 @@ class TeacherJoinClassController {
       if (!idClass || idClass == "") {
         return res.status(400).json({ check: false, msg: "Hãy nhập lớp" });
       } else {
-        const queryResult = await TeacherJoinClass.updateDate(
+        const queryResult = await StudentJoinClass.updateDate(
           attendDate,
           status,
           id,
@@ -273,16 +268,39 @@ class TeacherJoinClassController {
   }
   async updateRating(req, res) {
     try {
-      const { id, rating } = req.body;
+      const { id, listening, writing, speaking, reading } = req.body;
       if (!id || id == "") {
         return res
           .status(400)
-          .json({ check: false, msg: "Hãy chọn giáo viên cần chỉnh sửa" });
+          .json({ check: false, msg: "Hãy chọn học viên cần chỉnh sửa" });
       }
-      if (!rating || rating == "") {
-        return res.status(400).json({ check: false, msg: "Hãy nhập đánh giá" });
+      if (listening == "") {
+        return res
+          .status(400)
+          .json({ check: false, msg: "Hãy nhập điểm listening" });
+      }
+      if (speaking == "") {
+        return res
+          .status(400)
+          .json({ check: false, msg: "Hãy nhập điểm speaking" });
+      }
+      if (writing == "") {
+        return res
+          .status(400)
+          .json({ check: false, msg: "Hãy nhập điểm writing" });
+      }
+      if (reading == "") {
+        return res
+          .status(400)
+          .json({ check: false, msg: "Hãy nhập điểm reading" });
       } else {
-        const queryResult = await TeacherJoinClass.updateRating(rating, id);
+        const queryResult = await StudentJoinClass.updateRating(
+          listening,
+          writing,
+          speaking,
+          reading,
+          id
+        );
         if (queryResult) {
           return res.json({
             check: true,
@@ -311,7 +329,7 @@ class TeacherJoinClassController {
           .status(400)
           .json({ check: false, msg: "Hãy chọn trạng thái" });
       } else {
-        const queryResult = await TeacherJoinClass.updateSalary(paidStatus, id);
+        const queryResult = await StudentJoinClass.updateSalary(paidStatus, id);
         if (queryResult) {
           return res.json({
             check: true,
@@ -340,7 +358,7 @@ class TeacherJoinClassController {
           .status(400)
           .json({ check: false, msg: "Hãy chọn trạng thái" });
       } else {
-        const queryResult = await TeacherJoinClass.updatePrize(prizeStatus, id);
+        const queryResult = await StudentJoinClass.updatePrize(prizeStatus, id);
         if (queryResult) {
           return res.json({
             check: true,
@@ -364,7 +382,7 @@ class TeacherJoinClassController {
           .status(400)
           .json({ check: false, msg: "Hãy chọn giáo viên cần chỉnh sửa" });
       } else {
-        const queryResult = await TeacherJoinClass.deleteSalary(id);
+        const queryResult = await StudentJoinClass.deleteSalary(id);
         if (queryResult) {
           return res.json({
             check: true,
@@ -388,7 +406,7 @@ class TeacherJoinClassController {
           .status(400)
           .json({ check: false, msg: "Hãy chọn giáo viên cần chỉnh sửa" });
       } else {
-        const queryResult = await TeacherJoinClass.deletePrize(id);
+        const queryResult = await StudentJoinClass.deletePrize(id);
         if (queryResult) {
           return res.json({
             check: true,
@@ -404,7 +422,7 @@ class TeacherJoinClassController {
       return res.status(500).json({ check: false, msg: "Lỗi máy chủ" });
     }
   }
-  async deleteTeacherJoinClass(req, res) {
+  async deleteStudentJoinClass(req, res) {
     try {
       const { id } = req.body;
 
@@ -414,7 +432,7 @@ class TeacherJoinClassController {
           .json({ check: false, msg: "Hãy chọn giáo viên cần xóa" });
       }
 
-      const queryResult = await TeacherJoinClass.deleteTeacherJoinClass(id);
+      const queryResult = await StudentJoinClass.deleteStudentJoinClass(id);
       if (queryResult) {
         return res.json({
           check: true,
@@ -431,4 +449,4 @@ class TeacherJoinClassController {
   }
 }
 
-module.exports = new TeacherJoinClassController();
+module.exports = new StudentJoinClassController();

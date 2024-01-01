@@ -3,8 +3,14 @@ const pool = require("../config/database");
 class TeacherJoinClass {
   async getTeacherJoinClasses() {
     const query =
-      "SELECT teacherjoinclass.id,idTeacher,idClass,teachers.name,attendDate,rating,status,paid,prize,paidStatus,prizeStatus,classes.name AS className FROM teacherjoinclass INNER JOIN teachers ON teachers.id=teacherjoinclass.idTeacher INNER JOIN users ON users.id=teachers.id INNER JOIN classes ON teacherjoinclass.idClass=classes.id INNER JOIN courses ON classes.idCourse=courses.id";
+      "SELECT teacherjoinclass.id,idTeacher,idClass,teachers.name,attendDate,rating,status,paidTeacher,prizeTeacher AS prize,paidStatus,prizeStatus,classes.name AS className FROM teacherjoinclass INNER JOIN teachers ON teachers.id=teacherjoinclass.idTeacher INNER JOIN users ON users.id=teachers.id INNER JOIN classes ON teacherjoinclass.idClass=classes.id INNER JOIN courses ON classes.idCourse=courses.id";
     const [rows] = await pool.query(query);
+    return rows;
+  }
+  async getTeacherJoinClass(id) {
+    const query =
+      "SELECT teacherjoinclass.id,idTeacher,idClass,teachers.name,attendDate,rating,status,paidTeacher,prizeTeacher AS prize,paidStatus,prizeStatus,classes.name AS className,startDate,endDate  FROM teacherjoinclass INNER JOIN teachers ON teachers.id=teacherjoinclass.idTeacher INNER JOIN users ON users.id=teachers.id INNER JOIN classes ON teacherjoinclass.idClass=classes.id INNER JOIN courses ON classes.idCourse=courses.id WHERE idTeacher=?";
+    const [rows] = await pool.query(query, [id]);
     return rows;
   }
   async addTeacherJoinClass(idTeacher, idClass) {
@@ -24,7 +30,7 @@ class TeacherJoinClass {
       else if (result1[0].status === 1 || result1[0].status === 0) return null;
     }
     const query =
-      "INSERT INTO TeacherJoinClass(idTeacher, idClass, attendDate,status,rating) VALUES(?, ?, 0,-1,0)";
+      "INSERT INTO TeacherJoinClass(idTeacher, idClass, attendDate,status,rating,paidStatus) VALUES(?, ?, 0,-1,0,0)";
 
     const [result] = await pool.query(query, [idTeacher, idClass]);
     return result;
@@ -64,17 +70,50 @@ class TeacherJoinClass {
     return result;
   }
   async getNullRating() {
-    const query = `SELECT teacherjoinclass.id,idClass,teachers.name,attendDate,rating,status,paid,prize,paidStatus,prizeStatus,classes.name AS className FROM teacherjoinclass INNER JOIN teachers ON teachers.id=teacherjoinclass.idTeacher INNER JOIN users ON users.id=teachers.id INNER JOIN classes ON teacherjoinclass.idClass=classes.id INNER JOIN courses ON classes.idCourse=courses.id WHERE rating =0`;
+    const query = `SELECT teacherjoinclass.id,idClass,teachers.name,attendDate,rating,status,paidTeacher,prizeTeacher AS prize,paidStatus,prizeStatus,classes.name AS className FROM teacherjoinclass INNER JOIN teachers ON teachers.id=teacherjoinclass.idTeacher INNER JOIN users ON users.id=teachers.id INNER JOIN classes ON teacherjoinclass.idClass=classes.id INNER JOIN courses ON classes.idCourse=courses.id WHERE rating =0`;
     const [result] = await pool.query(query);
     return result;
   }
   async getNullSalary() {
-    const query = `SELECT teacherjoinclass.id,idClass,teachers.name,attendDate,rating,status,paid,prize,paidStatus,prizeStatus,classes.name AS className FROM teacherjoinclass INNER JOIN teachers ON teachers.id=teacherjoinclass.idTeacher INNER JOIN users ON users.id=teachers.id INNER JOIN classes ON teacherjoinclass.idClass=classes.id INNER JOIN courses ON classes.idCourse=courses.id WHERE paidStatus IS NULL`;
+    const query = `SELECT teacherjoinclass.id,idClass,teachers.name,attendDate,rating,status,paidTeacher,prizeTeacher AS prize,paidStatus,prizeStatus,classes.name AS className FROM teacherjoinclass INNER JOIN teachers ON teachers.id=teacherjoinclass.idTeacher INNER JOIN users ON users.id=teachers.id INNER JOIN classes ON teacherjoinclass.idClass=classes.id INNER JOIN courses ON classes.idCourse=courses.id WHERE paidStatus IS NULL`;
     const [result] = await pool.query(query);
     return result;
   }
   async getNullPrize() {
-    const query = `SELECT teacherjoinclass.id,idClass,teachers.name,attendDate,rating,status,paid,prize,paidStatus,prizeStatus,classes.name AS className FROM teacherjoinclass INNER JOIN teachers ON teachers.id=teacherjoinclass.idTeacher INNER JOIN users ON users.id=teachers.id INNER JOIN classes ON teacherjoinclass.idClass=classes.id INNER JOIN courses ON classes.idCourse=courses.id WHERE prizeStatus IS NULL`;
+    const query = `SELECT teacherjoinclass.id,idClass,teachers.name,prizeStatus,classes.name AS className FROM teacherjoinclass INNER JOIN teachers ON teachers.id=teacherjoinclass.idTeacher INNER JOIN users ON users.id=teachers.id INNER JOIN classes ON teacherjoinclass.idClass=classes.id INNER JOIN courses ON classes.idCourse=courses.id WHERE prizeStatus IS NULL`;
+    const [result] = await pool.query(query);
+    return result;
+  }
+  async getSalary() {
+    const query = `SELECT
+    teacherjoinclass.id,
+    idTeacher,
+    idClass,
+    teachers.name,
+    attendDate,
+    rating,
+    status,
+    attendDate * paidTeacher / maxAttendDate AS paid,
+    prizeTeacher AS prize,
+    paidStatus,
+    prizeStatus,
+    classes.name AS className
+FROM
+    teacherjoinclass
+INNER JOIN
+    teachers ON teachers.id = teacherjoinclass.idTeacher
+INNER JOIN
+    users ON users.id = teachers.id
+INNER JOIN
+    classes ON teacherjoinclass.idClass = classes.id
+INNER JOIN
+    courses ON classes.idCourse = courses.id;
+`;
+    const [result] = await pool.query(query);
+    return result;
+  }
+  async getPrize() {
+    const query = `SELECT teacherjoinclass.id,idClass, idTeacher,teachers.name,attendDate,rating,status,paidTeacher,prizeTeacher AS prize,paidStatus,prizeStatus,classes.name AS className FROM teacherjoinclass INNER JOIN teachers ON teachers.id=teacherjoinclass.idTeacher INNER JOIN users ON users.id=teachers.id INNER JOIN classes ON teacherjoinclass.idClass=classes.id INNER JOIN courses ON classes.idCourse=courses.id WHERE prizeStatus IS NOT NULL`;
     const [result] = await pool.query(query);
     return result;
   }

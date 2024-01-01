@@ -1496,9 +1496,8 @@ function editPayModal() {
         `</option>`;
     });
     str +=
-      `
-                            
-                            </select>
+      `         
+        </select>
                     </div>
                     <div>
                     <label for="year"

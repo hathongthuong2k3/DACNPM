@@ -1,62 +1,76 @@
-var tableData = [
-    {
-        name: "Thái Ngọc Rạng",
-        gender: "Nam",
-        birthYear: new Date(2003, 0, 1),
-        address: "KTX Khu A, Dĩ An, Bình Dương",
-        phoneNumber: "0912345678",
-        email: "rangthai@gmail.com",
-        course: "IELTS 1",
-        dates: 11,
-        teacherName: "Nguyễn Đức Tùng",
-        status: 0,
-        listening: 1.0,
-        speaking: 2.0,
-        reading: 3.0,
-        writing: 4.0,
-    },
-    {
-        name: "Nguyễn Thị Hằng",
-        gender: "Nữ",
-        birthYear: new Date(1995, 0, 1),
-        address: "123 Main Street, Hanoi",
-        phoneNumber: "0987654321",
-        email: "hangnguyen@gmail.com",
-        course: "TOEFL Prep",
-        dates: 10,
-        teacherName: "Nguyễn Đức Hải",
-        status: 1,
-        listening: 1.0,
-        speaking: 5.0,
-        reading: 3.0,
-        writing: 4.0,
-    },
-    {
-        name: "Lê Văn Hoàng",
-        gender: "Nam",
-        birthYear: new Date(2000, 0, 1),
-        address: "456 Elm Street, Ho Chi Minh City",
-        phoneNumber: "0123456789",
-        email: "hoangle@gmail.com",
-        course: "GRE Math",
-        dates: 0,
-        teacherName: "Nguyễn Phan Anh",
-        status: -1,
-        listening: 1.0,
-        speaking: 2.0,
-        reading: 9.0,
-        writing: 8.0,
-    },
-];
+// var tableData = [
+//     {
+//         name: "Thái Ngọc Rạng",
+//         gender: "Nam",
+//         birthYear: new Date(2003, 0, 1),
+//         address: "KTX Khu A, Dĩ An, Bình Dương",
+//         phoneNumber: "0912345678",
+//         email: "rangthai@gmail.com",
+//         course: "IELTS 1",
+//         dates: 11,
+//         teacherName: "Nguyễn Đức Tùng",
+//         status: 0,
+//         listening: 1.0,
+//         speaking: 2.0,
+//         reading: 3.0,
+//         writing: 4.0,
+//     },
+//     {
+//         name: "Nguyễn Thị Hằng",
+//         gender: "Nữ",
+//         birthYear: new Date(1995, 0, 1),
+//         address: "123 Main Street, Hanoi",
+//         phoneNumber: "0987654321",
+//         email: "hangnguyen@gmail.com",
+//         course: "TOEFL Prep",
+//         dates: 10,
+//         teacherName: "Nguyễn Đức Hải",
+//         status: 1,
+//         listening: 1.0,
+//         speaking: 5.0,
+//         reading: 3.0,
+//         writing: 4.0,
+//     },
+//     {
+//         name: "Lê Văn Hoàng",
+//         gender: "Nam",
+//         birthYear: new Date(2000, 0, 1),
+//         address: "456 Elm Street, Ho Chi Minh City",
+//         phoneNumber: "0123456789",
+//         email: "hoangle@gmail.com",
+//         course: "GRE Math",
+//         dates: 0,
+//         teacherName: "Nguyễn Phan Anh",
+//         status: -1,
+//         listening: 1.0,
+//         speaking: 2.0,
+//         reading: 9.0,
+//         writing: 8.0,
+//     },
+// ];
+var tableData = [];
+var temp = [];
+$.ajax({
+  type: "get",
+  url: "http://localhost:3000/students",
+  headers: {
+    Authorization: "Bearer " + localStorage.getItem("apitoken"),
+  },
+  dataType: "JSON",
+  success: function (res) {
+    tableData = res.data;
+  },
+});
 $(document).ready(function () {
-    loadData();
+  loadData();
 });
 function loadScoreModal() {
-    $('.scoreModal').click(function (e) {
-        e.preventDefault();
-        var id = $(this).attr('data-id');
-        var str = '';
-        str += `
+  $(".scoreModal").click(function (e) {
+    e.preventDefault();
+    var id = $(this).attr("data-id");
+    var str = "";
+    str +=
+      `
         <div class="mb-5 grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="col-span-2">
         <form>
@@ -66,42 +80,54 @@ function loadScoreModal() {
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
                     <input disabled type="text" id="full_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Nguyễn Văn A" value="`+ tableData[id]['name'] + `" required>
+                        placeholder="Nguyễn Văn A" value="` +
+      temp[id]["name"] +
+      `" required>
                 </div>
                 <div>
                     <label for="Lớp"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
                     <input disabled type="Lớp" id="Lớp"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
+                        placeholder="IELTS 1" value="` +
+      temp[id]["className"] +
+      `" required>
                 </div>
                 <div>
                     <label for="speaking"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Speaking</label>
                     <input type="text" id="speaking"
                         class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value=`+ tableData[id]['speaking'] + ` required>
+                        value=` +
+      temp[id]["speaking"] +
+      ` required>
                 </div>
                 <div>
                     <label for="listening"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Listening</label>
                     <input type="text" id="listening"
                         class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value=`+ tableData[id]['listening'] + ` required>
+                        value=` +
+      temp[id]["listening"] +
+      ` required>
                 </div>
                 <div>
                     <label for="writing"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Writing</label>
                     <input type="text" id="writing"
                         class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value=`+ tableData[id]['writing'] + ` required>
+                        value=` +
+      temp[id]["writing"] +
+      ` required>
                 </div>
                 <div>
                     <label for="reading"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reading</label>
                     <input type="text" id="reading"
                         class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value=`+ tableData[id]['reading'] + ` required>
+                        value=` +
+      temp[id]["reading"] +
+      ` required>
                 </div>
             </div>
         </form>
@@ -123,55 +149,92 @@ function loadScoreModal() {
                 </span>
             </button>
         </div>
-    </div></div>`
-        $('#scoreModal').html(str);
-        $('#scoreModal').removeClass('invisible opacity-0');
-        $('#scoreModal').addClass('opacity-100');
-        $('#studentModal').removeClass('opacity-100');
-        $('#studentModal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('#studentModal').html('');
-        }, 200);
-        $('.closeBtn').click(function (e) {
-            $('#scoreModal').removeClass('opacity-100');
-            $('#scoreModal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('#scoreModal').html('');
-            }, 200);
-        })
-        editData(id);
+    </div></div>`;
+    $("#scoreModal").html(str);
+    $("#scoreModal").removeClass("invisible opacity-0");
+    $("#scoreModal").addClass("opacity-100");
+    $("#studentModal").removeClass("opacity-100");
+    $("#studentModal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $("#studentModal").html("");
+    }, 200);
+    $(".closeBtn").click(function (e) {
+      $("#scoreModal").removeClass("opacity-100");
+      $("#scoreModal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $("#scoreModal").html("");
+      }, 200);
     });
+    editData(id);
+  });
 }
 function loadData() {
-    var str = '';
-    tableData.forEach((el, index) => {
-        str += `
+  $.ajax({
+    type: "get",
+    url: "http://localhost:3000/studentjoinclasses",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("apitoken"),
+    },
+    dataType: "JSON",
+    success: function (res) {
+      var str = "";
+      temp = res.data;
+      res.data.forEach((el, index) => {
+        let x = new Object();
+        tableData.forEach((item, y) => {
+          if (item.id === el.idStudent) {
+            x.email = item.email;
+            x.id = y;
+            return;
+          }
+        });
+        str +=
+          `
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            <span data-id=`+ index + ` class="studentModal">
-                                ` + el['name'] + `
+                            <span data-id=` +
+          x.id +
+          ` class="studentModal">
+                                ` +
+          el["name"] +
+          `
                             </span>
                         </th>
                         <td class="px-6 py-4">
-                        ` + el['course'] + `
+                        ` +
+          el["className"] +
+          `
                         </td>
                         <td class="px-6 py-4">
-                        ` + el['listening'] + `
+                        ` +
+          el["listening"] +
+          `
                         </td>
                         <td class="px-6 py-4">
-                        ` + el['speaking'] + `
+                        ` +
+          el["speaking"] +
+          `
                         </td>
                         <td class="px-6 py-4">
-                        ` + el['writing'] + `
+                        ` +
+          el["writing"] +
+          `
                         </td>
                         <td class="px-6 py-4">
-                        ` + el['reading'] + `
+                        ` +
+          el["reading"] +
+          `
                         </td>
                         <td class="px-6 py-4 ">
-                        ` + (el['listening'] + el['speaking'] + el['writing'] + el['reading']) / 4 + `
+                        ` +
+          (el["listening"] + el["speaking"] + el["writing"] + el["reading"]) /
+            4 +
+          `
                         </td>
                         <td class="px-6 py-4 justify-center">
-                            <button data-id=`+ index + ` data-tooltip-target="update"
+                            <button data-id=` +
+          index +
+          ` data-tooltip-target="update"
                                 class="scoreModal flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -186,25 +249,30 @@ function loadData() {
     <div class="tooltip-arrow" data-popper-arrow></div>
                             </button>
                         </td>
-                    </tr>`
-    }
-    )
-    $('#student').html(str);
-    loadStudentModal();
-    loadScoreModal();
+                    </tr>`;
+      });
+      $("#student").html(str);
+      loadStudentModal();
+      loadScoreModal();
+    },
+  });
 }
 function formatDate(date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day} /${month}/${year} `;
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day} /${month}/${year} `;
 }
 function loadStudentModal() {
-    $('.studentModal').click(function (e) {
-        e.preventDefault();
-        var str = ''
-        var id = $(this).attr('data-id');
-        str += `
+  $(".studentModal").click(function (e) {
+    e.preventDefault();
+    var str = "";
+    var id = $(this).attr("data-id");
+    let dob = new Date(tableData[id].dateofbirth);
+    dob.setMinutes(dob.getMinutes() - dob.getTimezoneOffset());
+    tableData[id].dateofbirth = dob;
+    str +=
+      `
         <div class="mb-5 grid grid-cols-3 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="col-span-2" id="modal1">
         <form>
@@ -214,7 +282,9 @@ function loadStudentModal() {
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ và tên</label>
                     <input disabled type="text" id="full_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Nguyễn Văn A" value="`+ tableData[id]['name'] + `" required>
+                        placeholder="Nguyễn Văn A" value="` +
+      tableData[id]["name"] +
+      `" required>
                 </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -223,14 +293,16 @@ function loadStudentModal() {
                         sinh</label>
                     <input disabled type="date" id="dob"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        value=`+ (new Date(tableData[id].birthYear.getTime() - (tableData[id].birthYear.getTimezoneOffset() * 60000))).toISOString().split('T')[0] + `     required>
+                        value=` +
+      tableData[id].dateofbirth.toISOString().split("T")[0] +
+      `     required>
                 </div>
                 <div>
                     <label for="gender"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giới tính</label>
-                    <div class="flex">`
-        if (tableData[id]['gender'] === "Nam") {
-            str += `<div class="flex items-center mt-3 mr-4">
+                    <div class="flex">`;
+    if (tableData[id]["gender"] === "Nam") {
+      str += `<div class="flex items-center mt-3 mr-4">
                         <input disabled id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
                             checked class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-radio"
@@ -241,10 +313,9 @@ function loadStudentModal() {
                             class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-2-radio"
                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
-                    </div>`
-        }
-        else {
-            str += `<div class="flex items-center mt-3 mr-4">
+                    </div>`;
+    } else {
+      str += `<div class="flex items-center mt-3 mr-4">
                         <input disabled id="inline-radio" type="radio" value="Nam" name="inline-radio-group"
                              class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-radio"
@@ -255,9 +326,10 @@ function loadStudentModal() {
                         checked class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-2-radio"
                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nữ</label>
-                    </div>`
-        }
-        str += ` 
+                    </div>`;
+    }
+    str +=
+      ` 
                     </div>
                 </div>
             </div>
@@ -267,7 +339,9 @@ function loadStudentModal() {
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa chỉ</label>
                     <input disabled type="text" id="address"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" value="`+ tableData[id]['address'] + `"required>
+                        placeholder="" value="` +
+      tableData[id]["address"] +
+      `"required>
                 </div>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -276,14 +350,18 @@ function loadStudentModal() {
                         điện thoại</label>
                     <input disabled type="tel" id="phone"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="0912345678" value="`+ tableData[id]['phoneNumber'] + `"pattern="[0-9]{10}" required>
+                        placeholder="0912345678" value="` +
+      tableData[id]["phoneNumber"] +
+      `"pattern="[0-9]{10}" required>
                 </div>
                 <div>
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Địa
                         chỉ email</label>
                     <input disabled type="email" id="email"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="nguyenvana@company.com" value="`+ tableData[id]['email'] + `" required>
+                        placeholder="nguyenvana@company.com" value="` +
+      tableData[id]["email"] +
+      `" required>
                 </div>
             </div>
             <div class="mb-6">
@@ -291,7 +369,9 @@ function loadStudentModal() {
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp</label>
                 <input disabled type="Lớp" id="Lớp"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="IELTS 1" value="`+ tableData[id]['course'] + `" required>
+                    placeholder="IELTS 1" value="` +
+      tableData[id]["course"] +
+      `" required>
             </div>
         </form>
     </div>
@@ -313,53 +393,95 @@ function loadStudentModal() {
                     </span>
                 </button>
             </div></div>`;
-        $('#studentModal').html(str);
-        $('#studentModal').removeClass('invisible opacity-0');
-        $('#studentModal').addClass('opacity-100');
-        $('#scoreModal').removeClass('opacity-100');
-        $('#scoreModal').addClass('invisible opacity-0');
-        setTimeout(function () {
-            $('#scoreModal').html('');
-        }, 200);
-        $('.closeBtn').click(function (e) {
-            $('#studentModal').removeClass('opacity-100');
-            $('#studentModal').addClass('invisible opacity-0');
-            setTimeout(function () {
-                $('#studentModal').html('');
-            }, 200);
-        })
+    $("#studentModal").html(str);
+    $("#studentModal").removeClass("invisible opacity-0");
+    $("#studentModal").addClass("opacity-100");
+    $("#scoreModal").removeClass("opacity-100");
+    $("#scoreModal").addClass("invisible opacity-0");
+    setTimeout(function () {
+      $("#scoreModal").html("");
+    }, 200);
+    $(".closeBtn").click(function (e) {
+      $("#studentModal").removeClass("opacity-100");
+      $("#studentModal").addClass("invisible opacity-0");
+      setTimeout(function () {
+        $("#studentModal").html("");
+      }, 200);
     });
-
+  });
 }
 function editData(id) {
-    $('.submitEditBtn').click(function (e) {
-        e.preventDefault();
-        var listening = Number($('#listening').val());
-        var speaking = Number($('#speaking').val());
-        var reading = Number($('#reading').val());
-        var writing = Number($('#writing').val());
-        Swal.fire({
-            title: "Bạn chắc chứ?",
-            text: "Điểm của " + tableData[id]['name'] + " thuộc lớp " + tableData[id]['course'] + " đang bị chỉnh sửa",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Xác nhận"
-        }).then((result) => {
-            if (result.isConfirmed) {
+  $(".submitEditBtn").click(function (e) {
+    e.preventDefault();
+    var listening = Number($("#listening").val());
+    var speaking = Number($("#speaking").val());
+    var reading = Number($("#reading").val());
+    var writing = Number($("#writing").val());
+    console.log(listening, speaking, reading, writing);
+    if (listening === "") {
+      Toast.fire({
+        icon: "error",
+        title: "Hãy nhập điểm listening",
+      });
+    } else if (speaking === "") {
+      Toast.fire({
+        icon: "error",
+        title: "Hãy nhập điểm speaking",
+      });
+    } else if (reading === "") {
+      Toast.fire({
+        icon: "error",
+        title: "Hãy nhập điểm reading",
+      });
+    } else if (writing === "") {
+      Toast.fire({
+        icon: "error",
+        title: "Hãy nhập điểm writing",
+      });
+    } else {
+      Swal.fire({
+        title: "Bạn chắc chứ?",
+        text:
+          "Điểm của " +
+          temp[id]["name"] +
+          " thuộc lớp " +
+          temp[id]["className"] +
+          " đang bị chỉnh sửa",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Xác nhận",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            type: "patch",
+            url: "http://localhost:3000/studentjoinclasses/rating",
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("apitoken"),
+            },
+            data: {
+              id: temp[id]["id"],
+              listening: listening,
+              reading: reading,
+              writing: writing,
+              speaking: speaking,
+            },
+            dataType: "JSON",
+            success: function (res) {
+              if (result.isConfirmed) {
                 Toast.fire({
-                    icon: "success",
-                    title: "Sửa điểm thành công"
+                  icon: "success",
+                  title: "Sửa điểm thành công",
                 }).then(() => {
-                    tableData[id]['listening'] = listening;
-                    tableData[id]['speaking'] = speaking;
-                    tableData[id]['reading'] = reading;
-                    tableData[id]['writing'] = writing;
-                    $('#scoreModal').html('');
-                    loadData();
-                })
-            }
-        });
-    })
+                  $("#scoreModal").html("");
+                  loadData();
+                });
+              }
+            },
+          });
+        }
+      });
+    }
+  });
 }

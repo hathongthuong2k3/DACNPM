@@ -1,8 +1,13 @@
-const pool = require('../config/database');
-const Log = require('./Log');
+const pool = require("../config/database");
+const Log = require("./Log");
 class Course {
   async getCourses() {
     const query = `SELECT * FROM courses`;
+    const [result] = await pool.query(query);
+    return result;
+  }
+  async getCourseForAll() {
+    const query = `SELECT name,intro,img,imgintro,short,description FROM courses`;
     const [result] = await pool.query(query);
     return result;
   }
@@ -12,39 +17,76 @@ class Course {
     if (result.length == 0) return null;
     return result;
   }
-  async addCourse(name, description, paid, prize, maxAttendDate) {
+  async addCourse(
+    name,
+    intro,
+    img,
+    imgintro,
+    short,
+    description,
+    paidStudent,
+    prizeStudent,
+    paidTeacher,
+    prizeTeacher,
+    maxAttendDate
+  ) {
     const query = `SELECT * FROM courses WHERE name=?`;
     const [result] = await pool.query(query, [name]);
     if (result.length == 0) {
-      const query1 = `INSERT INTO courses(name,description,paid,prize,maxAttendDate) VALUE (?,?,?,?,?)`;
+      const query1 = `INSERT INTO courses(name,intro,img,imgintro,short,description,paidStudent,prizeStudent,paidTeacher,prizeTeacher,maxAttendDate) VALUE (?,?,?,?,?,?,?,?,?,?,?)`;
       const [result1] = await pool.query(query1, [
         name,
+        intro,
+        img,
+        imgintro,
+        short,
         description,
-        paid,
-        prize,
+        paidStudent,
+        prizeStudent,
+        paidTeacher,
+        prizeTeacher,
         maxAttendDate,
       ]);
       return result1;
     }
     return null;
   }
-  async updateCourse(oldname, name, description, paid, prize, maxAttendDate) {
+  async updateCourse(
+    oldname,
+    name,
+    intro,
+    img,
+    imgintro,
+    short,
+    description,
+    paidStudent,
+    prizeStudent,
+    paidTeacher,
+    prizeTeacher,
+    maxAttendDate
+  ) {
     var result = [];
     if (oldname !== name) {
       const query = `SELECT * FROM courses WHERE name=?`;
       [result] = await pool.query(query, [name]);
     }
     if (result.length == 0) {
-      const query1 = `UPDATE courses SET name = ?, description=?,paid=?,prize=?,maxAttendDate=? WHERE name = ?`;
+      const query1 = `UPDATE courses SET name=?,intro=?,img=?,imgintro=?,short=?,description=?,paidStudent=?,prizeStudent=?,paidTeacher=?,prizeTeacher=?,maxAttendDate=? WHERE name = ?`;
       const [result1] = await pool.query(query1, [
         name,
+        intro,
+        img,
+        imgintro,
+        short,
         description,
-        paid,
-        prize,
+        paidStudent,
+        prizeStudent,
+        paidTeacher,
+        prizeTeacher,
         maxAttendDate,
         oldname,
       ]);
-      if (result1.affectedRows == 0) return false;
+      if (result1.changedRows === 0) return false;
       return true;
     }
     return null;
@@ -52,7 +94,7 @@ class Course {
   async deleteCourse(name) {
     const query1 = `SELECT COUNT(*) FROM classes INNER JOIN courses ON idCourse=courses.id WHERE courses.name=?`;
     const [result1] = await pool.query(query1, [name]);
-    if (result1[0]['COUNT(*)'] == 0) {
+    if (result1[0]["COUNT(*)"] == 0) {
       const query = `DELETE FROM courses WHERE name=?;`;
       const [result] = await pool.query(query, [name]);
       if (result.affectedRows == 0) return false;

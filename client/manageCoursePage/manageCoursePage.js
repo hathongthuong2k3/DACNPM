@@ -61,18 +61,23 @@ function loadData() {
         </td>
         <td class="px-6 py-4">
         ` +
-          el["paid"].toLocaleString("en-US") +
+          el["paidStudent"].toLocaleString("en-US") +
           ` đ
         </td>
         <td class="px-6 py-4">
         ` +
-          el["prize"].toLocaleString("en-US") +
+          el["prizeStudent"].toLocaleString("en-US") +
           ` đ
         </td>
         <td class="px-6 py-4">
         ` +
-          el["description"] +
-          `
+          el["paidTeacher"].toLocaleString("en-US") +
+          ` đ
+        </td>
+        <td class="px-6 py-4">
+        ` +
+          el["prizeTeacher"].toLocaleString("en-US") +
+          ` đ
         </td>
         <td class="px-6 py-4">
         ` +
@@ -80,6 +85,20 @@ function loadData() {
           ` buổi
         </td>
         <td class="px-6 py-4 flex justify-center">
+<button type="button" data-modal-target="extralarge-modal" data-modal-toggle="extralarge-modal" data-id=` +
+          index +
+          ` data-tooltip-target="detail"
+                class="detailBtn flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 20 20">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+    </svg>
+                <div id="detail" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    Chi tiết
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+            </button>
             <button type="button" data-id=` +
           index +
           ` data-tooltip-target="update"
@@ -118,10 +137,48 @@ function loadData() {
       });
       $("#course").html(str);
       loadEditData();
+      loadDetailData();
       deleteData();
     },
   });
   var str = "";
+}
+function loadDetailData() {
+  $(".detailBtn").click(function (e) {
+    e.preventDefault();
+    var id = $(this).attr("data-id");
+    $("#nameCourse").html(courseData[id].name);
+    let str = "";
+    str +=
+      `<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+      <td class="px-6 py-4">
+          ` +
+      courseData[id].imgintro +
+      `
+      </td>
+      <td class="px-6 py-4">
+      ` +
+      courseData[id].short +
+      `
+      </td>
+      <td class="px-6 py-4">
+      ` +
+      courseData[id].img +
+      `
+      </td>
+      <td class="px-6 py-4">
+      ` +
+      courseData[id].intro +
+      `
+      </td>
+      <td class="px-6 py-4">
+      ` +
+      courseData[id].description +
+      `
+      </td>
+  </tr>`;
+    $("#detail1").html(str);
+  });
 }
 function loadAddData() {
   $(".addModal").click(function (e) {
@@ -131,7 +188,7 @@ function loadAddData() {
     str += `
             <div class="mb-5 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <form id="addForm">
-                <div class="grid gap-6 mb-6 md:grid-cols-3">
+                <div class="grid gap-6 mb-6 md:grid-cols-4">
                     <div>
                         <label for="courseName"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp học</label>
@@ -139,6 +196,41 @@ function loadAddData() {
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="IELTS"
                             required>
+                    </div>
+                    <div>
+                        <label for="imgintro"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hình giới thiệu</label>
+                        <input type="text" id="imgintro"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="...." required>
+                    </div>
+                    <div>
+                        <label for="short"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mô tả ngắn</label>
+                        <input type="text" id="short"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="...." required>
+                    </div>
+                    <div>
+                        <label for="img"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hình mô tả</label>
+                        <input type="text" id="img"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="...." required>
+                    </div>
+                    <div>
+                        <label for="intro"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giới thiệu</label>
+                        <input type="text" id="intro"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="...." required>
+                    </div>
+                    <div>
+                        <label for="description"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mô tả</label>
+                        <input type="text" id="description"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="...." required>
                     </div>
                     <div>
                         <label for="fee"
@@ -149,6 +241,13 @@ function loadAddData() {
                             required>
                     </div>
                     <div>
+                        <label for="prizeStudent"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Học bổng</label>
+                        <input type="text" id="prizeStudent"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="1000000" required>
+                    </div>
+                    <div>
                         <label for="salary"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lương</label>
                         <input type="text" id="salary"
@@ -157,11 +256,11 @@ function loadAddData() {
                             required>
                     </div>
                     <div>
-                        <label for="description"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mô tả</label>
-                        <input type="text" id="description"
+                        <label for="prizeTeacher"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thưởng</label>
+                        <input type="text" id="prizeTeacher"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="...." required>
+                            placeholder="1000000" required>
                     </div>
                     <div>
                         <label for="time"
@@ -215,12 +314,29 @@ function addData() {
   $(".submitAddBtn").click(function (e) {
     e.preventDefault();
     var courseName = $("#courseName").val();
+    var intro = $("#intro").val();
+    var imgintro = $("#imgintro").val();
+    var img = $("#img").val();
+    var short = $("#short").val();
+    var description = $("#description").val();
     var fee = $("#fee").val();
     var salary = $("#salary").val();
-    var description = $("#description").val();
+    var prizeStudent = $("#prizeStudent").val();
+    var prizeTeacher = $("#prizeTeacher").val();
     var time = $("#time").val();
-
-    if (!courseName || !fee || !salary || !description || !time) {
+    if (
+      !courseName ||
+      !fee ||
+      !prizeStudent ||
+      !prizeTeacher ||
+      !intro ||
+      !imgintro ||
+      !img ||
+      !short ||
+      !salary ||
+      !description ||
+      !time
+    ) {
       Toast.fire({
         icon: "error",
         title: "Vui lòng nhập đầy đủ thông tin",
@@ -235,9 +351,15 @@ function addData() {
       },
       data: {
         name: courseName,
+        intro: intro,
+        img: img,
+        imgintro: imgintro,
+        short: short,
         description: description,
-        paid: Number(fee),
-        prize: Number(salary),
+        paidStudent: Number(fee),
+        prizeStudent: Number(prizeStudent),
+        paidTeacher: Number(salary),
+        prizeTeacher: Number(prizeTeacher),
         maxAttendDate: Number(time),
       },
       dataType: "JSON",
@@ -271,80 +393,134 @@ function loadEditData() {
     var str = "";
     str +=
       `
-        <div class="mb-5 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <form id="addForm">
-            <div class="grid gap-6 mb-6 md:grid-cols-3">
-                <div>
-                    <label for="courseName"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp học</label>
-                    <input type="text" id="courseName" data-value="` +
-      courseData[id]["name"] +
+      <div class="mb-5 gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <form id="addForm">
+          <div class="grid gap-6 mb-6 md:grid-cols-4">
+              <div>
+                  <label for="courseName"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lớp học</label>
+                  <input type="text" id="courseName"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      courseData[id].name +
+      `" data-value="` +
+      courseData[id].name +
       `"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value=` +
-      courseData[id]["name"] +
-      `
-                        placeholder="IELTS"
-                        required>
-                </div>
-                <div>
-                    <label for="fee"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Học phí</label>
-                    <input type="text" id="fee"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value=` +
-      courseData[id]["paid"] +
-      `
-                        placeholder="1000000"
-                        required>
-                </div>
-                <div>
-                    <label for="salary"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lương</label>
-                    <input type="text" id="salary"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value=` +
-      courseData[id]["prize"] +
-      `
-                        placeholder="1000000"
-                        required>
-                </div>
-                <div>
-                    <label for="description"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mô tả</label>
-                    <input type="text" id="description"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value=` +
-      courseData[id]["description"] +
-      `
-                        placeholder="...." required>
-                </div>
-                <div>
-                    <label for="time"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thời gian</label>
-                    <input type="number" id="time"
-                        class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1 tháng" value=` +
-      courseData[id]["maxAttendDate"] +
-      ` required>
-                </div>
-            </div>
-    </form>
-    <div style="margin-top: 4vh;">
-        <div class="w-full flex justify-between">
-        <button type="submit" 
-                class="closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
-                <span
-                    class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                    Hủy
-                </span>
-            </button>
-            <button form="addForm" type="submit"
-                class="submitEditBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
-                <span
-                    class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                    Thay đổi
-                </span>
-            </button>
-        </div>
-    </div>
-    </div>
-    </div>
+                      placeholder="IELTS"
+                      required>
+              </div>
+              <div>
+                  <label for="imgintro"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hình giới thiệu</label>
+                  <input type="text" id="imgintro"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      courseData[id].imgintro +
+      `"
+                      placeholder="...." required>
+              </div>
+              <div>
+                  <label for="short"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mô tả ngắn</label>
+                  <input type="text" id="short"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      courseData[id].short +
+      `"
+                      placeholder="...." required>
+              </div>
+              <div>
+                  <label for="img"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hình mô tả</label>
+                  <input type="text" id="img"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      courseData[id].img +
+      `"
+                      placeholder="...." required>
+              </div>
+              <div>
+                  <label for="intro"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Giới thiệu</label>
+                  <input type="text" id="intro"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      courseData[id].intro +
+      `"
+                      placeholder="...." required>
+              </div>
+              <div>
+                  <label for="description"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mô tả</label>
+                  <textarea id="description"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      courseData[id].description +
+      `"
+                       placeholder="...." required></textarea>
+              </div>
+              <div>
+                  <label for="fee"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Học phí</label>
+                  <input type="text" id="fee"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      courseData[id].paidStudent +
+      `"
+                      placeholder="1000000"
+                      required>
+              </div>
+              <div>
+                  <label for="prizeStudent"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Học bổng</label>
+                  <input type="text" id="prizeStudent"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      courseData[id].prizeStudent +
+      `"
+                      placeholder="1000000" required>
+              </div>
+              <div>
+                  <label for="salary"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lương</label>
+                  <input type="text" id="salary"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      courseData[id].paidTeacher +
+      `"
+                      placeholder="1000000"
+                      required>
+              </div>
+              <div>
+                  <label for="prizeTeacher"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thưởng</label>
+                  <input type="text" id="prizeTeacher"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      courseData[id].prizeTeacher +
+      `"
+                      placeholder="1000000" required>
+              </div>
+              <div>
+                  <label for="time"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thời gian</label>
+                  <input type="number" id="time"
+                      class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="` +
+      courseData[id].maxAttendDate +
+      `" placeholder="1 tháng" required>
+              </div>
+          </div>
+  </form>
+  <div style="margin-top: 4vh;">
+      <div class="w-full flex justify-between">
+      <button type="submit" 
+              class="closeBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
+              <span
+                  class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  Hủy
+              </span>
+          </button>
+          <button form="addForm" type="submit"
+              class="submitEditBtn inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 hover:text-white">
+              <span
+                  class="w-full px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  Thay đổi
+              </span>
+          </button>
+      </div>
+  </div>
+  </div>
+  </div>
         `;
     $("#editModal").html(str);
     $("#editModal").removeClass("invisible opacity-0");
@@ -370,12 +546,29 @@ function editData(id) {
     e.preventDefault();
     var oldName = $("#courseName").attr("data-value");
     var courseName = $("#courseName").val();
+    var intro = $("#intro").val();
+    var imgintro = $("#imgintro").val();
+    var img = $("#img").val();
+    var short = $("#short").val();
+    var description = $("#description").val();
     var fee = $("#fee").val();
     var salary = $("#salary").val();
-    var description = $("#description").val();
+    var prizeStudent = $("#prizeStudent").val();
+    var prizeTeacher = $("#prizeTeacher").val();
     var time = $("#time").val();
-
-    if (!courseName || !fee || !salary || !description || !time) {
+    if (
+      !courseName ||
+      !fee ||
+      !prizeStudent ||
+      !prizeTeacher ||
+      !intro ||
+      !imgintro ||
+      !img ||
+      !short ||
+      !salary ||
+      !description ||
+      !time
+    ) {
       Toast.fire({
         icon: "error",
         title: "Vui lòng nhập đầy đủ thông tin",
@@ -401,9 +594,15 @@ function editData(id) {
           data: {
             oldname: oldName,
             name: courseName,
+            intro: intro,
+            img: img,
+            imgintro: imgintro,
+            short: short,
             description: description,
-            paid: Number(fee),
-            prize: Number(salary),
+            paidStudent: Number(fee),
+            prizeStudent: Number(prizeStudent),
+            paidTeacher: Number(salary),
+            prizeTeacher: Number(prizeTeacher),
             maxAttendDate: Number(time),
           },
           dataType: "JSON",
