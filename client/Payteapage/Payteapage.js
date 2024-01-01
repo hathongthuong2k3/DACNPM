@@ -1163,7 +1163,7 @@ function addWarn() {
       if (result.isConfirmed) {
         $.ajax({
           type: "get",
-          url: "http://localhost:3000/sendPrize",
+          url: "http://localhost:3000/sendSalary",
           headers: {
             Authorization: "Bearer " + localStorage.getItem("apitoken"),
           },

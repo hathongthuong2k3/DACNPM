@@ -228,12 +228,12 @@ function loadData() {
                 </td>
             </tr>`;
         $("#teacher").html(str);
-        addWarn();
-        addModal();
-        editModal();
-        deleteModal();
-        loadStudentModal();
       });
+      addWarn();
+      addModal();
+      editModal();
+      deleteModal();
+      loadStudentModal();
     },
   });
 }
@@ -392,9 +392,22 @@ function addWarn() {
       confirmButtonText: "Xác nhận",
     }).then((result) => {
       if (result.isConfirmed) {
-        Toast.fire({
-          icon: "success",
-          title: "Gửi thông báo thành công",
+        $.ajax({
+          type: "get",
+          url: "http://localhost:3000/sendFile",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("apitoken"),
+          },
+          data: {
+            to: tableData[id]["email"],
+          },
+          dataType: "JSON",
+          success: function (res) {
+            Toast.fire({
+              icon: "success",
+              title: tableData[id]["name"] + " đã được gửi thông báo",
+            });
+          },
         });
       }
     });

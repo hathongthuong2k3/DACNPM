@@ -54,6 +54,15 @@ $.ajax({
   success: function (res) {
     tableData = res.data;
   },
+  error: function (jqXHR, textStatus, errorThrown) {
+    if (jqXHR.status === 403) {
+      window.location.replace("../HomePage/homePage.html");
+    }
+    Toast.fire({
+      icon: "error",
+      title: jqXHR.responseJSON.msg,
+    });
+  },
 });
 
 $(document).ready(function () {

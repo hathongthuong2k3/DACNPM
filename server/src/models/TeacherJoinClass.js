@@ -135,15 +135,17 @@ INNER JOIN
     const query2 =
       "SELECT * FROM classes INNER JOIN courses ON classes.idCourse=courses.id WHERE classes.id= ?";
     const [result2] = await pool.query(query2, [idClass]);
-    console.log(result2);
     if (!status) {
-      if (attendDate < result2[0].maxAttendDate) {
+      if (Number(attendDate) < Number(result2[0].maxAttendDate)) {
         status = 0;
       } else if (Number(attendDate) === Number(result2[0].maxAttendDate)) {
         status = 1;
       } else {
         return -1;
       }
+    }
+    if (Number(attendDate) > Number(result2[0].maxAttendDate)) {
+      return -1;
     }
     const query =
       "UPDATE TeacherJoinClass SET attendDate = ?, status=? WHERE id = ?";

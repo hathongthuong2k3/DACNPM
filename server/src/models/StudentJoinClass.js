@@ -25,8 +25,9 @@ class StudentJoinClass {
     INNER JOIN users ON users.id=students.id 
     INNER JOIN classes ON studentjoinclass.idClass=classes.id 
     INNER JOIN courses ON classes.idCourse=courses.id 
-    INNER JOIN teacherjoinclass ON studentjoinclass.idClass=teacherjoinclass.idClass
-    INNER JOIN teachers ON teachers.id=teacherjoinclass.idTeacher`;
+    LEFT JOIN teacherjoinclass ON studentjoinclass.idClass=teacherjoinclass.idClass
+    LEFT JOIN teachers ON teachers.id=teacherjoinclass.idTeacher
+    ORDER BY studentjoinclass.id`;
     const [rows] = await pool.query(query);
     return rows;
   }

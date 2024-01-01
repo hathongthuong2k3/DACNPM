@@ -366,7 +366,7 @@ function addData() {
       success: function (res) {
         Toast.fire({
           icon: "success",
-          title: "Thêm lớp thành công",
+          title: "Thêm khóa học thành công",
         }).then(() => {
           $("#addModal").removeClass("opacity-100");
           $("#addModal").addClass("invisible opacity-0");
@@ -609,7 +609,7 @@ function editData(id) {
           success: function (res) {
             Toast.fire({
               icon: "success",
-              title: "Sửa lớp thành công",
+              title: "Sửa khóa học thành công",
             }).then(() => {
               $("#editModal").removeClass("opacity-100");
               $("#editModal").addClass("invisible opacity-0");
@@ -664,7 +664,7 @@ function deleteData() {
           success: function (res) {
             Toast.fire({
               icon: "success",
-              title: "Xóa thành công",
+              title: "Xóa khóa học thành công",
             }).then(() => {
               loadData();
             });

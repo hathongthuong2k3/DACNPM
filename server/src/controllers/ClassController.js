@@ -120,7 +120,7 @@ class ClassController {
       } = req.body;
       if (!name || name == "") {
         return res.status(400).json({ check: false, msg: "Chưa nhập tên lớp" });
-      } else if (!idCourse || idCourse === "" || !Number.isInteger(idCourse)) {
+      } else if (!idCourse || idCourse === "") {
         return res
           .status(400)
           .json({ check: false, msg: "Chưa chọn khóa học" });

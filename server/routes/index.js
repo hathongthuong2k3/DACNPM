@@ -17,7 +17,7 @@ const { requireApiKey } = require("../src/middleware/useApiKey");
 
 function route(app) {
   app.use("/user", UserRouter);
-  app.use("/staffs", requireApiKey, StaffRouter);
+  app.use("/staffs", StaffRouter);
   app.use("/", MailRouter);
   app.use("/users", UserRouter);
   app.use("/admins", requireApiKey, AdminRouter);

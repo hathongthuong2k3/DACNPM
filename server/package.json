@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/restom0/mindx_final-project/tree/main/server",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "chart.js": "^4.4.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",

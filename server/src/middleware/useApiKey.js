@@ -39,14 +39,40 @@ const requireApiKey = (req, res, next) => {
       const admin =
         decoded.data.role !== "admin" &&
         (req.baseUrl === "/admins" ||
-          req.baseUrl === "/courses" ||
+          req.baseUrl === "/course" ||
           req.baseUrl === "/register-logs" ||
-          req.baseUrl === "/logs");
+          req.baseUrl === "/logs" ||
+          req.baseUrl === "/sponsors" ||
+          req.baseUrl === "/emails" ||
+          req.baseUrl === "/staff" ||
+          req.baseUrl === "/showtimekeeping" ||
+          req.baseUrl === "/tempkeeping" ||
+          req.baseUrl === "/salary" ||
+          req.baseUrl === "/staff/null" ||
+          req.baseUrl === "/prize" ||
+          req.baseUrl === "/prize/null");
       const staff =
-        (decoded.data.role !== "staff" || decoded.data.role !== "admin") &&
-        req.baseUrl === "/files" &&
-        req.baseUrl === "/classes";
-      if (admin || staff) {
+        decoded.data.role !== "staff" &&
+        decoded.data.role !== "admin" &&
+        (req.baseUrl === "/files" ||
+          req.baseUrl === "/classes" ||
+          req.baseUrl === "/sendPay" ||
+          req.baseUrl === "/sendPrize" ||
+          req.baseUrl === "/sendSalary" ||
+          req.baseUrl === "/sendWarning" ||
+          req.baseUrl === "/sendFile" ||
+          req.baseUrl === "/sendCheer");
+      const teacher =
+        decoded.data.role !== "staff" &&
+        decoded.data.role !== "admin" &&
+        decoded.data.role !== "teacher" &&
+        (req.baseUrl === "/teachers" || req.baseUrl === "/teacherjoinclasses");
+      const student =
+        decoded.data.role !== "staff" &&
+        decoded.data.role !== "admin" &&
+        decoded.data.role !== "student" &&
+        (req.baseUrl === "/students" || req.baseUrl === "/studentjoinclasses");
+      if (admin || staff || teacher || student) {
         return res
           .status(403)
           .json({ check: false, msg: "Đây là nơi không dành cho bạn" });
@@ -305,6 +331,47 @@ const sendWarning = async (req, res, next) => {
     }
   });
 };
+const sendFile = async (req, res, next) => {
+  const { to } = req.query;
+  const mailData = {
+    from: "BK English Center",
+
+    to: to,
+    subject: "Thông báo đến nhận sách",
+    html: `
+            <b>Chào bạn! </b>
+            <br/> 
+            <p>Tài liệu bạn yêu cầu đã có</p>
+            <br/>
+            <p>Hãy ghé trung tâm mà bạn đã yêu cầu để nhận tài liệu</p>`,
+  };
+  transporter.sendMail(mailData, async (error, info) => {
+    if (error) {
+      const result = await Log.addLog(
+        res.user.id,
+        "Gửi thông báo nhận tài liệu",
+        Date.now(),
+        false
+      );
+      res.status(400).send({
+        check: false,
+        msg: error,
+      });
+    } else {
+      const result = await Log.addLog(
+        res.user.id,
+        "Gửi thông báo nhận tài liệu",
+        Date.now(),
+        true
+      );
+      res.status(200).send({
+        check: true,
+        message: "Mail send",
+        message_id: info.messageId,
+      });
+    }
+  });
+};
 const requireOtp = (req, res, next) => {
   if (req.body.role === "admin" || req.body.role === "staff") {
     if (!req.headers.authorization) {
@@ -344,4 +411,5 @@ module.exports = {
   sendPrize,
   sendWarning,
   sendSalary,
+  sendFile,
 };
